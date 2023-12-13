@@ -30,14 +30,14 @@ void main() async {
   runApp(const MyApp());
 }
 
-final _appTheme = AppTheme();
+final AppTheme _appTheme = AppTheme();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final appTheme = _appTheme;
+    final AppTheme appTheme = _appTheme;
     return FluentApp(
       title: appTitle,
       themeMode: appTheme.mode,
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       locale: appTheme.locale,
-      builder: (context, child) {
+      builder: (BuildContext context, Widget? child) {
         return Directionality(
           textDirection: appTheme.textDirection,
           child: NavigationPaneTheme(
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
 
   @override
   Widget build(BuildContext context) {
-    final appTheme = AppTheme();
+    final AppTheme appTheme = AppTheme();
 
     return NavigationView(
       appBar: const NavigationAppBar(
@@ -113,7 +113,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
         ),
         actions: Row(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: [
+          children: <Widget>[
             WindowButtons(),
           ],
         ),
@@ -157,8 +157,8 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
             case NavigationIndicators.end:
               return const EndNavigationIndicator();
             case NavigationIndicators.sticky:
-            default:
-              return const StickyNavigationIndicator();
+            // default:
+            //   return const StickyNavigationIndicator();
           }
         }(),
         autoSuggestBoxReplacement: const Icon(FluentIcons.search),
@@ -167,8 +167,8 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
   }
 
   @override
-  void onWindowClose() async {
-    bool isPreventClose = await windowManager.isPreventClose();
+  Future<void> onWindowClose() async {
+    final bool isPreventClose = await windowManager.isPreventClose();
     if (isPreventClose && mounted) {
       showDialog(
         context: context,
@@ -176,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> with WindowListener {
           return ContentDialog(
             title: const Text('Confirm close'),
             content: const Text('Are you sure you want to close this window?'),
-            actions: [
+            actions: <Widget>[
               FilledButton(
                 child: const Text('Yes'),
                 onPressed: () {
@@ -216,4 +216,4 @@ class WindowButtons extends StatelessWidget {
   }
 }
 
-final rootNavigatorKey = GlobalKey<NavigatorState>();
+final GlobalKey<NavigatorState> rootNavigatorKey = GlobalKey<NavigatorState>();

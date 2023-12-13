@@ -82,3 +82,7 @@ lib/commons/env/prod_conf.dart
 
 safty360-proto
 lib/commons/firebase/firebase_options.dart
+
+# desktop
+/windows/flutter/ephemeral
+/macos/flutter/ephemeral

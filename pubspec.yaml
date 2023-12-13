@@ -43,9 +43,23 @@ dev_dependencies:
   flutter_native_splash: ^2.1.6
   flutter_lints: ^3.0.1
   flutter_launcher_icons: ^0.13.1
+  injectable_generator: ^2.1.5    # 依赖注入代码生成
+  json_serializable: ^6.7.1       # json 序列化代码生成
+  freezed: ^2.3.2
+  drift_dev: ^2.3.2
+  build_runner: ^2.3.3
+  flutter_gen_runner: ^5.3.2
+
+flutter_gen:
+  output: lib/presentation/gen/assets/ # Optional (default: lib/gen/)
+  line_length: 120 # Optional (default: 80)
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
 
 flutter_native_splash:
   color: "#000000"

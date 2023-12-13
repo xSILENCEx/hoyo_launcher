@@ -1,8 +1,7 @@
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_acrylic/flutter_acrylic.dart';
 import 'package:system_theme/system_theme.dart';
-
-import 'package:fluent_ui/fluent_ui.dart';
 
 enum NavigationIndicators { sticky, end }
 
@@ -45,7 +44,7 @@ class AppTheme extends ChangeNotifier {
   void setEffect(WindowEffect effect, BuildContext context) {
     Window.setEffect(
       effect: effect,
-      color: [
+      color: <WindowEffect>[
         WindowEffect.solid,
         WindowEffect.acrylic,
       ].contains(effect)
@@ -71,10 +70,8 @@ class AppTheme extends ChangeNotifier {
 }
 
 AccentColor get systemAccentColor {
-  if ((defaultTargetPlatform == TargetPlatform.windows ||
-          defaultTargetPlatform == TargetPlatform.android) &&
-      !kIsWeb) {
-    return AccentColor.swatch({
+  if ((defaultTargetPlatform == TargetPlatform.windows || defaultTargetPlatform == TargetPlatform.android) && !kIsWeb) {
+    return AccentColor.swatch(<String, Color>{
       'darkest': SystemTheme.accentColor.darkest,
       'darker': SystemTheme.accentColor.darker,
       'dark': SystemTheme.accentColor.dark,
