@@ -1,0 +1,26 @@
+targets:
+  $default:
+    builders:
+      source_gen|combining_builder:
+        options:
+          build_extensions:
+            '^lib/{{path}}/{{}}.dart': 'lib/{{path}}/generated/{{}}.g.dart'
+      freezed:
+        options:
+          # Disable the generation of copyWith/== for the entire project
+          copy_with: true
+          equal: false
+          # `when` and `map` can be enabled/disabled entirely by setting them to `true`/`false`
+          map: false
+          # We can also enable/disable specific variants of `when`/`map` by setting them to `true`/`false`:
+          when: false
+          build_extensions:
+            '^lib/{{path}}/{{}}.dart': 'lib/{{path}}/generated/{{}}.freezed.dart'
+      injectable_generator:injectable_builder:
+        options:
+          auto_register: true
+          # auto registers any class with a name matches the given pattern
+          class_name_pattern: "Usecase$|Repository$|Bloc$|Cubit$"
+          # auto registers any class inside a file with a
+          # name matches the given pattern
+          file_name_pattern: "_repository$|_bloc$|_usecase$|_cubit$"

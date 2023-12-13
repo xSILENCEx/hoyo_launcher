@@ -1,0 +1,84 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+*.p12
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+.vscode/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Web related
+lib/generated_plugin_registrant.dart
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+android/app/google-services.json
+/android/app/src/debug/google-services.json
+/android/app/src/google-services.json
+lib/utils/log_util.dart
+/local.properties
+untranslated-messages-file.txt
+
+# environment variables
+.env.*
+*.env
+env.g.dart
+
+pc-api-6048871540126913906-430-cf97013bc4b3.json
+dev.dart
+prod.dart
+.devbot
+devbot.config.json
+AuthKey_G9N65B8TQH.p8
+GoogleService-Info.plist
+api_key.json
+# ios
+lib/helpers/api_keys/credential.dart
+android/app/src/main/kotlin/com/metaconnect/app/ApiKeys.kt
+ios/UserInfoWidget/ApiKeys.swift
+
+
+# fastline
+.env.default
+Preview.html
+report.xml
+
+lib/commons/env/dev_conf.dart
+lib/commons/env/prod_conf.dart
+
+safty360-proto
+lib/commons/firebase/firebase_options.dart
