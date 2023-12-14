@@ -11,7 +11,7 @@ part 'generated/game_info_dao.g.dart';
 // DaoGenerator
 // **************************************************************************
 
-GameInfoDao get catalogDao => GameInfoDao(database);
+GameInfoDao get gameInfoDao => GameInfoDao(database);
 
 @DriftAccessor(tables: <Type>[GameInfoTable])
 class GameInfoDao extends AppDatabaseAccessor with _$GameInfoDaoMixin {
@@ -28,6 +28,11 @@ class GameInfoDao extends AppDatabaseAccessor with _$GameInfoDaoMixin {
     });
   }
 
+  Stream<List<GameInfoDBModel>> watchGameInfoList() {
+    final SimpleSelectStatement<GameInfoTable, GameInfoDBModel> query = _baseGet();
+    return query.watch();
+  }
+
   Future<List<GameInfoDBModel>> getGameInfoList() async {
     final SimpleSelectStatement<GameInfoTable, GameInfoDBModel> query = _baseGet();
     return query.get();
@@ -41,7 +46,7 @@ class GameInfoDao extends AppDatabaseAccessor with _$GameInfoDaoMixin {
   }
 
   /// 删除游戏信息
-  Future<void> deleteCatalog(String id) async {
+  Future<void> deleteGameInfo(String id) async {
     final DeleteStatement<GameInfoTable, GameInfoDBModel> statement = delete(gameInfoTable);
     statement.where((GameInfoTable t) => t.id.equals(id));
     await statement.go();

@@ -20,6 +20,8 @@ abstract class GameInfoBackground {
   }
 
   Map<String, dynamic> toJson();
+
+  String toJsonString() => jsonEncode(toJson());
 }
 
 class _GameInfoBackground extends GameInfoBackground {

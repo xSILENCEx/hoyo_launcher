@@ -9,8 +9,33 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsIconsGen {
+  const $AssetsIconsGen();
+
+  /// File path: assets/icons/genshin_impact.png
+  AssetGenImage get genshinImpact =>
+      const AssetGenImage('assets/icons/genshin_impact.png');
+
+  /// File path: assets/icons/honkai_impact_3.png
+  AssetGenImage get honkaiImpact3 =>
+      const AssetGenImage('assets/icons/honkai_impact_3.png');
+
+  /// File path: assets/icons/honkai_star_rail.png
+  AssetGenImage get honkaiStarRail =>
+      const AssetGenImage('assets/icons/honkai_star_rail.png');
+
+  /// File path: assets/icons/zzz.png
+  AssetGenImage get zzz => const AssetGenImage('assets/icons/zzz.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values =>
+      [genshinImpact, honkaiImpact3, honkaiStarRail, zzz];
+}
+
 class Assets {
   Assets._();
+
+  static const $AssetsIconsGen icons = $AssetsIconsGen();
 }
 
 class AssetGenImage {

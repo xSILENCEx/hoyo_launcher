@@ -71,18 +71,6 @@ lib/helpers/api_keys/credential.dart
 android/app/src/main/kotlin/com/metaconnect/app/ApiKeys.kt
 ios/UserInfoWidget/ApiKeys.swift
 
-
-# fastline
-.env.default
-Preview.html
-report.xml
-
-lib/commons/env/dev_conf.dart
-lib/commons/env/prod_conf.dart
-
-safty360-proto
-lib/commons/firebase/firebase_options.dart
-
 # desktop
 /windows/flutter/ephemeral
 /macos/flutter/ephemeral

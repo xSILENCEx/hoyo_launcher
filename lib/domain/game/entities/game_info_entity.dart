@@ -5,6 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'game_info_background.dart';
 import 'game_info_bg_type.dart';
 
+export 'game_info_bg_type.dart';
+
 @immutable
 class GameInfoEntity {
   GameInfoEntity({
