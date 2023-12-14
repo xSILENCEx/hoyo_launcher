@@ -4,3 +4,4 @@ output-localization-file: app_localizations.dart
 synthetic-package: false
 output-dir: lib/presentation/gen/l10n
 nullable-getter: false
+untranslated-messages-file: untranslated_messages.json
