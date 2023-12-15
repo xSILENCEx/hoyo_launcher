@@ -2,8 +2,8 @@ import 'game_info_background.dart';
 import 'game_info_bg_type.dart';
 
 /// 创建游戏信息实体
-class CreateGameInfoEntity {
-  const CreateGameInfoEntity._({
+class EditGameInfoEntity {
+  const EditGameInfoEntity._({
     required this.id,
     this.icon,
     this.title,
@@ -15,27 +15,28 @@ class CreateGameInfoEntity {
     this.launcherPath,
   });
 
-  CreateGameInfoEntity.create(this.id)
+  EditGameInfoEntity.create(this.id)
       : icon = null,
         title = null,
         launchPath = null,
-        gameBgType = null,
-        background = null,
         createTime = null,
         updateTime = null,
-        launcherPath = null;
+        launcherPath = null,
+        gameBgType = null,
+        background = null;
 
   final String id;
   final String? icon;
   final String? title;
   final String? launchPath;
-  final GameInfoBgType? gameBgType;
-  final GameInfoBackground? background;
   final DateTime? createTime;
   final DateTime? updateTime;
-  final String? launcherPath;
 
-  CreateGameInfoEntity copyWith({
+  final String? launcherPath;
+  final GameInfoBgType? gameBgType;
+  final GameInfoBackground? background;
+
+  EditGameInfoEntity copyWith({
     String? id,
     String? icon,
     String? title,
@@ -46,7 +47,7 @@ class CreateGameInfoEntity {
     DateTime? updateTime,
     String? launcherPath,
   }) {
-    return CreateGameInfoEntity._(
+    return EditGameInfoEntity._(
       id: id ?? this.id,
       icon: icon ?? this.icon,
       title: title ?? this.title,

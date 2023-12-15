@@ -98,6 +98,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hoyo Launcher'**
   String get app_name;
+
+  /// No description provided for @create_info.
+  ///
+  /// In en, this message translates to:
+  /// **'Create'**
+  String get create_info;
+
+  /// No description provided for @select.
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get select;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
+  /// No description provided for @icon.
+  ///
+  /// In en, this message translates to:
+  /// **'Icon'**
+  String get icon;
+
+  /// No description provided for @execution_path.
+  ///
+  /// In en, this message translates to:
+  /// **'Execution path'**
+  String get execution_path;
+
+  /// No description provided for @launcher_path.
+  ///
+  /// In en, this message translates to:
+  /// **'Game Launcher path'**
+  String get launcher_path;
+
+  /// No description provided for @game_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Game name'**
+  String get game_name;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

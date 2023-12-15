@@ -1,10 +1,10 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/widgets/window_buttons.dart';
 import 'package:hoyo_launcher/theme.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 import 'package:window_manager/window_manager.dart';
+
+import 'create_game_info/create_game_info_page.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -35,16 +35,8 @@ class _HomeState extends State<Home> with WindowListener {
     return NavigationView(
       appBar: NavigationAppBar(
         automaticallyImplyLeading: false,
-        title: DragToMoveArea(
-          child: Align(
-            alignment: AlignmentDirectional.centerStart,
-            child: Text(l10n.app_name),
-          ),
-        ),
-        actions: const Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[WindowButtons()],
-        ),
+        title: DragToMoveArea(child: Align(alignment: AlignmentDirectional.centerStart, child: Text(l10n.app_name))),
+        actions: const Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[WindowButtons()]),
       ),
       pane: NavigationPane(
         selected: _selected,
@@ -52,7 +44,7 @@ class _HomeState extends State<Home> with WindowListener {
         displayMode: appTheme.displayMode,
         items: <NavigationPaneItem>[
           PaneItem(
-            icon: const Icon(FluentIcons.home, size: 50),
+            icon: const Icon(FluentIcons.home),
             title: const Text('Home'),
             body: Container(color: Colors.black),
             onTap: () => setState(() => _selected = 0),
@@ -63,34 +55,26 @@ class _HomeState extends State<Home> with WindowListener {
             body: Container(color: Colors.blue),
             onTap: () => setState(() => _selected = 1),
           ),
+          _addItem(),
         ],
         footerItems: <NavigationPaneItem>[
           PaneItem(
             icon: const Icon(FluentIcons.settings),
             title: const Text('Settings'),
             body: Container(color: Colors.green),
-            onTap: () async {
-              // launchUrlString(r'D:\StarRail\Star Rail\Game\StarRail.exe');
-              final String? dirPath = await FilePicker.platform.getDirectoryPath();
-              print('dirPath:$dirPath');
-
-              if (dirPath == null) return;
-
-              launchUrlString(dirPath);
-            },
+            onTap: CreateGameInfoPage.open,
           ),
         ],
-        indicator: () {
-          switch (appTheme.indicator) {
-            case NavigationIndicators.end:
-              return const EndNavigationIndicator();
-            case NavigationIndicators.sticky:
-            // default:
-            //   return const StickyNavigationIndicator();
-          }
-        }(),
-        autoSuggestBoxReplacement: const Icon(FluentIcons.search),
       ),
+    );
+  }
+
+  PaneItem _addItem() {
+    return PaneItem(
+      icon: const Icon(FluentIcons.add),
+      title: Text(l10n.create_info),
+      body: const SizedBox.shrink(),
+      onTap: CreateGameInfoPage.open,
     );
   }
 

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
 import 'game_info_background.dart';
@@ -17,20 +15,24 @@ class GameInfoEntity {
     required this.gameBgType,
     required this.createTime,
     required this.updateTime,
-    required String backgroundStr,
+    required String? backgroundStr,
     this.launcherPath,
-  }) : background = GameInfoBackground.generate(gameBgType, backgroundStr);
+  }) : _background = GameInfoBackground.generate(gameBgType, backgroundStr);
 
   final String id;
   final String icon;
   final String title;
   final String launchPath;
-  final GameInfoBgType gameBgType;
-  final GameInfoBackground background;
   final DateTime createTime;
   final DateTime updateTime;
 
+  final GameInfoBgType? gameBgType;
+  final GameInfoBackground? _background;
   final String? launcherPath;
+
+  T? getBackground<T extends GameInfoBackground>() {
+    return _background as T?;
+  }
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -38,10 +40,10 @@ class GameInfoEntity {
       'icon': icon,
       'title': title,
       'launchPath': launchPath,
-      'gameBgType': gameBgType.value,
+      'gameBgType': gameBgType?.value,
       'createTime': createTime.millisecondsSinceEpoch,
       'updateTime': updateTime.millisecondsSinceEpoch,
-      'background': jsonEncode(background.toJson()),
+      'background': _background?.toJsonString(),
       'launcherPath': launcherPath,
     };
   }

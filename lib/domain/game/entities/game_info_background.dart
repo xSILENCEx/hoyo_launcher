@@ -6,7 +6,9 @@ import 'game_info_bg_type.dart';
 abstract class GameInfoBackground {
   const GameInfoBackground();
 
-  factory GameInfoBackground.generate(GameInfoBgType type, String value) {
+  static GameInfoBackground? generate(GameInfoBgType? type, String? value) {
+    if (type == null || value == null) return null;
+
     final Map<String, dynamic> jsonData = jsonDecode(value) as Map<String, dynamic>;
 
     switch (type) {

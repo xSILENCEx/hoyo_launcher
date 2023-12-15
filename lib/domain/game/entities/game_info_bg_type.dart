@@ -9,7 +9,7 @@ enum GameInfoBgType {
 
   final String value;
 
-  static GameInfoBgType fromString(String type) {
+  static GameInfoBgType fromString(String? type) {
     return GameInfoBgType.values.firstWhere(
       (GameInfoBgType e) => e.value == type,
       orElse: () {

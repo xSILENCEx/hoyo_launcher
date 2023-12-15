@@ -32,9 +32,9 @@ GameInfoDBModel gameInfoEntityToDB(GameInfoEntity entity) {
     icon: entity.icon,
     title: entity.title,
     launchPath: entity.launchPath,
-    gameBgType: entity.gameBgType.value,
+    gameBgType: entity.gameBgType?.value,
     createTime: entity.createTime,
     updateTime: entity.updateTime,
-    background: entity.background.toJsonString(),
+    background: entity.getBackground()?.toJsonString(),
   );
 }
