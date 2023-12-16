@@ -21,6 +21,7 @@ class NavBar extends StatelessWidget {
     required this.navItems,
     required this.onItemTap,
     required this.onSettingItemTap,
+    required this.onDelItemTap,
     required this.onEditItemTap,
     required this.onAddItemTap,
   });
@@ -29,6 +30,7 @@ class NavBar extends StatelessWidget {
   final List<GameInfoEntity> navItems;
   final Function(int index) onItemTap;
   final Function(GameInfoEntity info) onEditItemTap;
+  final Function(GameInfoEntity info) onDelItemTap;
   final Function() onSettingItemTap;
   final Function() onAddItemTap;
 
@@ -78,10 +80,16 @@ class NavBar extends StatelessWidget {
       navMinWidth,
       isSelected: selectIndex == index,
       index: index,
-      trailing: IconButton(
-        onPressed: () => onEditItemTap(item),
-        icon: const Icon(fu.FluentIcons.settings),
-      ),
+      trailings: <Widget>[
+        IconButton(
+          onPressed: () => onEditItemTap(item),
+          icon: const Icon(fu.FluentIcons.edit, size: 12),
+        ),
+        IconButton(
+          onPressed: () => onDelItemTap(item),
+          icon: const Icon(fu.FluentIcons.delete, size: 12),
+        ),
+      ],
       iconPadding: const EdgeInsets.all(_leadingMargin * 2),
     );
   }
@@ -123,7 +131,7 @@ class NavBar extends StatelessWidget {
     required bool isSelected,
     int index = -1,
     bool hasIndicator = true,
-    Widget? trailing,
+    List<Widget> trailings = const <Widget>[],
     EdgeInsetsGeometry? iconPadding,
     Function()? onTap,
   }) {
@@ -160,11 +168,11 @@ class NavBar extends StatelessWidget {
                   Container(width: leadingSize, height: leadingSize, padding: iconPadding, child: icon),
                   const SizedBox(width: _leadingMargin),
                   SizedBox(
-                    width: _navMaxWidth - _navMinWidth - _navMinWidth - _leadingMargin * 2,
+                    width: _navMaxWidth + _leadingMargin * 2 - _navMinWidth * (trailings.length + 1),
                     child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
                   ),
-                  if (trailing != null) const SizedBox(width: _leadingMargin),
-                  if (trailing != null) trailing,
+                  if (trailings.isNotEmpty) const SizedBox(width: _leadingMargin),
+                  if (trailings.isNotEmpty) ...trailings,
                 ],
               ),
             ),

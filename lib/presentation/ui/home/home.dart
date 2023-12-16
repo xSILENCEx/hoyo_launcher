@@ -59,6 +59,7 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
                 children: <Widget>[
                   NavBar(
                     onEditItemTap: EditGameInfoPage.edit,
+                    onDelItemTap: (GameInfoEntity info) {},
                     onSettingItemTap: () {},
                     onAddItemTap: EditGameInfoPage.create,
                     selectIndex: navIndex,
