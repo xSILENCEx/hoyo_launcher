@@ -20,7 +20,7 @@ class GameInfoPage extends StatelessWidget {
             children: <Widget>[
               FilledButton(
                 onPressed: () {},
-                style: ButtonStyle(padding: ButtonState.all(const EdgeInsets.symmetric(horizontal: 50, vertical: 16))),
+                style: ButtonStyle(padding: ButtonState.all(const EdgeInsets.symmetric(horizontal: 34, vertical: 10))),
                 child: Text(l10n.start_game, style: const TextStyle(fontWeight: FontWeight.bold)),
               ),
             ],
