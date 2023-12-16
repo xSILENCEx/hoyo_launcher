@@ -8,6 +8,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get app_name => 'Hoyo Launcher';
 
   @override
+  String get launcher => 'Launcher';
+
+  @override
   String get create_info => 'Create';
 
   @override
@@ -36,4 +39,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get game_name => 'Game name';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get start_game => 'Start game';
+
+  @override
+  String get open_launcher => 'Open Launcher';
 }

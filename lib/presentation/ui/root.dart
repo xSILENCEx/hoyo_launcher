@@ -1,6 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart' hide Page, Colors;
 import 'package:flutter/material.dart';
-import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
 import 'package:hoyo_launcher/presentation/gen/l10n/app_localizations.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/utils/router_tool.dart';
@@ -45,10 +44,7 @@ class Root extends StatelessWidget {
         return Directionality(
           textDirection: appTheme.textDirection,
           child: NavigationPaneTheme(
-            data: NavigationPaneThemeData(
-              backgroundColor:
-                  appTheme.windowEffect != flutter_acrylic.WindowEffect.disabled ? Colors.transparent : null,
-            ),
+            data: const NavigationPaneThemeData(backgroundColor: Colors.transparent),
             child: child!,
           ),
         );

@@ -10,7 +10,10 @@ class PathPicker extends StatefulWidget {
     required this.onPathChanged,
     required this.pickType,
     this.headerValue,
+    this.initialPath,
   });
+
+  final String? initialPath;
 
   final String? headerValue;
   final PickType pickType;
@@ -21,7 +24,7 @@ class PathPicker extends StatefulWidget {
 }
 
 class _PathPickerState extends State<PathPicker> {
-  final TextEditingController _controller = TextEditingController();
+  late final TextEditingController _controller = TextEditingController(text: widget.initialPath);
 
   @override
   void dispose() {

@@ -11,7 +11,9 @@ const List<String> _innerIcons = <String>[
 const double _size = 100;
 
 class IconSelector extends StatefulWidget {
-  const IconSelector({super.key, required this.onSelected});
+  const IconSelector({super.key, required this.onSelected, this.initIconPath});
+
+  final String? initIconPath;
 
   final Function(String iconPath) onSelected;
 
@@ -22,7 +24,7 @@ class IconSelector extends StatefulWidget {
 class _IconSelectorState extends State<IconSelector> {
   final FlyoutController _controller = FlyoutController();
 
-  String? _iconPath;
+  late String? _iconPath = widget.initIconPath;
 
   @override
   void dispose() {
@@ -47,10 +49,11 @@ class _IconSelectorState extends State<IconSelector> {
         child: FilledButton(
           onPressed: _showPicker,
           style: ButtonStyle(
+            padding: ButtonState.all(EdgeInsets.zero),
             shape: ButtonState.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
             backgroundColor: ButtonState.all(Colors.grey),
           ),
-          child: _iconPath == null ? const Icon(FluentIcons.add, size: 30) : AppImg.cover(url: _iconPath),
+          child: _iconPath == null ? const Icon(FluentIcons.add, size: 30) : AppImg.cover(url: _iconPath, radius: 10),
         ),
       ),
     );
@@ -67,11 +70,20 @@ class _IconSelectorState extends State<IconSelector> {
           child: Row(
             children: <Widget>[
               for (final String icon in _innerIcons)
-                AppImg.cover(
-                  url: icon,
-                  width: _size * 0.9,
-                  height: _size * 0.9,
-                  radius: 10,
+                GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _iconPath = icon;
+                    });
+                    widget.onSelected(icon);
+                    Flyout.of(context).close();
+                  },
+                  child: AppImg.cover(
+                    url: icon,
+                    width: _size * 0.9,
+                    height: _size * 0.9,
+                    radius: 10,
+                  ),
                 ),
             ],
           ),

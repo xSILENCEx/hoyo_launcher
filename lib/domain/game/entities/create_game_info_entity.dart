@@ -25,6 +25,18 @@ class EditGameInfoEntity {
         gameBgType = null,
         background = null;
 
+  const EditGameInfoEntity.edit({
+    required this.id,
+    this.icon,
+    this.title,
+    this.launchPath,
+    this.gameBgType,
+    this.background,
+    this.createTime,
+    this.updateTime,
+    this.launcherPath,
+  });
+
   final String id;
   final String? icon;
   final String? title;
@@ -58,5 +70,19 @@ class EditGameInfoEntity {
       updateTime: updateTime ?? this.updateTime,
       launcherPath: launcherPath ?? this.launcherPath,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'id': id,
+      'icon': icon,
+      'title': title,
+      'launchPath': launchPath,
+      'gameBgType': gameBgType?.index,
+      'background': background?.toJsonString(),
+      'createTime': createTime?.millisecondsSinceEpoch,
+      'updateTime': updateTime?.millisecondsSinceEpoch,
+      'launcherPath': launcherPath,
+    };
   }
 }

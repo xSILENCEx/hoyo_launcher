@@ -1,6 +1,7 @@
 {
     "app_name": "miHoYo 启动器",
-    "create_info": "Create",
+    "launcher": "启动器",
+    "create_info": "添加",
     "select": "选择路径",
     "delete": "删除",
     "edit": "编辑",
@@ -9,5 +10,8 @@
     "icon": "游戏图标",
     "execution_path": "启动路径",
     "launcher_path": "游戏启动器路径",
-    "game_name": "游戏名"
+    "game_name": "游戏名",
+    "settings": "设置",
+    "start_game": "开始游戏",
+    "open_launcher": "打开启动器"
 }

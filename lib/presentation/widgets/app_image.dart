@@ -3,6 +3,7 @@ import 'dart:typed_data';
 
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hoyo_launcher/commons/logger.dart';
 import 'package:hoyo_launcher/presentation/utils/safe_state.dart';
 
@@ -114,6 +115,16 @@ class AppImg extends StatelessWidget {
     if (url!.startsWith('/')) {
       image = FileImage(File(url!), scale: scale);
     } else if (url!.startsWith('assets')) {
+      if (url!.endsWith('.svg')) {
+        return SvgPicture.asset(
+          url!,
+          width: width,
+          height: height,
+          fit: fit ?? BoxFit.contain,
+          alignment: alignment,
+        );
+      }
+
       image = AssetImage(url!);
     } else if (bytes != null) {
       image = MemoryImage(bytes!, scale: scale);

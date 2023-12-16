@@ -1,10 +1,17 @@
+import 'dart:ui';
+
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
-import 'package:hoyo_launcher/presentation/widgets/window_buttons.dart';
+import 'package:hoyo_launcher/commons/getIt/di.dart';
+import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
+import 'package:hoyo_launcher/domain/game/usecases/get_game_info_usecase.dart';
+import 'package:hoyo_launcher/presentation/widgets/app_image.dart';
 import 'package:hoyo_launcher/theme.dart';
 import 'package:window_manager/window_manager.dart';
 
-import 'create_game_info/create_game_info_page.dart';
+import 'create_game_info/edit_game_info_page.dart';
+import 'home_mixins/nav_mixin.dart';
+import 'nav_bar.dart';
+import 'widgets/app_bar.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -13,9 +20,7 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> with WindowListener {
-  int _selected = 0;
-
+class _HomeState extends State<Home> with WindowListener, NavMixin {
   @override
   void initState() {
     windowManager.addListener(this);
@@ -32,49 +37,50 @@ class _HomeState extends State<Home> with WindowListener {
   Widget build(BuildContext context) {
     final AppTheme appTheme = AppTheme();
 
-    return NavigationView(
-      appBar: NavigationAppBar(
-        automaticallyImplyLeading: false,
-        title: DragToMoveArea(child: Align(alignment: AlignmentDirectional.centerStart, child: Text(l10n.app_name))),
-        actions: const Row(mainAxisAlignment: MainAxisAlignment.end, children: <Widget>[WindowButtons()]),
-      ),
-      pane: NavigationPane(
-        selected: _selected,
-        size: const NavigationPaneSize(openMaxWidth: 200, compactWidth: 50),
-        displayMode: appTheme.displayMode,
-        items: <NavigationPaneItem>[
-          PaneItem(
-            icon: const Icon(FluentIcons.home),
-            title: const Text('Home'),
-            body: Container(color: Colors.black),
-            onTap: () => setState(() => _selected = 0),
-          ),
-          PaneItem(
-            icon: const Icon(FluentIcons.home),
-            title: const Text('Home'),
-            body: Container(color: Colors.blue),
-            onTap: () => setState(() => _selected = 1),
-          ),
-          _addItem(),
-        ],
-        footerItems: <NavigationPaneItem>[
-          PaneItem(
-            icon: const Icon(FluentIcons.settings),
-            title: const Text('Settings'),
-            body: Container(color: Colors.green),
-            onTap: CreateGameInfoPage.open,
-          ),
-        ],
-      ),
-    );
-  }
+    return StreamBuilder<List<GameInfoEntity>>(
+      stream: getIt.get<GetGameInfoUseCase>().watchGameInfoList(),
+      builder: (_, AsyncSnapshot<List<GameInfoEntity>> snapshot) {
+        final List<GameInfoEntity> gameInfoList = snapshot.data ?? <GameInfoEntity>[];
 
-  PaneItem _addItem() {
-    return PaneItem(
-      icon: const Icon(FluentIcons.add),
-      title: Text(l10n.create_info),
-      body: const SizedBox.shrink(),
-      onTap: CreateGameInfoPage.open,
+        return Stack(
+          children: <Widget>[
+            if (gameInfoList.isNotEmpty && navIndex < gameInfoList.length)
+              Positioned.fill(
+                child: ImageFiltered(
+                  imageFilter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
+                  child: AppImg.cover(url: gameInfoList[navIndex].icon),
+                ),
+              ),
+            Container(
+              // color: Colors.red.withOpacity(0.2),
+              color: const Color(0xFF202020).withOpacity(0.9),
+            ),
+            NavigationView(
+              appBar: buildAppBar(),
+              content: Row(
+                children: <Widget>[
+                  NavBar(
+                    onEditItemTap: EditGameInfoPage.edit,
+                    onSettingItemTap: () {},
+                    onAddItemTap: EditGameInfoPage.create,
+                    selectIndex: navIndex,
+                    navItems: gameInfoList,
+                    onItemTap: changeNav,
+                  ),
+                  Expanded(
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(8)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 

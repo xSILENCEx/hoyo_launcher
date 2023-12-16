@@ -1,5 +1,6 @@
 {
     "app_name": "Hoyo Launcher",
+    "launcher": "Launcher",
     "create_info": "Create",
     "select": "Select",
     "delete": "Delete",
@@ -9,6 +10,9 @@
     "icon": "Icon",
     "execution_path": "Execution path",
     "launcher_path": "Game Launcher path",
-    "game_name": "Game name"
+    "game_name": "Game name",
+    "settings": "Settings",
+    "start_game": "Start game",
+    "open_launcher": "Open Launcher"
     
 }

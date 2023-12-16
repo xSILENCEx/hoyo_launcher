@@ -8,7 +8,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get app_name => 'miHoYo 启动器';
 
   @override
-  String get create_info => 'Create';
+  String get launcher => '启动器';
+
+  @override
+  String get create_info => '添加';
 
   @override
   String get select => '选择路径';
@@ -36,4 +39,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get game_name => '游戏名';
+
+  @override
+  String get settings => '设置';
+
+  @override
+  String get start_game => '开始游戏';
+
+  @override
+  String get open_launcher => '打开启动器';
 }

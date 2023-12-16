@@ -99,6 +99,12 @@ abstract class AppLocalizations {
   /// **'Hoyo Launcher'**
   String get app_name;
 
+  /// No description provided for @launcher.
+  ///
+  /// In en, this message translates to:
+  /// **'Launcher'**
+  String get launcher;
+
   /// No description provided for @create_info.
   ///
   /// In en, this message translates to:
@@ -158,6 +164,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Game name'**
   String get game_name;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @start_game.
+  ///
+  /// In en, this message translates to:
+  /// **'Start game'**
+  String get start_game;
+
+  /// No description provided for @open_launcher.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Launcher'**
+  String get open_launcher;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

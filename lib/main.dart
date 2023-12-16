@@ -3,6 +3,7 @@ import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
 import 'package:system_theme/system_theme.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'commons/getIt/di.dart';
 import 'presentation/ui/root.dart';
 
 const String appTitle = 'Hoyo Launcher';
@@ -13,6 +14,8 @@ void main() async {
   await flutter_acrylic.Window.initialize();
   await flutter_acrylic.Window.hideWindowControls();
   await WindowManager.instance.ensureInitialized();
+
+  configureDependencies();
 
   windowManager.waitUntilReadyToShow().then((_) async {
     await windowManager.setTitleBarStyle(
