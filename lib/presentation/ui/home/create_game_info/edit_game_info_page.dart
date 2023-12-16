@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/commons/getIt/di.dart';
 import 'package:hoyo_launcher/commons/logger.dart';
-import 'package:hoyo_launcher/domain/game/entities/create_game_info_entity.dart';
+import 'package:hoyo_launcher/domain/game/entities/edit_game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/usecases/create_game_info_usecase.dart';
 import 'package:hoyo_launcher/presentation/utils/ex_types/ex_string.dart';

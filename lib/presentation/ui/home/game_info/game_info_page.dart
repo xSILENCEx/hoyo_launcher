@@ -12,7 +12,7 @@ class GameInfoPage extends StatelessWidget {
     return Stack(
       alignment: Alignment.bottomRight,
       children: <Widget>[
-        // Container(color: Colors.purple),
+        Container(color: Colors.purple.withOpacity(0.2)),
         Padding(
           padding: const EdgeInsets.all(40),
           child: Column(
@@ -21,7 +21,7 @@ class GameInfoPage extends StatelessWidget {
               FilledButton(
                 onPressed: () {},
                 style: ButtonStyle(padding: ButtonState.all(const EdgeInsets.symmetric(horizontal: 50, vertical: 16))),
-                child: Text(l10n.start_game, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                child: Text(l10n.start_game, style: const TextStyle(fontWeight: FontWeight.bold)),
               ),
             ],
           ),

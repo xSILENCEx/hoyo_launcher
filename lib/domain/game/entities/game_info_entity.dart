@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 
-import 'game_info_background.dart';
+import 'game_info_bg/game_info_bg.dart';
 import 'game_info_bg_type.dart';
 
 export 'game_info_bg_type.dart';
@@ -17,7 +17,7 @@ class GameInfoEntity {
     required this.updateTime,
     required String? backgroundStr,
     this.launcherPath,
-  }) : _background = GameInfoBackground.generate(gameBgType, backgroundStr);
+  }) : _background = GameInfoBg.generate(gameBgType, backgroundStr);
 
   final String id;
   final String icon;
@@ -27,10 +27,10 @@ class GameInfoEntity {
   final DateTime updateTime;
 
   final GameInfoBgType? gameBgType;
-  final GameInfoBackground? _background;
+  final GameInfoBg? _background;
   final String? launcherPath;
 
-  T? getBackground<T extends GameInfoBackground>() {
+  T? getBackground<T extends GameInfoBg>() {
     return _background as T?;
   }
 

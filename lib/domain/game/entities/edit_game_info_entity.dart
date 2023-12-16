@@ -1,4 +1,4 @@
-import 'game_info_background.dart';
+import 'game_info_bg/game_info_bg.dart';
 import 'game_info_bg_type.dart';
 
 /// 创建游戏信息实体
@@ -46,7 +46,7 @@ class EditGameInfoEntity {
 
   final String? launcherPath;
   final GameInfoBgType? gameBgType;
-  final GameInfoBackground? background;
+  final GameInfoBg? background;
 
   EditGameInfoEntity copyWith({
     String? id,
@@ -54,7 +54,7 @@ class EditGameInfoEntity {
     String? title,
     String? launchPath,
     GameInfoBgType? gameBgType,
-    GameInfoBackground? background,
+    GameInfoBg? background,
     DateTime? createTime,
     DateTime? updateTime,
     String? launcherPath,

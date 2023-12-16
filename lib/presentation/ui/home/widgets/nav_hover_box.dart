@@ -23,22 +23,17 @@ class NavHoverBox extends StatefulWidget {
 class _NavHoverBoxState extends State<NavHoverBox> with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(vsync: this);
 
-  bool _isHover = false;
-
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
-  Future<void> _onHover(_) async {
-    if (_isHover) return;
-    _isHover = true;
+  Future<void> _onEnter(_) async {
     await _controller.animateTo(1, duration: _kHoverDuration, curve: _curve);
   }
 
   Future<void> _onExit(_) async {
-    _isHover = false;
     await _controller.animateTo(0, duration: _kHoverDuration, curve: _curve);
   }
 
@@ -51,7 +46,7 @@ class _NavHoverBoxState extends State<NavHoverBox> with SingleTickerProviderStat
         return SizedBox(
           width: value * (widget.maxWidth - widget.minWidth) + widget.minWidth,
           child: MouseRegion(
-            onHover: _onHover,
+            onEnter: _onEnter,
             onExit: _onExit,
             child: widget.childBuilder(value),
           ),

@@ -5,10 +5,10 @@ import 'package:hoyo_launcher/commons/getIt/di.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/usecases/get_game_info_usecase.dart';
 import 'package:hoyo_launcher/presentation/widgets/app_image.dart';
-import 'package:hoyo_launcher/theme.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'create_game_info/edit_game_info_page.dart';
+import 'game_info/game_info_page.dart';
 import 'home_mixins/nav_mixin.dart';
 import 'nav_bar.dart';
 import 'widgets/app_bar.dart';
@@ -35,8 +35,6 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
 
   @override
   Widget build(BuildContext context) {
-    final AppTheme appTheme = AppTheme();
-
     return StreamBuilder<List<GameInfoEntity>>(
       stream: getIt.get<GetGameInfoUseCase>().watchGameInfoList(),
       builder: (_, AsyncSnapshot<List<GameInfoEntity>> snapshot) {
@@ -68,11 +66,9 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
                     onItemTap: changeNav,
                   ),
                   Expanded(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.black,
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(8)),
-                      ),
+                    child: ClipRRect(
+                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(8)),
+                      child: gameInfoList.isEmpty ? Container() : GameInfoPage(gameInfo: gameInfoList[navIndex]),
                     ),
                   ),
                 ],

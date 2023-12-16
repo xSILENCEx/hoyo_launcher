@@ -1,4 +1,4 @@
-import 'package:hoyo_launcher/domain/game/entities/create_game_info_entity.dart';
+import 'package:hoyo_launcher/domain/game/entities/edit_game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/i_game_info_repository.dart';
 
