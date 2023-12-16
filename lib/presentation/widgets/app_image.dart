@@ -110,12 +110,12 @@ class AppImg extends StatelessWidget {
   Widget build(BuildContext context) {
     if ((url?.isEmpty ?? true) && bytes == null) return const SizedBox.shrink();
 
-    ImageProvider<Object>? image;
+    final bool isAssets = url?.startsWith('assets') ?? false;
+    final bool isFile = url?.startsWith(RegExp(r'(/|[a-zA-Z]:)')) ?? false;
+    final bool isSvg = url?.endsWith('.svg') ?? false;
 
-    if (url!.startsWith('/')) {
-      image = FileImage(File(url!), scale: scale);
-    } else if (url!.startsWith('assets')) {
-      if (url!.endsWith('.svg')) {
+    if (isSvg) {
+      if (isAssets) {
         return SvgPicture.asset(
           url!,
           width: width,
@@ -123,8 +123,30 @@ class AppImg extends StatelessWidget {
           fit: fit ?? BoxFit.contain,
           alignment: alignment,
         );
+      } else if (isFile) {
+        return SvgPicture.file(
+          File(url!),
+          width: width,
+          height: height,
+          fit: fit ?? BoxFit.contain,
+          alignment: alignment,
+        );
+      } else if (_isNetwork) {
+        return SvgPicture.network(
+          url!,
+          width: width,
+          height: height,
+          fit: fit ?? BoxFit.contain,
+          alignment: alignment,
+        );
       }
+    }
 
+    ImageProvider<Object>? image;
+
+    if (isFile) {
+      image = FileImage(File(url!), scale: scale);
+    } else if (isAssets) {
       image = AssetImage(url!);
     } else if (bytes != null) {
       image = MemoryImage(bytes!, scale: scale);

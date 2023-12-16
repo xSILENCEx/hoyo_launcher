@@ -32,6 +32,15 @@ class _PathPickerState extends State<PathPicker> {
     super.dispose();
   }
 
+  @override
+  void didUpdateWidget(covariant PathPicker oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.initialPath != oldWidget.initialPath) {
+      _controller.text = widget.initialPath ?? '';
+    }
+  }
+
   Future<void> _selectPath() async {
     String? path;
 
@@ -52,7 +61,12 @@ class _PathPickerState extends State<PathPicker> {
   Widget build(BuildContext context) {
     Widget child = Row(
       children: <Widget>[
-        Flexible(child: TextBox(controller: _controller)),
+        Flexible(
+          child: TextBox(
+            controller: _controller,
+            onEditingComplete: () => widget.onPathChanged(_controller.text),
+          ),
+        ),
         const SizedBox(width: 20),
         SizedBox(
           height: 32,
@@ -68,10 +82,7 @@ class _PathPickerState extends State<PathPicker> {
     );
 
     if (widget.headerValue != null) {
-      child = InfoLabel(
-        label: widget.headerValue!,
-        child: child,
-      );
+      child = InfoLabel(label: widget.headerValue!, child: child);
     }
 
     return child;
