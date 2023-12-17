@@ -7,6 +7,10 @@ class RotationListBg extends GameInfoBg {
     required this.transformType,
   });
 
+  RotationListBg.empty()
+      : imageList = <String>[],
+        transformType = ImageTransformType.fade;
+
   factory RotationListBg.fromJson(Map<String, dynamic> json) {
     return RotationListBg(
       imageList: json['imageList'].toString().split(','),

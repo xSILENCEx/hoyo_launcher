@@ -13,8 +13,8 @@ import 'package:hoyo_launcher/presentation/utils/router_tool.dart';
 import 'package:hoyo_launcher/presentation/widgets/confirm_dialog.dart';
 import 'package:hoyo_launcher/presentation/widgets/path_picker.dart';
 
-import 'icon_selector.dart';
 import 'edit_more_actions_box.dart';
+import 'icon_selector.dart';
 
 EditGameInfoEntity _resolveMapper(GameInfoEntity editGameInfo) {
   return EditGameInfoEntity.edit(

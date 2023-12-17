@@ -30,6 +30,7 @@
     "plz_complete_info": "请完善信息",
     "plz_select_game_icon": "请选择游戏图标",
     "bg_type": "背景类型",
+    "one_image_per_line": "每行一张图片",
     "single_image": "单张图片",
     "folder_loop": "文件夹循环",
     "list_loop": "列表循环"

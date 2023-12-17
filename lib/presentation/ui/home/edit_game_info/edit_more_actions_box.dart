@@ -122,10 +122,7 @@ class _EditMoreActionsBoxState extends State<EditMoreActionsBox> {
               color: isHover ? _fluentTheme.accentColor : Colors.transparent,
               borderRadius: BorderRadius.circular(4),
             ),
-            child: Icon(
-              FluentIcons.add,
-              color: isHover ? Colors.white : _fluentTheme.accentColor,
-            ),
+            child: const Icon(FluentIcons.add),
           );
         },
       ),

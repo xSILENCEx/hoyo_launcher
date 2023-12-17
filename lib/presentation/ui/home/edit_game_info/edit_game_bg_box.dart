@@ -1,5 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_bg/game_info_bg.dart';
+import 'package:hoyo_launcher/domain/game/entities/game_info_bg/rotation_folder_bg.dart';
+import 'package:hoyo_launcher/domain/game/entities/game_info_bg/rotation_list_bg.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_bg/single_image_bg.dart';
 import 'package:hoyo_launcher/presentation/utils/ex_types/ex_string.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
@@ -45,7 +47,7 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
   final LayerLink _layerLink = LayerLink();
 
   late GameInfoBgType _gameInfoBgType = widget.initInfoBgType ?? GameInfoBgType.singleImage;
-  late GameInfoBg? _gameInfoBg = widget.initInfoBg ?? SingleImageBg(imageUrl: '');
+  late GameInfoBg _gameInfoBg = widget.initInfoBg ?? const SingleImageBg.empty();
 
   FluentThemeData get _fluentTheme => FluentTheme.of(context);
 
@@ -58,9 +60,15 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
 
     if (type == null) return;
 
-    setState(() {
-      _gameInfoBgType = type;
-    });
+    _gameInfoBgType = type;
+
+    if (type == widget.initInfoBgType) {
+      _gameInfoBg = widget.initInfoBg ?? GameInfoBg.getEmpty(type);
+    } else {
+      _gameInfoBg = GameInfoBg.getEmpty(type);
+    }
+
+    setState(() {});
   }
 
   @override
@@ -74,6 +82,7 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
       child: Column(
         children: <Widget>[
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(l10n.bg_type.withColon),
               const SizedBox(width: 10),
@@ -127,25 +136,44 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
 
   /// 选择单张图片
   Widget _buildSingleImage() {
+    final SingleImageBg bg = _gameInfoBg as SingleImageBg;
+
     return PathPicker(
-      onPathChanged: (String path) {},
+      onPathChanged: (String path) {
+        if (path.trim().isEmpty) return;
+
+        _gameInfoBg = bg.copyWith(imageUrl: path);
+        widget.onGameInfoBgChanged(_gameInfoBgType, _gameInfoBg);
+      },
       pickType: PickType.file,
     );
   }
 
   /// 选择文件夹
   Widget _buildFolderPicker() {
+    final RotationFolderBg bg = _gameInfoBg as RotationFolderBg;
+
     return PathPicker(
-      onPathChanged: (String path) {},
+      onPathChanged: (String path) {
+        if (path.trim().isEmpty) return;
+
+        _gameInfoBg = bg.copyWith(imageFolder: path);
+        widget.onGameInfoBgChanged(_gameInfoBgType, _gameInfoBg);
+      },
       pickType: PickType.folder,
     );
   }
 
   /// 选择多张图片
   Widget _buildImageList() {
-    return TextBox(
-      onEditingComplete: () {},
-      maxLength: 4000,
+    final RotationListBg bg = _gameInfoBg as RotationListBg;
+
+    return _ImageListBox(
+      pathList: bg.imageList,
+      onPathListChanged: (List<String> pathList) {
+        _gameInfoBg = bg.copyWith(imageList: pathList);
+        widget.onGameInfoBgChanged(_gameInfoBgType, _gameInfoBg);
+      },
     );
   }
 
@@ -190,6 +218,30 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class _ImageListBox extends StatefulWidget {
+  const _ImageListBox({required this.pathList, required this.onPathListChanged});
+
+  final List<String> pathList;
+  final Function(List<String> pathList) onPathListChanged;
+
+  @override
+  State<_ImageListBox> createState() => _ImageListBoxState();
+}
+
+class _ImageListBoxState extends State<_ImageListBox> {
+  @override
+  Widget build(BuildContext context) {
+    return InfoLabel(
+      label: l10n.one_image_per_line,
+      child: TextBox(
+        onEditingComplete: () {},
+        maxLength: 4000,
+        maxLines: 2,
       ),
     );
   }

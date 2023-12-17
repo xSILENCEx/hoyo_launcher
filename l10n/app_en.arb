@@ -30,6 +30,7 @@
     "plz_complete_info": "Please complete the information",
     "plz_select_game_icon": "Please select a game icon",
     "bg_type": "Background type",
+    "one_image_per_line": "One picture per line",
     "single_image": "Single image",
     "folder_loop": "Folder loop",
     "list_loop": "List loop"

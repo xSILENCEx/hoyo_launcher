@@ -98,6 +98,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get bg_type => '背景类型';
 
   @override
+  String get one_image_per_line => '每行一张图片';
+
+  @override
   String get single_image => '单张图片';
 
   @override

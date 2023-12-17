@@ -98,6 +98,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get bg_type => 'Background type';
 
   @override
+  String get one_image_per_line => 'One picture per line';
+
+  @override
   String get single_image => 'Single image';
 
   @override

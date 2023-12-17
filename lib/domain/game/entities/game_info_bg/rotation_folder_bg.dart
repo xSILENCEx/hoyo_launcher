@@ -7,6 +7,10 @@ class RotationFolderBg extends GameInfoBg {
     required this.transformType,
   });
 
+  const RotationFolderBg.empty()
+      : imageFolder = '',
+        transformType = ImageTransformType.fade;
+
   factory RotationFolderBg.fromJson(Map<String, dynamic> json) {
     return RotationFolderBg(
       imageFolder: json['imageFolder'] as String,

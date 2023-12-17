@@ -1,9 +1,9 @@
 import 'package:hoyo_launcher/commons/logger.dart';
 
 enum GameInfoBgType {
+  singleImage._('STATIC_IMAGE'),
   folderRotation._('FOLDER_ROTATION'),
   listRotation._('LIST_ROTATION'),
-  singleImage._('STATIC_IMAGE'),
   unknown._('UNKNOWN');
 
   const GameInfoBgType._(this.value);

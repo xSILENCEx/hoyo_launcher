@@ -279,6 +279,12 @@ abstract class AppLocalizations {
   /// **'Background type'**
   String get bg_type;
 
+  /// No description provided for @one_image_per_line.
+  ///
+  /// In en, this message translates to:
+  /// **'One picture per line'**
+  String get one_image_per_line;
+
   /// No description provided for @single_image.
   ///
   /// In en, this message translates to:

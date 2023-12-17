@@ -28,6 +28,19 @@ abstract class GameInfoBg {
     }
   }
 
+  static GameInfoBg getEmpty(GameInfoBgType type) {
+    switch (type) {
+      case GameInfoBgType.folderRotation:
+        return const RotationFolderBg.empty();
+      case GameInfoBgType.listRotation:
+        return RotationListBg.empty();
+      case GameInfoBgType.singleImage:
+        return const SingleImageBg.empty();
+      case GameInfoBgType.unknown:
+        return const _GameInfoBackground();
+    }
+  }
+
   Map<String, dynamic> toJson();
 
   GameInfoBg copyWith();
