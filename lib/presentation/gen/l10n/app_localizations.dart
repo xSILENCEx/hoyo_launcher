@@ -147,6 +147,30 @@ abstract class AppLocalizations {
   /// **'Icon'**
   String get icon;
 
+  /// No description provided for @info.
+  ///
+  /// In en, this message translates to:
+  /// **'Information'**
+  String get info;
+
+  /// No description provided for @error.
+  ///
+  /// In en, this message translates to:
+  /// **'Error'**
+  String get error;
+
+  /// No description provided for @warning.
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
+  String get warning;
+
+  /// No description provided for @success.
+  ///
+  /// In en, this message translates to:
+  /// **'Success'**
+  String get success;
+
   /// No description provided for @execution_path.
   ///
   /// In en, this message translates to:
@@ -189,11 +213,53 @@ abstract class AppLocalizations {
   /// **'Confirm delete?'**
   String get confirm_delete;
 
-  /// No description provided for @open_launcher.
+  /// No description provided for @more_actions.
   ///
   /// In en, this message translates to:
-  /// **'Open Launcher'**
-  String get open_launcher;
+  /// **'More actions'**
+  String get more_actions;
+
+  /// No description provided for @add_action.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a action'**
+  String get add_action;
+
+  /// No description provided for @plz_fill_game_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill in the game name'**
+  String get plz_fill_game_name;
+
+  /// No description provided for @plz_select_game_path.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select the game path'**
+  String get plz_select_game_path;
+
+  /// No description provided for @plz_fill_execution_path.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill in the execution path'**
+  String get plz_fill_execution_path;
+
+  /// No description provided for @plz_fill_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Please fill in the name'**
+  String get plz_fill_name;
+
+  /// No description provided for @plz_complete_info.
+  ///
+  /// In en, this message translates to:
+  /// **'Please complete the information'**
+  String get plz_complete_info;
+
+  /// No description provided for @plz_select_game_icon.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a game icon'**
+  String get plz_select_game_icon;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

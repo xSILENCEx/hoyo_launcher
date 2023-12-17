@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/commons/getIt/di.dart';
 import 'package:hoyo_launcher/domain/game/entities/edit_game_info_entity.dart';
+import 'package:hoyo_launcher/domain/game/entities/game_info_action.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/usecases/create_game_info_usecase.dart';
 import 'package:hoyo_launcher/domain/game/usecases/del_game_info_usecase.dart';
@@ -11,6 +12,7 @@ import 'package:hoyo_launcher/presentation/widgets/confirm_dialog.dart';
 import 'package:hoyo_launcher/presentation/widgets/path_picker.dart';
 
 import 'icon_selector.dart';
+import 'more_actions.dart';
 
 EditGameInfoEntity _resolveMapper(GameInfoEntity editGameInfo) {
   return EditGameInfoEntity.edit(
@@ -89,20 +91,29 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
             initIconPath: _editInfo.icon,
             onSelected: (String iconPath) => _editInfo = _editInfo.copyWith(icon: iconPath),
           ),
-          const SizedBox(height: 20),
+          _spacer(),
           InfoLabel(
             label: l10n.game_name.withColon,
-            child: TextFormBox(
-              initialValue: _editInfo.title,
-              onChanged: (String value) => _editInfo = _editInfo.copyWith(title: value),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 120),
+              child: TextFormBox(
+                initialValue: _editInfo.title,
+                onChanged: (String value) => _editInfo = _editInfo.copyWith(title: value),
+                maxLength: 4000,
+              ),
             ),
           ),
-          const SizedBox(height: 20),
+          _spacer(),
           PathPicker(
             initialPath: _editInfo.launchPath,
             headerValue: l10n.execution_path.withColon,
             pickType: PickType.file,
             onPathChanged: (String path) => _editInfo = _editInfo.copyWith(launchPath: path),
+          ),
+          _spacer(),
+          MoreActions(
+            initActions: _editInfo.moreActions,
+            onActionsChanged: (List<GameInfoAction> actions) => _editInfo = _editInfo.copyWith(moreActions: actions),
           ),
         ],
       ),
@@ -122,12 +133,16 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
               width: 150,
               child: FilledButton(
                 onPressed: _save,
-                child: Text(l10n.create_info),
+                child: Text(l10n.ok),
               ),
             ),
           ],
         ),
       ],
     );
+  }
+
+  Widget _spacer() {
+    return const SizedBox(height: 20);
   }
 }

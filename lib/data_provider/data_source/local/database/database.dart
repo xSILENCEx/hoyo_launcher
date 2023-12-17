@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:hoyo_launcher/commons/app_path.dart';
 import 'package:path/path.dart' as p;
-import 'package:path_provider/path_provider.dart';
 
 import 'dao_list.dart';
 import 'table_list.dart';
@@ -52,10 +52,7 @@ class MyDatabase extends _$MyDatabase {
 LazyDatabase _openConnection() {
   // the LazyDatabase util lets us find the right location for the file async.
   return LazyDatabase(() async {
-    // put the database file, called db.sqlite here, into the documents folder
-    // for your app.
-    final Directory dbFolder = await getApplicationDocumentsDirectory();
-    final File file = File(p.join(dbFolder.path, 'tt_db.sqlite'));
+    final File file = File(p.join(appDirectoryPath, 'hoyo_launcher_db.sqlite'));
     return NativeDatabase.createInBackground(file);
   });
 }

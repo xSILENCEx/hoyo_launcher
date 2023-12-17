@@ -8,6 +8,10 @@
     "cancel": "Cancel",
     "ok": "OK",
     "icon": "Icon",
+    "info": "Information",
+    "error": "Error",
+    "warning": "Warning",
+    "success": "Success",
     "execution_path": "Execution path",
     "game_name": "Game name",
     "settings": "Settings",
@@ -15,6 +19,12 @@
     "yes": "Yes",
     "no": "No",
     "confirm_delete": "Confirm delete?",
-    "open_launcher": "Open Launcher"
-    
+    "more_actions": "More actions",
+    "add_action": "Add a action",
+    "plz_fill_game_name": "Please fill in the game name",
+    "plz_select_game_path": "Please select the game path",
+    "plz_fill_execution_path": "Please fill in the execution path",
+    "plz_fill_name": "Please fill in the name",
+    "plz_complete_info": "Please complete the information",
+    "plz_select_game_icon": "Please select a game icon"
 }

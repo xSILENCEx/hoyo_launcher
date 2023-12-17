@@ -5,7 +5,7 @@ class GameInfoAction {
   const GameInfoAction({required this.name, required this.executePath});
 
   factory GameInfoAction.fromStr(String jsonStr) {
-    final Map<String, dynamic> data = jsonEncode(jsonStr) as Map<String, dynamic>;
+    final Map<String, dynamic> data = jsonDecode(jsonStr) as Map<String, dynamic>;
 
     return GameInfoAction(
       name: data['name'] as String,

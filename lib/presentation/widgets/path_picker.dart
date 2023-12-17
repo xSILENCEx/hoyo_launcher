@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
+import 'package:hoyo_launcher/presentation/widgets/info_bar.dart';
 
 enum PickType { folder, file }
 
@@ -26,6 +27,8 @@ class PathPicker extends StatefulWidget {
 class _PathPickerState extends State<PathPicker> {
   late final TextEditingController _controller = TextEditingController(text: widget.initialPath);
 
+  bool _isSelecting = false;
+
   @override
   void dispose() {
     _controller.dispose();
@@ -44,11 +47,23 @@ class _PathPickerState extends State<PathPicker> {
   Future<void> _selectPath() async {
     String? path;
 
-    if (widget.pickType == PickType.folder) {
-      path = await FilePicker.platform.getDirectoryPath();
-    } else {
-      final FilePickerResult? result = await FilePicker.platform.pickFiles();
-      path = result?.files.single.path;
+    try {
+      if (_isSelecting) return;
+      _isSelecting = true;
+      if (widget.pickType == PickType.folder) {
+        path = await FilePicker.platform.getDirectoryPath();
+      } else if (widget.pickType == PickType.file) {
+        final FilePickerResult? result = await FilePicker.platform.pickFiles();
+        path = result?.files.single.path;
+      }
+    } catch (e) {
+      AppInfoBar.show(
+        context,
+        e.toString(),
+        severity: InfoBarSeverity.error,
+      );
+    } finally {
+      _isSelecting = false;
     }
 
     if (path == null) return;
@@ -65,15 +80,14 @@ class _PathPickerState extends State<PathPicker> {
           child: TextBox(
             controller: _controller,
             onEditingComplete: () => widget.onPathChanged(_controller.text),
+            maxLength: 4000,
           ),
         ),
         const SizedBox(width: 20),
         SizedBox(
+          width: 100,
           height: 32,
           child: Button(
-            style: ButtonStyle(
-              padding: ButtonState.all(const EdgeInsets.symmetric(horizontal: 20)),
-            ),
             onPressed: _selectPath,
             child: Center(child: Text(l10n.select)),
           ),

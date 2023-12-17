@@ -17,17 +17,19 @@ class Root extends StatelessWidget {
     return FluentApp(
       navigatorKey: navigatorKey,
       navigatorObservers: <NavigatorObserver>[routeObserver],
-      onGenerateTitle: (BuildContext context) {
-        return l10nWithContext(context).app_name;
-      },
+      onGenerateTitle: (BuildContext context) => l10nWithContext(context).app_name,
       themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       color: appTheme.color,
       darkTheme: FluentThemeData.dark().copyWith(
+        inactiveColor: Colors.grey,
+        cardColor: const Color(0xff252525),
         visualDensity: VisualDensity.standard,
         scaffoldBackgroundColor: const Color(0xFF202020),
       ),
       theme: FluentThemeData(
+        inactiveColor: Colors.grey,
+        cardColor: const Color(0xffECECEC),
         accentColor: appTheme.color,
         visualDensity: VisualDensity.standard,
         focusTheme: FocusThemeData(

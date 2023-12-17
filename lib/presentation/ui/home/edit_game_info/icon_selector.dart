@@ -52,19 +52,20 @@ class _IconSelectorState extends State<IconSelector> {
 
   @override
   Widget build(BuildContext context) {
+    final FluentThemeData fluentTheme = FluentTheme.of(context);
+
     return Row(
       children: <Widget>[
         CompositedTransformTarget(
           link: _layerLink,
-          child: SizedBox(
-            width: _size,
-            height: _size,
-            child: FilledButton(
-              onPressed: _showPicker,
-              style: ButtonStyle(
-                padding: ButtonState.all(EdgeInsets.zero),
-                shape: ButtonState.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(_iconRadius))),
-                backgroundColor: ButtonState.all(Colors.grey),
+          child: GestureDetector(
+            onTap: _showPicker,
+            child: Container(
+              width: _size,
+              height: _size,
+              decoration: BoxDecoration(
+                color: fluentTheme.cardColor,
+                borderRadius: BorderRadius.circular(_iconRadius),
               ),
               child: _iconPath == null
                   ? const Icon(FluentIcons.add)

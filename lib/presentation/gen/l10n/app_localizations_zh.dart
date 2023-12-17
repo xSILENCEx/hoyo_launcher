@@ -32,6 +32,18 @@ class AppLocalizationsZh extends AppLocalizations {
   String get icon => '游戏图标';
 
   @override
+  String get info => '信息';
+
+  @override
+  String get error => '错误';
+
+  @override
+  String get warning => '警告';
+
+  @override
+  String get success => '成功';
+
+  @override
   String get execution_path => '启动路径';
 
   @override
@@ -53,5 +65,26 @@ class AppLocalizationsZh extends AppLocalizations {
   String get confirm_delete => '确认删除？';
 
   @override
-  String get open_launcher => '打开启动器';
+  String get more_actions => '更多操作';
+
+  @override
+  String get add_action => '添加操作';
+
+  @override
+  String get plz_fill_game_name => '请输入游戏名称';
+
+  @override
+  String get plz_select_game_path => '请选择游戏路径';
+
+  @override
+  String get plz_fill_execution_path => '请选择游戏启动路径';
+
+  @override
+  String get plz_fill_name => '请输入操作名称';
+
+  @override
+  String get plz_complete_info => '请完善信息';
+
+  @override
+  String get plz_select_game_icon => '请选择游戏图标';
 }

@@ -32,6 +32,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get icon => 'Icon';
 
   @override
+  String get info => 'Information';
+
+  @override
+  String get error => 'Error';
+
+  @override
+  String get warning => 'Warning';
+
+  @override
+  String get success => 'Success';
+
+  @override
   String get execution_path => 'Execution path';
 
   @override
@@ -53,5 +65,26 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirm_delete => 'Confirm delete?';
 
   @override
-  String get open_launcher => 'Open Launcher';
+  String get more_actions => 'More actions';
+
+  @override
+  String get add_action => 'Add a action';
+
+  @override
+  String get plz_fill_game_name => 'Please fill in the game name';
+
+  @override
+  String get plz_select_game_path => 'Please select the game path';
+
+  @override
+  String get plz_fill_execution_path => 'Please fill in the execution path';
+
+  @override
+  String get plz_fill_name => 'Please fill in the name';
+
+  @override
+  String get plz_complete_info => 'Please complete the information';
+
+  @override
+  String get plz_select_game_icon => 'Please select a game icon';
 }
