@@ -2,9 +2,11 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/commons/getIt/di.dart';
 import 'package:hoyo_launcher/domain/game/entities/edit_game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_action.dart';
+import 'package:hoyo_launcher/domain/game/entities/game_info_bg/game_info_bg.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/usecases/create_game_info_usecase.dart';
 import 'package:hoyo_launcher/domain/game/usecases/del_game_info_usecase.dart';
+import 'package:hoyo_launcher/presentation/ui/home/edit_game_info/edit_game_bg_box.dart';
 import 'package:hoyo_launcher/presentation/utils/ex_types/ex_string.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/utils/router_tool.dart';
@@ -12,7 +14,7 @@ import 'package:hoyo_launcher/presentation/widgets/confirm_dialog.dart';
 import 'package:hoyo_launcher/presentation/widgets/path_picker.dart';
 
 import 'icon_selector.dart';
-import 'more_actions.dart';
+import 'edit_more_actions_box.dart';
 
 EditGameInfoEntity _resolveMapper(GameInfoEntity editGameInfo) {
   return EditGameInfoEntity.edit(
@@ -106,14 +108,22 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
           _spacer(),
           PathPicker(
             initialPath: _editInfo.launchPath,
-            headerValue: l10n.execution_path.withColon,
+            headerValue: l10n.launch_path.withColon,
             pickType: PickType.file,
             onPathChanged: (String path) => _editInfo = _editInfo.copyWith(launchPath: path),
           ),
           _spacer(),
-          MoreActions(
+          EditMoreActionsBox(
             initActions: _editInfo.moreActions,
             onActionsChanged: (List<GameInfoAction> actions) => _editInfo = _editInfo.copyWith(moreActions: actions),
+          ),
+          _spacer(),
+          EditGameBgBox(
+            initInfoBg: _editInfo.background,
+            initInfoBgType: _editInfo.gameBgType,
+            onGameInfoBgChanged: (GameInfoBgType gameInfoBgType, GameInfoBg gameInfoBg) {
+              _editInfo = _editInfo.copyWith(gameBgType: gameInfoBgType, background: gameInfoBg);
+            },
           ),
         ],
       ),

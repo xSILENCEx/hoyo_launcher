@@ -6,8 +6,8 @@ import 'package:hoyo_launcher/presentation/widgets/hover_builder.dart';
 import 'package:hoyo_launcher/presentation/widgets/info_bar.dart';
 import 'package:hoyo_launcher/presentation/widgets/path_picker.dart';
 
-class MoreActions extends StatefulWidget {
-  const MoreActions({
+class EditMoreActionsBox extends StatefulWidget {
+  const EditMoreActionsBox({
     super.key,
     this.initActions = const <GameInfoAction>[],
     required this.onActionsChanged,
@@ -17,10 +17,10 @@ class MoreActions extends StatefulWidget {
   final Function(List<GameInfoAction> actions) onActionsChanged;
 
   @override
-  State<MoreActions> createState() => _MoreActionsState();
+  State<EditMoreActionsBox> createState() => _EditMoreActionsBoxState();
 }
 
-class _MoreActionsState extends State<MoreActions> {
+class _EditMoreActionsBoxState extends State<EditMoreActionsBox> {
   late final List<GameInfoAction> _actions = List<GameInfoAction>.from(widget.initActions);
 
   FluentThemeData get _fluentTheme => FluentTheme.of(context);
@@ -137,13 +137,18 @@ class _MoreActionsState extends State<MoreActions> {
     String? path;
 
     return ContentDialog(
+      constraints: kDefaultContentDialogConstraints.copyWith(maxWidth: 500),
       title: Text(l10n.add_action),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          TextBox(onChanged: (String value) => title = value),
+          InfoLabel(
+            label: l10n.action_name.withColon,
+            child: TextBox(onChanged: (String value) => title = value),
+          ),
           const SizedBox(height: 20),
           PathPicker(
+            headerValue: l10n.execution_path.withColon,
             onPathChanged: (String value) => path = value,
             pickType: PickType.file,
           ),

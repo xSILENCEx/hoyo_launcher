@@ -171,6 +171,12 @@ abstract class AppLocalizations {
   /// **'Success'**
   String get success;
 
+  /// No description provided for @launch_path.
+  ///
+  /// In en, this message translates to:
+  /// **'Launch path'**
+  String get launch_path;
+
   /// No description provided for @execution_path.
   ///
   /// In en, this message translates to:
@@ -225,6 +231,12 @@ abstract class AppLocalizations {
   /// **'Add a action'**
   String get add_action;
 
+  /// No description provided for @action_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Action name'**
+  String get action_name;
+
   /// No description provided for @plz_fill_game_name.
   ///
   /// In en, this message translates to:
@@ -260,6 +272,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Please select a game icon'**
   String get plz_select_game_icon;
+
+  /// No description provided for @bg_type.
+  ///
+  /// In en, this message translates to:
+  /// **'Background type'**
+  String get bg_type;
+
+  /// No description provided for @single_image.
+  ///
+  /// In en, this message translates to:
+  /// **'Single image'**
+  String get single_image;
+
+  /// No description provided for @folder_loop.
+  ///
+  /// In en, this message translates to:
+  /// **'Folder loop'**
+  String get folder_loop;
+
+  /// No description provided for @list_loop.
+  ///
+  /// In en, this message translates to:
+  /// **'List loop'**
+  String get list_loop;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

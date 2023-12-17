@@ -44,7 +44,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get success => '成功';
 
   @override
-  String get execution_path => '启动路径';
+  String get launch_path => '启动路径';
+
+  @override
+  String get execution_path => '执行路径';
 
   @override
   String get game_name => '游戏名';
@@ -71,6 +74,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get add_action => '添加操作';
 
   @override
+  String get action_name => '操作名';
+
+  @override
   String get plz_fill_game_name => '请输入游戏名称';
 
   @override
@@ -87,4 +93,16 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get plz_select_game_icon => '请选择游戏图标';
+
+  @override
+  String get bg_type => '背景类型';
+
+  @override
+  String get single_image => '单张图片';
+
+  @override
+  String get folder_loop => '文件夹循环';
+
+  @override
+  String get list_loop => '列表循环';
 }

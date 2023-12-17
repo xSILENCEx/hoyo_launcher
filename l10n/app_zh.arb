@@ -12,7 +12,8 @@
     "error": "错误",
     "warning": "警告",
     "success": "成功",
-    "execution_path": "启动路径",
+    "launch_path": "启动路径",
+    "execution_path": "执行路径",
     "game_name": "游戏名",
     "settings": "设置",
     "start_game": "开始游戏",
@@ -21,10 +22,15 @@
     "confirm_delete": "确认删除？",
     "more_actions": "更多操作",
     "add_action": "添加操作",
+    "action_name": "操作名",
     "plz_fill_game_name": "请输入游戏名称",
     "plz_select_game_path": "请选择游戏路径",
     "plz_fill_execution_path": "请选择游戏启动路径",
     "plz_fill_name": "请输入操作名称",
     "plz_complete_info": "请完善信息",
-    "plz_select_game_icon": "请选择游戏图标"
+    "plz_select_game_icon": "请选择游戏图标",
+    "bg_type": "背景类型",
+    "single_image": "单张图片",
+    "folder_loop": "文件夹循环",
+    "list_loop": "列表循环"
 }

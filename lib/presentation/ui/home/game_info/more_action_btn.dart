@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_action.dart';
 import 'package:hoyo_launcher/presentation/widgets/hover_builder.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class MoreActionBtn extends StatelessWidget {
   const MoreActionBtn({
@@ -29,6 +30,8 @@ class MoreActionBtn extends StatelessWidget {
       );
 
       if (executePath == null) return;
+
+      launchUrlString(executePath);
     }
 
     return Container(

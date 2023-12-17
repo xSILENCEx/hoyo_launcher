@@ -12,6 +12,7 @@
     "error": "Error",
     "warning": "Warning",
     "success": "Success",
+    "launch_path": "Launch path",
     "execution_path": "Execution path",
     "game_name": "Game name",
     "settings": "Settings",
@@ -21,10 +22,15 @@
     "confirm_delete": "Confirm delete?",
     "more_actions": "More actions",
     "add_action": "Add a action",
+    "action_name": "Action name",
     "plz_fill_game_name": "Please fill in the game name",
     "plz_select_game_path": "Please select the game path",
     "plz_fill_execution_path": "Please fill in the execution path",
     "plz_fill_name": "Please fill in the name",
     "plz_complete_info": "Please complete the information",
-    "plz_select_game_icon": "Please select a game icon"
+    "plz_select_game_icon": "Please select a game icon",
+    "bg_type": "Background type",
+    "single_image": "Single image",
+    "folder_loop": "Folder loop",
+    "list_loop": "List loop"
 }

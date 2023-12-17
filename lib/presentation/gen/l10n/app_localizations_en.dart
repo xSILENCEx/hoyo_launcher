@@ -44,6 +44,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get success => 'Success';
 
   @override
+  String get launch_path => 'Launch path';
+
+  @override
   String get execution_path => 'Execution path';
 
   @override
@@ -71,6 +74,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get add_action => 'Add a action';
 
   @override
+  String get action_name => 'Action name';
+
+  @override
   String get plz_fill_game_name => 'Please fill in the game name';
 
   @override
@@ -87,4 +93,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get plz_select_game_icon => 'Please select a game icon';
+
+  @override
+  String get bg_type => 'Background type';
+
+  @override
+  String get single_image => 'Single image';
+
+  @override
+  String get folder_loop => 'Folder loop';
+
+  @override
+  String get list_loop => 'List loop';
 }
