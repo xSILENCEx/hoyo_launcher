@@ -14,7 +14,7 @@ class NavHoverBox extends StatefulWidget {
 
   final double minWidth;
   final double maxWidth;
-  final Widget Function(double value) childBuilder;
+  final Widget Function(double value, double width) childBuilder;
 
   @override
   State<NavHoverBox> createState() => _NavHoverBoxState();
@@ -43,12 +43,13 @@ class _NavHoverBoxState extends State<NavHoverBox> with SingleTickerProviderStat
       animation: _controller,
       builder: (_, Widget? child) {
         final double value = _controller.value;
+        final double width = value * (widget.maxWidth - widget.minWidth) + widget.minWidth;
         return SizedBox(
-          width: value * (widget.maxWidth - widget.minWidth) + widget.minWidth,
+          width: width,
           child: MouseRegion(
             onEnter: _onEnter,
             onExit: _onExit,
-            child: widget.childBuilder(value),
+            child: ClipRect(child: widget.childBuilder(value, width)),
           ),
         );
       },

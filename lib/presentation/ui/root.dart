@@ -18,7 +18,7 @@ class Root extends StatelessWidget {
       navigatorKey: navigatorKey,
       navigatorObservers: <NavigatorObserver>[routeObserver],
       onGenerateTitle: (BuildContext context) => l10nWithContext(context).app_name,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       color: appTheme.color,
       darkTheme: FluentThemeData.dark().copyWith(

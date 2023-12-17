@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:fluent_ui/fluent_ui.dart' as fu;
 import 'package:flutter/material.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
@@ -6,11 +8,6 @@ import 'package:hoyo_launcher/presentation/widgets/app_image.dart';
 import 'package:hoyo_launcher/presentation/widgets/hover_builder.dart';
 
 import 'widgets/nav_hover_box.dart';
-
-const double _navMinWidth = 60;
-const double _navMaxWidth = 280;
-
-const double _leadingMargin = 6;
 
 class NavBar extends StatelessWidget {
   const NavBar({
@@ -22,7 +19,12 @@ class NavBar extends StatelessWidget {
     required this.onDelItemTap,
     required this.onEditItemTap,
     required this.onAddItemTap,
+    this.onNavHover,
   });
+
+  static const double navBarMinWidth = 60;
+  static const double navBarMaxWidth = 280;
+  static const double _leadingMargin = 6;
 
   final int selectIndex;
   final List<GameInfoEntity> navItems;
@@ -32,13 +34,17 @@ class NavBar extends StatelessWidget {
   final Function() onSettingItemTap;
   final Function() onAddItemTap;
 
+  final Function(double animationValue)? onNavHover;
+
   @override
   Widget build(BuildContext context) {
     return NavHoverBox(
-      minWidth: _navMinWidth,
-      maxWidth: _navMaxWidth,
-      childBuilder: (double value) {
-        final double navMinWidth = _navMinWidth + (value * _navMinWidth * 0.15);
+      minWidth: navBarMinWidth,
+      maxWidth: navBarMaxWidth,
+      childBuilder: (double value, double width) {
+        onNavHover?.call(width);
+
+        final double navMinWidth = navBarMinWidth + (value * navBarMinWidth * 0.15);
 
         return Material(
           color: Colors.transparent,
@@ -161,7 +167,7 @@ class NavBar extends StatelessWidget {
                 curve: Curves.ease,
                 duration: const Duration(milliseconds: 500),
                 width: 3,
-                height: isSelected ? (_navMinWidth - _leadingMargin * 2) / 2.5 : 0,
+                height: isSelected ? (navBarMinWidth - _leadingMargin * 2) / 2.5 : 0,
                 decoration: BoxDecoration(
                   color: indicatorColor,
                   borderRadius: BorderRadius.circular(4),
@@ -175,7 +181,7 @@ class NavBar extends StatelessWidget {
                   Container(width: leadingSize, height: leadingSize, padding: iconPadding, child: icon),
                   const SizedBox(width: _leadingMargin),
                   SizedBox(
-                    width: _navMaxWidth + _leadingMargin * 2 - _navMinWidth * (trailings.length + 1),
+                    width: navBarMaxWidth + _leadingMargin * 2 - navBarMinWidth * (trailings.length + 1),
                     child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
                   ),
                   if (trailings.isNotEmpty) const SizedBox(width: _leadingMargin),

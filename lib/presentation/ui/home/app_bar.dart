@@ -3,7 +3,7 @@ import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/widgets/app_image.dart';
 import 'package:window_manager/window_manager.dart';
 
-import 'window_buttons.dart';
+import 'widgets/window_buttons.dart';
 
 NavigationAppBar buildAppBar() {
   return NavigationAppBar(

@@ -1,18 +1,17 @@
-import 'dart:ui';
-
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/commons/getIt/di.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/usecases/get_game_info_usecase.dart';
 import 'package:hoyo_launcher/presentation/ui/settings/settings_page.dart';
-import 'package:hoyo_launcher/presentation/widgets/app_image.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'app_bar.dart';
 import 'edit_game_info/edit_game_info_page.dart';
+import 'game_info/game_info_bg/game_bg_builder.dart';
 import 'game_info/game_info_page.dart';
 import 'home_mixins/nav_mixin.dart';
 import 'nav_bar.dart';
-import 'widgets/app_bar.dart';
+import 'widgets/blur_box.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -45,16 +44,15 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
 
         return Stack(
           children: <Widget>[
-            if (gameInfoList.isNotEmpty && navIndex < gameInfoList.length)
-              Positioned.fill(
-                child: ImageFiltered(
-                  imageFilter: ImageFilter.blur(sigmaX: 30, sigmaY: 30),
-                  child: AppImg.cover(url: gameInfoList[navIndex].icon),
+            if (gameInfoList.isNotEmpty)
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 300),
+                child: KeyedSubtree(
+                  key: ValueKey<String>(gameInfoList[navIndex].id),
+                  child: gameBgBuilder(gameInfoList[navIndex]),
                 ),
               ),
-            Container(
-              color: fluentTheme.scaffoldBackgroundColor.withOpacity(0.8),
-            ),
+            Positioned.fill(child: BlurBox(navBarWithNotifier)),
             NavigationView(
               appBar: buildAppBar(),
               content: Row(
@@ -64,17 +62,15 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
                     onDelItemTap: EditGameInfoPage.del,
                     onSettingItemTap: SettingsPage.open,
                     onAddItemTap: EditGameInfoPage.create,
+                    onNavHover: onNavHover,
                     selectIndex: navIndex,
                     navItems: gameInfoList,
                     onItemTap: changeNav,
                   ),
                   Expanded(
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.only(topLeft: Radius.circular(8)),
-                      child: gameInfoList.isEmpty
-                          ? Container(color: fluentTheme.scaffoldBackgroundColor.withOpacity(0.8))
-                          : GameInfoPage(gameInfo: gameInfoList[navIndex]),
-                    ),
+                    child: gameInfoList.isEmpty
+                        ? Container(color: fluentTheme.scaffoldBackgroundColor.withOpacity(0.8))
+                        : GameInfoPage(gameInfo: gameInfoList[navIndex]),
                   ),
                 ],
               ),
