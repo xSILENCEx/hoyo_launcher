@@ -20,7 +20,7 @@ class BlurBox extends StatelessWidget {
       },
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: ColoredBox(color: fluentTheme.scaffoldBackgroundColor.withOpacity(0.2)),
+        child: ColoredBox(color: fluentTheme.scaffoldBackgroundColor.withOpacity(0.5)),
       ),
     );
   }

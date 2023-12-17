@@ -44,14 +44,7 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
 
         return Stack(
           children: <Widget>[
-            if (gameInfoList.isNotEmpty)
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 300),
-                child: KeyedSubtree(
-                  key: ValueKey<String>(gameInfoList[navIndex].id),
-                  child: gameBgBuilder(gameInfoList[navIndex]),
-                ),
-              ),
+            GameBgBuilder(gameInfo: gameInfoList.isEmpty ? null : gameInfoList[navIndex]),
             Positioned.fill(child: BlurBox(navBarWithNotifier)),
             NavigationView(
               appBar: buildAppBar(),

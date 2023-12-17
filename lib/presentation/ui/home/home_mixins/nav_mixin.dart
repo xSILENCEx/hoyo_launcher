@@ -16,4 +16,10 @@ mixin NavMixin on State<Home> {
   void onNavHover(double value) {
     navBarWithNotifier.value = value;
   }
+
+  @override
+  void dispose() {
+    navBarWithNotifier.dispose();
+    super.dispose();
+  }
 }
