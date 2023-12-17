@@ -121,6 +121,7 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
     );
   }
 
+  /// 根据类型选择对应的视图
   Widget _buildView() {
     switch (_gameInfoBgType) {
       case GameInfoBgType.folderRotation:
@@ -139,6 +140,7 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
     final SingleImageBg bg = _gameInfoBg as SingleImageBg;
 
     return PathPicker(
+      initialPath: bg.imageUrl,
       onPathChanged: (String path) {
         if (path.trim().isEmpty) return;
 
@@ -154,6 +156,7 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
     final RotationFolderBg bg = _gameInfoBg as RotationFolderBg;
 
     return PathPicker(
+      initialPath: bg.imageFolder,
       onPathChanged: (String path) {
         if (path.trim().isEmpty) return;
 
