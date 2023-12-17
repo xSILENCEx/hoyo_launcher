@@ -14,8 +14,8 @@ NavigationAppBar buildAppBar() {
         child: Row(
           children: <Widget>[
             const AppImg(url: 'assets/images/mihoyo_logo.svg', width: 50),
-            const SizedBox(width: 4),
-            Text(l10n.launcher),
+            const SizedBox(width: 6),
+            Text(l10n.launcher, style: const TextStyle(fontWeight: FontWeight.bold)),
           ],
         ),
       ),

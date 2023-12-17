@@ -18,7 +18,7 @@ class Root extends StatelessWidget {
       navigatorKey: navigatorKey,
       navigatorObservers: <NavigatorObserver>[routeObserver],
       onGenerateTitle: (BuildContext context) => l10nWithContext(context).app_name,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       color: appTheme.color,
       darkTheme: FluentThemeData.dark().copyWith(
@@ -29,6 +29,7 @@ class Root extends StatelessWidget {
       ),
       theme: FluentThemeData(
         inactiveColor: Colors.grey,
+        scaffoldBackgroundColor: const Color(0xffF0F0F0),
         cardColor: const Color(0xffECECEC),
         accentColor: appTheme.color,
         visualDensity: VisualDensity.standard,

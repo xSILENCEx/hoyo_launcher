@@ -44,6 +44,7 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
 
         return Stack(
           children: <Widget>[
+            Positioned.fill(child: ColoredBox(color: fluentTheme.scaffoldBackgroundColor)),
             GameBgBuilder(gameInfo: gameInfoList.isEmpty ? null : gameInfoList[navIndex]),
             Positioned.fill(child: BlurBox(navBarWithNotifier)),
             NavigationView(
@@ -61,9 +62,8 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
                     onItemTap: changeNav,
                   ),
                   Expanded(
-                    child: gameInfoList.isEmpty
-                        ? Container(color: fluentTheme.scaffoldBackgroundColor.withOpacity(0.8))
-                        : GameInfoPage(gameInfo: gameInfoList[navIndex]),
+                    child:
+                        gameInfoList.isEmpty ? const SizedBox.shrink() : GameInfoPage(gameInfo: gameInfoList[navIndex]),
                   ),
                 ],
               ),
