@@ -9,9 +9,11 @@
     "ok": "确认",
     "icon": "游戏图标",
     "execution_path": "启动路径",
-    "launcher_path": "游戏启动器路径",
     "game_name": "游戏名",
     "settings": "设置",
     "start_game": "开始游戏",
+    "yes": "确认",
+    "no": "取消",
+    "confirm_delete": "确认删除？",
     "open_launcher": "打开启动器"
 }

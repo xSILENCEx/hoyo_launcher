@@ -4,10 +4,11 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/commons/getIt/di.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/usecases/get_game_info_usecase.dart';
+import 'package:hoyo_launcher/presentation/ui/settings/settings_page.dart';
 import 'package:hoyo_launcher/presentation/widgets/app_image.dart';
 import 'package:window_manager/window_manager.dart';
 
-import 'create_game_info/edit_game_info_page.dart';
+import 'edit_game_info/edit_game_info_page.dart';
 import 'game_info/game_info_page.dart';
 import 'home_mixins/nav_mixin.dart';
 import 'nav_bar.dart';
@@ -35,6 +36,8 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
 
   @override
   Widget build(BuildContext context) {
+    final FluentThemeData fluentTheme = FluentTheme.of(context);
+
     return StreamBuilder<List<GameInfoEntity>>(
       stream: getIt.get<GetGameInfoUseCase>().watchGameInfoList(),
       builder: (_, AsyncSnapshot<List<GameInfoEntity>> snapshot) {
@@ -50,8 +53,7 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
                 ),
               ),
             Container(
-              // color: Colors.red.withOpacity(0.2),
-              color: const Color(0xFF202020).withOpacity(0.9),
+              color: fluentTheme.scaffoldBackgroundColor.withOpacity(0.8),
             ),
             NavigationView(
               appBar: buildAppBar(),
@@ -59,8 +61,8 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
                 children: <Widget>[
                   NavBar(
                     onEditItemTap: EditGameInfoPage.edit,
-                    onDelItemTap: (GameInfoEntity info) {},
-                    onSettingItemTap: () {},
+                    onDelItemTap: EditGameInfoPage.del,
+                    onSettingItemTap: SettingsPage.open,
                     onAddItemTap: EditGameInfoPage.create,
                     selectIndex: navIndex,
                     navItems: gameInfoList,
@@ -69,7 +71,9 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
                   Expanded(
                     child: ClipRRect(
                       borderRadius: const BorderRadius.only(topLeft: Radius.circular(8)),
-                      child: gameInfoList.isEmpty ? Container() : GameInfoPage(gameInfo: gameInfoList[navIndex]),
+                      child: gameInfoList.isEmpty
+                          ? Container(color: fluentTheme.scaffoldBackgroundColor.withOpacity(0.8))
+                          : GameInfoPage(gameInfo: gameInfoList[navIndex]),
                     ),
                   ),
                 ],

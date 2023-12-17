@@ -12,8 +12,6 @@ const double _navMaxWidth = 280;
 
 const double _leadingMargin = 6;
 
-final Color _navColor = Colors.grey[800]!;
-
 class NavBar extends StatelessWidget {
   const NavBar({
     super.key,
@@ -40,7 +38,7 @@ class NavBar extends StatelessWidget {
       minWidth: _navMinWidth,
       maxWidth: _navMaxWidth,
       childBuilder: (double value) {
-        final double navMinWidth = _navMinWidth + (value * _navMinWidth * 0.2);
+        final double navMinWidth = _navMinWidth + (value * _navMinWidth * 0.15);
 
         return Material(
           color: Colors.transparent,
@@ -53,17 +51,17 @@ class NavBar extends StatelessWidget {
                   itemCount: navItems.length + 1,
                   itemBuilder: (_, int index) {
                     if (index == navItems.length) {
-                      return _buildAddItem(navMinWidth);
+                      return _buildAddItem(context, navMinWidth);
                     }
 
-                    return _buildItem(index, navItems[index], navMinWidth);
+                    return _buildItem(context, index, navItems[index], navMinWidth);
                   },
                   separatorBuilder: (_, __) => const SizedBox(height: 10),
                 ),
               ),
               SizedBox(
                 width: double.infinity,
-                child: _buildSettingItem(navMinWidth),
+                child: _buildSettingItem(context, navMinWidth),
               ),
               const SizedBox(height: _leadingMargin),
             ],
@@ -73,8 +71,9 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(int index, GameInfoEntity item, double navMinWidth) {
+  Widget _buildItem(BuildContext context, int index, GameInfoEntity item, double navMinWidth) {
     return _buildBasicItem(
+      context,
       item.title,
       AppImg.cover(url: item.icon, width: 26, height: 26, radius: 4),
       navMinWidth,
@@ -94,10 +93,11 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildAddItem(double navMinWidth) {
+  Widget _buildAddItem(BuildContext context, double navMinWidth) {
     return HoverBuilder(
       builder: (bool isHover) {
         return _buildBasicItem(
+          context,
           l10n.create_info,
           const Icon(fu.FluentIcons.add),
           navMinWidth,
@@ -109,10 +109,11 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildSettingItem(double navMinWidth) {
+  Widget _buildSettingItem(BuildContext context, double navMinWidth) {
     return HoverBuilder(
       builder: (bool isHover) {
         return _buildBasicItem(
+          context,
           l10n.settings,
           const Icon(fu.FluentIcons.settings),
           navMinWidth,
@@ -125,6 +126,7 @@ class NavBar extends StatelessWidget {
   }
 
   Widget _buildBasicItem(
+    BuildContext context,
     String title,
     Widget icon,
     double navMinWidth, {
@@ -137,13 +139,18 @@ class NavBar extends StatelessWidget {
   }) {
     final double leadingSize = navMinWidth - _leadingMargin * 2;
 
+    final fu.FluentThemeData fluentTheme = fu.FluentTheme.of(context);
+
+    final Color navColor = fluentTheme.navigationPaneTheme.backgroundColor!.withOpacity(0.4);
+    final Color indicatorColor = fluentTheme.accentColor;
+
     return GestureDetector(
       onTap: onTap ?? () => onItemTap(index),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: _leadingMargin),
         height: leadingSize,
         decoration: BoxDecoration(
-          color: isSelected ? _navColor : _navColor.withOpacity(0),
+          color: isSelected ? navColor : navColor.withOpacity(0),
           borderRadius: BorderRadius.circular(6),
         ),
         child: Stack(
@@ -152,11 +159,11 @@ class NavBar extends StatelessWidget {
             if (hasIndicator)
               AnimatedContainer(
                 curve: Curves.ease,
-                duration: const Duration(milliseconds: 300),
+                duration: const Duration(milliseconds: 500),
                 width: 3,
                 height: isSelected ? (_navMinWidth - _leadingMargin * 2) / 2.5 : 0,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: indicatorColor,
                   borderRadius: BorderRadius.circular(4),
                 ),
               ),

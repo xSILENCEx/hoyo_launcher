@@ -35,9 +35,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get execution_path => 'Execution path';
 
   @override
-  String get launcher_path => 'Game Launcher path';
-
-  @override
   String get game_name => 'Game name';
 
   @override
@@ -45,6 +42,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get start_game => 'Start game';
+
+  @override
+  String get yes => 'Yes';
+
+  @override
+  String get no => 'No';
+
+  @override
+  String get confirm_delete => 'Confirm delete?';
 
   @override
   String get open_launcher => 'Open Launcher';

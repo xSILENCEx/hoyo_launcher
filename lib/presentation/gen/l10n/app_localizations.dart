@@ -153,12 +153,6 @@ abstract class AppLocalizations {
   /// **'Execution path'**
   String get execution_path;
 
-  /// No description provided for @launcher_path.
-  ///
-  /// In en, this message translates to:
-  /// **'Game Launcher path'**
-  String get launcher_path;
-
   /// No description provided for @game_name.
   ///
   /// In en, this message translates to:
@@ -176,6 +170,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Start game'**
   String get start_game;
+
+  /// No description provided for @yes.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes'**
+  String get yes;
+
+  /// No description provided for @no.
+  ///
+  /// In en, this message translates to:
+  /// **'No'**
+  String get no;
+
+  /// No description provided for @confirm_delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm delete?'**
+  String get confirm_delete;
 
   /// No description provided for @open_launcher.
   ///

@@ -20,16 +20,12 @@ class Root extends StatelessWidget {
       onGenerateTitle: (BuildContext context) {
         return l10nWithContext(context).app_name;
       },
-      themeMode: appTheme.mode,
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       color: appTheme.color,
-      darkTheme: FluentThemeData(
-        brightness: Brightness.dark,
-        accentColor: appTheme.color,
+      darkTheme: FluentThemeData.dark().copyWith(
         visualDensity: VisualDensity.standard,
-        focusTheme: FocusThemeData(
-          glowFactor: is10footScreen(context) ? 2.0 : 0.0,
-        ),
+        scaffoldBackgroundColor: const Color(0xFF202020),
       ),
       theme: FluentThemeData(
         accentColor: appTheme.color,

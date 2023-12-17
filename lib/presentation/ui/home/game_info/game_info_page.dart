@@ -14,7 +14,7 @@ class GameInfoPage extends StatelessWidget {
       children: <Widget>[
         Container(color: Colors.purple.withOpacity(0.2)),
         Padding(
-          padding: const EdgeInsets.all(40),
+          padding: const EdgeInsets.only(right: 40, bottom: 40),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[

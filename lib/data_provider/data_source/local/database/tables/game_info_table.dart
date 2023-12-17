@@ -32,6 +32,6 @@ class GameInfoTable extends Table {
   /// * [background] 游戏背景
   TextColumn get background => text().nullable()();
 
-  /// * [launcherPath] 游戏启动器路径
-  TextColumn get launcherPath => text().nullable()();
+  /// * [moreActions] 更多操作
+  TextColumn get moreActions => text().nullable()();
 }

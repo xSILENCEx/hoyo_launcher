@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import 'game_info_action.dart';
 import 'game_info_bg/game_info_bg.dart';
 import 'game_info_bg_type.dart';
 
@@ -16,8 +17,10 @@ class GameInfoEntity {
     required this.createTime,
     required this.updateTime,
     required String? backgroundStr,
-    this.launcherPath,
-  }) : _background = GameInfoBg.generate(gameBgType, backgroundStr);
+    String? moreActionsStr,
+    List<GameInfoAction>? moreActions,
+  })  : _background = GameInfoBg.generate(gameBgType, backgroundStr),
+        moreActions = moreActions ?? GameInfoAction.generateList(moreActionsStr);
 
   final String id;
   final String icon;
@@ -28,10 +31,15 @@ class GameInfoEntity {
 
   final GameInfoBgType? gameBgType;
   final GameInfoBg? _background;
-  final String? launcherPath;
+
+  final List<GameInfoAction> moreActions;
 
   T? getBackground<T extends GameInfoBg>() {
     return _background as T?;
+  }
+
+  String? genMoreActionsStr() {
+    return moreActions.isEmpty ? null : moreActions.map((GameInfoAction action) => action.toJsonString()).join('||');
   }
 
   Map<String, dynamic> toJson() {
@@ -44,7 +52,7 @@ class GameInfoEntity {
       'createTime': createTime.millisecondsSinceEpoch,
       'updateTime': updateTime.millisecondsSinceEpoch,
       'background': _background?.toJsonString(),
-      'launcherPath': launcherPath,
+      'moreActions': genMoreActionsStr(),
     };
   }
 

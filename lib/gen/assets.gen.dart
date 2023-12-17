@@ -32,10 +32,21 @@ class $AssetsIconsGen {
       [genshinImpact, honkaiImpact3, honkaiStarRail, zzz];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/mihoyo_logo.svg
+  String get mihoyoLogo => 'assets/images/mihoyo_logo.svg';
+
+  /// List of all assets
+  List<String> get values => [mihoyoLogo];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {

@@ -11,6 +11,7 @@ GameInfoEntity gameInfoDBToEntity(GameInfoDBModel model) {
     createTime: model.createTime,
     updateTime: model.updateTime,
     backgroundStr: model.background,
+    moreActionsStr: model.moreActions,
   );
 }
 
@@ -36,5 +37,6 @@ GameInfoDBModel gameInfoEntityToDB(GameInfoEntity entity) {
     createTime: entity.createTime,
     updateTime: entity.updateTime,
     background: entity.getBackground()?.toJsonString(),
+    moreActions: entity.genMoreActionsStr(),
   );
 }

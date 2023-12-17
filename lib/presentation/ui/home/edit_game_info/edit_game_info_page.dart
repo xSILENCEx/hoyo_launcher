@@ -1,12 +1,13 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/commons/getIt/di.dart';
-import 'package:hoyo_launcher/commons/logger.dart';
 import 'package:hoyo_launcher/domain/game/entities/edit_game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/usecases/create_game_info_usecase.dart';
+import 'package:hoyo_launcher/domain/game/usecases/del_game_info_usecase.dart';
 import 'package:hoyo_launcher/presentation/utils/ex_types/ex_string.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/utils/router_tool.dart';
+import 'package:hoyo_launcher/presentation/widgets/confirm_dialog.dart';
 import 'package:hoyo_launcher/presentation/widgets/path_picker.dart';
 
 import 'icon_selector.dart';
@@ -21,7 +22,7 @@ EditGameInfoEntity _resolveMapper(GameInfoEntity editGameInfo) {
     updateTime: editGameInfo.updateTime,
     gameBgType: editGameInfo.gameBgType,
     background: editGameInfo.getBackground(),
-    launcherPath: editGameInfo.launcherPath,
+    moreActions: editGameInfo.moreActions,
   );
 }
 
@@ -34,6 +35,7 @@ class EditGameInfoPage extends StatefulWidget {
     await showDialog(
       context: currentContext,
       builder: (_) => const EditGameInfoPage._(),
+      barrierDismissible: true,
     );
   }
 
@@ -41,7 +43,15 @@ class EditGameInfoPage extends StatefulWidget {
     await showDialog(
       context: currentContext,
       builder: (_) => EditGameInfoPage._(editGameInfo: _resolveMapper(gameInfo)),
+      barrierDismissible: true,
     );
+  }
+
+  static Future<void> del(GameInfoEntity gameInfo) async {
+    final bool confirmDel = await ConfirmDialog.show(gameInfo.title);
+    if (confirmDel) {
+      await getIt.get<DelGameInfoUsecase>()(gameInfo.id);
+    }
   }
 
   @override
@@ -62,8 +72,6 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
     }
     _editInfo = _editInfo.copyWith(updateTime: now);
 
-    infoLog('_editInfo:${_editInfo.toJson()}');
-
     await getIt.get<CreateGameInfoUseCase>()(_editInfo);
     Navigator.pop(context);
   }
@@ -72,7 +80,7 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
   Widget build(BuildContext context) {
     return ContentDialog(
       constraints: const BoxConstraints(maxWidth: 600),
-      title: const Text('Delete file permanently?'),
+      title: Text(widget.editGameInfo == null ? l10n.create_info : l10n.edit),
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,

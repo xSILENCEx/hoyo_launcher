@@ -9,10 +9,12 @@
     "ok": "OK",
     "icon": "Icon",
     "execution_path": "Execution path",
-    "launcher_path": "Game Launcher path",
     "game_name": "Game name",
     "settings": "Settings",
     "start_game": "Start game",
+    "yes": "Yes",
+    "no": "No",
+    "confirm_delete": "Confirm delete?",
     "open_launcher": "Open Launcher"
     
 }

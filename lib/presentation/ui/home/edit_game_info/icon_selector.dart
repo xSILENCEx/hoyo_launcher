@@ -11,8 +11,8 @@ const List<String> _innerIcons = <String>[
 ];
 
 const double _size = 60;
-
 const double _itemSpacing = 10;
+const double _iconRadius = 6;
 
 class IconSelector extends StatefulWidget {
   const IconSelector({super.key, required this.onSelected, this.initIconPath});
@@ -63,24 +63,24 @@ class _IconSelectorState extends State<IconSelector> {
               onPressed: _showPicker,
               style: ButtonStyle(
                 padding: ButtonState.all(EdgeInsets.zero),
-                shape: ButtonState.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))),
+                shape: ButtonState.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(_iconRadius))),
                 backgroundColor: ButtonState.all(Colors.grey),
               ),
               child: _iconPath == null
-                  ? const Icon(FluentIcons.add, size: 30)
+                  ? const Icon(FluentIcons.add)
                   : Stack(
                       alignment: Alignment.bottomRight,
                       children: <Widget>[
-                        AppImg.cover(url: _iconPath, width: _size, height: _size, radius: 6),
+                        AppImg.cover(url: _iconPath, width: _size, height: _size, radius: _iconRadius),
                         Container(
-                          width: 20,
-                          height: 20,
+                          width: _size * 0.35,
+                          height: _size * 0.35,
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             color: Colors.black.withOpacity(0.8),
                             borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(10),
-                              bottomRight: Radius.circular(10),
+                              topLeft: Radius.circular(_iconRadius),
+                              bottomRight: Radius.circular(_iconRadius),
                             ),
                           ),
                           child: const Icon(FluentIcons.edit, size: 10, color: Colors.white),
@@ -120,31 +120,13 @@ class _IconSelectorState extends State<IconSelector> {
               mainAxisSpacing: _itemSpacing,
               crossAxisSpacing: _itemSpacing,
             ),
-            // separatorBuilder: (_, __) => const SizedBox(width: _itemSpacing),
             itemBuilder: (_, int index) {
               final String icon = _innerIcons[index];
               return GestureDetector(
                 onTap: () => Navigator.of(context).pop(icon),
-                child: AppImg.cover(
-                  url: icon,
-                  width: _size,
-                  height: _size,
-                  radius: 10,
-                ),
+                child: AppImg.cover(url: icon, width: _size, height: _size, radius: _iconRadius),
               );
             },
-            // children: <Widget>[
-            //   for (final String icon in _innerIcons)
-            //     GestureDetector(
-            //       onTap: () => Navigator.of(context).pop(icon),
-            //       child: AppImg.cover(
-            //         url: icon,
-            //         width: _size,
-            //         height: _size,
-            //         radius: 10,
-            //       ),
-            //     ),
-            // ],
           ),
         ),
       ),

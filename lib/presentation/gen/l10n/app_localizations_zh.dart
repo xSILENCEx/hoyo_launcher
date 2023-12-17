@@ -35,9 +35,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get execution_path => '启动路径';
 
   @override
-  String get launcher_path => '游戏启动器路径';
-
-  @override
   String get game_name => '游戏名';
 
   @override
@@ -45,6 +42,15 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get start_game => '开始游戏';
+
+  @override
+  String get yes => '确认';
+
+  @override
+  String get no => '取消';
+
+  @override
+  String get confirm_delete => '确认删除？';
 
   @override
   String get open_launcher => '打开启动器';
