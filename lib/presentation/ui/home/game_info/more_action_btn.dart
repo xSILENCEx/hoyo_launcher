@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_action.dart';
+import 'package:hoyo_launcher/presentation/widgets/app_btn.dart';
 import 'package:hoyo_launcher/presentation/widgets/hover_builder.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -13,37 +14,37 @@ class MoreActionBtn extends StatelessWidget {
   final List<GameInfoAction> actions;
   final double btnSize;
 
+  Future<void> _onTap(BuildContext context, LayerLink layerLink) async {
+    final String? executePath = await showDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierColor: Colors.black.withOpacity(0.1),
+      builder: (BuildContext context) {
+        return _buildMenu(context, layerLink);
+      },
+    );
+
+    if (executePath == null) return;
+
+    launchUrlString(executePath);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (actions.isEmpty) return const SizedBox.shrink();
 
     final LayerLink _layerLink = LayerLink();
 
-    Future<void> _onTap(BuildContext context, LayerLink layerLink) async {
-      final String? executePath = await showDialog(
-        context: context,
-        barrierDismissible: true,
-        barrierColor: Colors.black.withOpacity(0.1),
-        builder: (BuildContext context) {
-          return _buildMenu(context, layerLink);
-        },
-      );
-
-      if (executePath == null) return;
-
-      launchUrlString(executePath);
-    }
-
     return Container(
-      width: btnSize,
-      height: btnSize,
       margin: const EdgeInsets.only(left: 10),
       child: CompositedTransformTarget(
         link: _layerLink,
-        child: FilledButton(
-          onPressed: () => _onTap(context, _layerLink),
-          style: ButtonStyle(padding: ButtonState.all(EdgeInsets.zero)),
-          child: const Center(child: Icon(FluentIcons.collapse_menu)),
+        child: AppBtn(
+          onTap: () => _onTap(context, _layerLink),
+          width: btnSize,
+          height: btnSize,
+          alignment: Alignment.center,
+          child: const Icon(FluentIcons.collapse_menu),
         ),
       ),
     );

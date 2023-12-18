@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
+import 'package:hoyo_launcher/presentation/widgets/app_btn.dart';
 
 import 'more_action_btn.dart';
 
@@ -21,20 +22,16 @@ class GameInfoPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
-              SizedBox(
+              AppBtn(
+                onTap: () {},
                 width: _buttonHeight * 4,
                 height: _buttonHeight,
-                child: FilledButton(
-                  onPressed: () {},
-                  style: ButtonStyle(padding: ButtonState.all(EdgeInsets.zero)),
-                  child: Center(
-                    child: Text(
-                      l10n.start_game,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
+                alignment: Alignment.center,
+                child: Text(
+                  l10n.start_game,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               MoreActionBtn(actions: gameInfo.moreActions, btnSize: _buttonHeight),

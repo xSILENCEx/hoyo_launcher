@@ -18,10 +18,10 @@ class Root extends StatelessWidget {
       navigatorKey: navigatorKey,
       navigatorObservers: <NavigatorObserver>[routeObserver],
       onGenerateTitle: (BuildContext context) => l10nWithContext(context).app_name,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
-      color: appTheme.color,
       darkTheme: FluentThemeData.dark().copyWith(
+        accentColor: const Color(0xff362E54).toAccentColor(),
         inactiveColor: Colors.grey,
         cardColor: const Color(0xff252525),
         visualDensity: VisualDensity.standard,
@@ -31,7 +31,7 @@ class Root extends StatelessWidget {
         inactiveColor: Colors.grey,
         scaffoldBackgroundColor: const Color(0xffF0F0F0),
         cardColor: const Color(0xffECECEC),
-        accentColor: appTheme.color,
+        accentColor: const Color(0xff8E8AA8).toAccentColor(),
         visualDensity: VisualDensity.standard,
         focusTheme: FocusThemeData(
           glowFactor: is10footScreen(context) ? 2.0 : 0.0,
