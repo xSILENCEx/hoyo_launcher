@@ -7,7 +7,6 @@ import 'package:window_manager/window_manager.dart';
 
 import 'app_bar.dart';
 import 'edit_game_info/edit_game_info_page.dart';
-import 'game_info/game_info_bg/game_bg_builder.dart';
 import 'game_info/game_info_page.dart';
 import 'home_mixins/nav_mixin.dart';
 import 'nav_bar.dart';
@@ -45,7 +44,7 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
         return Stack(
           children: <Widget>[
             Positioned.fill(child: ColoredBox(color: fluentTheme.scaffoldBackgroundColor)),
-            GameBgBuilder(gameInfo: gameInfoList.isEmpty ? null : gameInfoList[navIndex]),
+            // GameBgBuilder(gameInfo: gameInfoList.isEmpty ? null : gameInfoList[navIndex]),
             Positioned.fill(child: BlurBox(navBarWithNotifier)),
             NavigationView(
               appBar: buildAppBar(),

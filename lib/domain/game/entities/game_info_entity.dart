@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 
 import 'game_info_action.dart';
-import 'game_info_bg/game_info_bg.dart';
-import 'game_info_bg_type.dart';
+import 'game_info_bg.dart';
 
-export 'game_info_bg_type.dart';
+export 'game_info_bg.dart';
 
 @immutable
 class GameInfoEntity {
@@ -13,14 +12,12 @@ class GameInfoEntity {
     required this.icon,
     required this.title,
     required this.launchPath,
-    required this.gameBgType,
     required this.createTime,
     required this.updateTime,
-    required String? backgroundStr,
+    this.gameBgInfo,
     String? moreActionsStr,
     List<GameInfoAction>? moreActions,
-  })  : _background = GameInfoBg.generate(gameBgType, backgroundStr),
-        moreActions = moreActions ?? GameInfoAction.generateList(moreActionsStr);
+  }) : moreActions = moreActions ?? GameInfoAction.generateList(moreActionsStr);
 
   final String id;
   final String icon;
@@ -29,14 +26,9 @@ class GameInfoEntity {
   final DateTime createTime;
   final DateTime updateTime;
 
-  final GameInfoBgType? gameBgType;
-  final GameInfoBg? _background;
-
   final List<GameInfoAction> moreActions;
 
-  T? getBackground<T extends GameInfoBg>() {
-    return _background as T?;
-  }
+  final GameInfoBg? gameBgInfo;
 
   String? genMoreActionsStr() {
     return moreActions.isEmpty ? null : moreActions.map((GameInfoAction action) => action.toJsonString()).join('||');
@@ -48,11 +40,10 @@ class GameInfoEntity {
       'icon': icon,
       'title': title,
       'launchPath': launchPath,
-      'gameBgType': gameBgType?.value,
       'createTime': createTime.millisecondsSinceEpoch,
       'updateTime': updateTime.millisecondsSinceEpoch,
-      'background': _background?.toJsonString(),
       'moreActions': genMoreActionsStr(),
+      'bgInfo': gameBgInfo?.toJson(),
     };
   }
 

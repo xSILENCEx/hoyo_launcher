@@ -2,7 +2,6 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/commons/getIt/di.dart';
 import 'package:hoyo_launcher/domain/game/entities/edit_game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_action.dart';
-import 'package:hoyo_launcher/domain/game/entities/game_info_bg/game_info_bg.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/usecases/create_game_info_usecase.dart';
 import 'package:hoyo_launcher/domain/game/usecases/del_game_info_usecase.dart';
@@ -24,9 +23,8 @@ EditGameInfoEntity _resolveMapper(GameInfoEntity editGameInfo) {
     launchPath: editGameInfo.launchPath,
     createTime: editGameInfo.createTime,
     updateTime: editGameInfo.updateTime,
-    gameBgType: editGameInfo.gameBgType,
-    background: editGameInfo.getBackground(),
     moreActions: editGameInfo.moreActions,
+    gameBgInfo: editGameInfo.gameBgInfo,
   );
 }
 
@@ -119,11 +117,9 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
           ),
           _spacer(),
           EditGameBgBox(
-            initInfoBg: _editInfo.background,
-            initInfoBgType: _editInfo.gameBgType,
-            onGameInfoBgChanged: (GameInfoBgType gameInfoBgType, GameInfoBg gameInfoBg) {
-              _editInfo = _editInfo.copyWith(gameBgType: gameInfoBgType, background: gameInfoBg);
-            },
+            // initInfoBg: _editInfo.background,
+            // initInfoBgType: _editInfo.gameBgType,
+            onGameInfoBgChanged: (gameInfoBg) {},
           ),
         ],
       ),

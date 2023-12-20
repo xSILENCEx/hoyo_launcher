@@ -10,9 +10,8 @@ GameInfoEntity _genMapper(EditGameInfoEntity editGameInfo) {
     launchPath: editGameInfo.launchPath!,
     createTime: editGameInfo.createTime!,
     updateTime: editGameInfo.updateTime!,
-    gameBgType: editGameInfo.gameBgType,
-    backgroundStr: editGameInfo.background?.toJsonString(),
     moreActions: editGameInfo.moreActions,
+    gameBgInfo: editGameInfo.gameBgInfo,
   );
 }
 

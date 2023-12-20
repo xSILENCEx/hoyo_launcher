@@ -30,6 +30,12 @@ class $GameInfoTableTable extends GameInfoTable
   late final GeneratedColumn<String> launchPath = GeneratedColumn<String>(
       'launch_path', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _moreActionsMeta =
+      const VerificationMeta('moreActions');
+  @override
+  late final GeneratedColumn<String> moreActions = GeneratedColumn<String>(
+      'more_actions', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
   static const VerificationMeta _createTimeMeta =
       const VerificationMeta('createTime');
   @override
@@ -42,36 +48,9 @@ class $GameInfoTableTable extends GameInfoTable
   late final GeneratedColumn<DateTime> updateTime = GeneratedColumn<DateTime>(
       'update_time', aliasedName, false,
       type: DriftSqlType.dateTime, requiredDuringInsert: true);
-  static const VerificationMeta _gameBgTypeMeta =
-      const VerificationMeta('gameBgType');
   @override
-  late final GeneratedColumn<String> gameBgType = GeneratedColumn<String>(
-      'game_bg_type', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _backgroundMeta =
-      const VerificationMeta('background');
-  @override
-  late final GeneratedColumn<String> background = GeneratedColumn<String>(
-      'background', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  static const VerificationMeta _moreActionsMeta =
-      const VerificationMeta('moreActions');
-  @override
-  late final GeneratedColumn<String> moreActions = GeneratedColumn<String>(
-      'more_actions', aliasedName, true,
-      type: DriftSqlType.string, requiredDuringInsert: false);
-  @override
-  List<GeneratedColumn> get $columns => [
-        id,
-        icon,
-        title,
-        launchPath,
-        createTime,
-        updateTime,
-        gameBgType,
-        background,
-        moreActions
-      ];
+  List<GeneratedColumn> get $columns =>
+      [id, icon, title, launchPath, moreActions, createTime, updateTime];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -107,6 +86,12 @@ class $GameInfoTableTable extends GameInfoTable
     } else if (isInserting) {
       context.missing(_launchPathMeta);
     }
+    if (data.containsKey('more_actions')) {
+      context.handle(
+          _moreActionsMeta,
+          moreActions.isAcceptableOrUnknown(
+              data['more_actions']!, _moreActionsMeta));
+    }
     if (data.containsKey('create_time')) {
       context.handle(
           _createTimeMeta,
@@ -122,24 +107,6 @@ class $GameInfoTableTable extends GameInfoTable
               data['update_time']!, _updateTimeMeta));
     } else if (isInserting) {
       context.missing(_updateTimeMeta);
-    }
-    if (data.containsKey('game_bg_type')) {
-      context.handle(
-          _gameBgTypeMeta,
-          gameBgType.isAcceptableOrUnknown(
-              data['game_bg_type']!, _gameBgTypeMeta));
-    }
-    if (data.containsKey('background')) {
-      context.handle(
-          _backgroundMeta,
-          background.isAcceptableOrUnknown(
-              data['background']!, _backgroundMeta));
-    }
-    if (data.containsKey('more_actions')) {
-      context.handle(
-          _moreActionsMeta,
-          moreActions.isAcceptableOrUnknown(
-              data['more_actions']!, _moreActionsMeta));
     }
     return context;
   }
@@ -158,16 +125,12 @@ class $GameInfoTableTable extends GameInfoTable
           .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
       launchPath: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}launch_path'])!,
+      moreActions: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}more_actions']),
       createTime: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}create_time'])!,
       updateTime: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}update_time'])!,
-      gameBgType: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}game_bg_type']),
-      background: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}background']),
-      moreActions: attachedDatabase.typeMapping
-          .read(DriftSqlType.string, data['${effectivePrefix}more_actions']),
     );
   }
 
@@ -190,30 +153,22 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
   /// * [launchPath] 游戏启动路径
   final String launchPath;
 
+  /// * [moreActions] 更多操作
+  final String? moreActions;
+
   /// * [createTime] 创建时间
   final DateTime createTime;
 
   /// * [updateTime] 更新时间
   final DateTime updateTime;
-
-  /// * [gameBgType] 游戏背景类型
-  final String? gameBgType;
-
-  /// * [background] 游戏背景
-  final String? background;
-
-  /// * [moreActions] 更多操作
-  final String? moreActions;
   const GameInfoDBModel(
       {required this.id,
       required this.icon,
       required this.title,
       required this.launchPath,
+      this.moreActions,
       required this.createTime,
-      required this.updateTime,
-      this.gameBgType,
-      this.background,
-      this.moreActions});
+      required this.updateTime});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -221,17 +176,11 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
     map['icon'] = Variable<String>(icon);
     map['title'] = Variable<String>(title);
     map['launch_path'] = Variable<String>(launchPath);
-    map['create_time'] = Variable<DateTime>(createTime);
-    map['update_time'] = Variable<DateTime>(updateTime);
-    if (!nullToAbsent || gameBgType != null) {
-      map['game_bg_type'] = Variable<String>(gameBgType);
-    }
-    if (!nullToAbsent || background != null) {
-      map['background'] = Variable<String>(background);
-    }
     if (!nullToAbsent || moreActions != null) {
       map['more_actions'] = Variable<String>(moreActions);
     }
+    map['create_time'] = Variable<DateTime>(createTime);
+    map['update_time'] = Variable<DateTime>(updateTime);
     return map;
   }
 
@@ -241,17 +190,11 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
       icon: Value(icon),
       title: Value(title),
       launchPath: Value(launchPath),
-      createTime: Value(createTime),
-      updateTime: Value(updateTime),
-      gameBgType: gameBgType == null && nullToAbsent
-          ? const Value.absent()
-          : Value(gameBgType),
-      background: background == null && nullToAbsent
-          ? const Value.absent()
-          : Value(background),
       moreActions: moreActions == null && nullToAbsent
           ? const Value.absent()
           : Value(moreActions),
+      createTime: Value(createTime),
+      updateTime: Value(updateTime),
     );
   }
 
@@ -263,11 +206,9 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
       icon: serializer.fromJson<String>(json['icon']),
       title: serializer.fromJson<String>(json['title']),
       launchPath: serializer.fromJson<String>(json['launchPath']),
+      moreActions: serializer.fromJson<String?>(json['moreActions']),
       createTime: serializer.fromJson<DateTime>(json['createTime']),
       updateTime: serializer.fromJson<DateTime>(json['updateTime']),
-      gameBgType: serializer.fromJson<String?>(json['gameBgType']),
-      background: serializer.fromJson<String?>(json['background']),
-      moreActions: serializer.fromJson<String?>(json['moreActions']),
     );
   }
   @override
@@ -278,11 +219,9 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
       'icon': serializer.toJson<String>(icon),
       'title': serializer.toJson<String>(title),
       'launchPath': serializer.toJson<String>(launchPath),
+      'moreActions': serializer.toJson<String?>(moreActions),
       'createTime': serializer.toJson<DateTime>(createTime),
       'updateTime': serializer.toJson<DateTime>(updateTime),
-      'gameBgType': serializer.toJson<String?>(gameBgType),
-      'background': serializer.toJson<String?>(background),
-      'moreActions': serializer.toJson<String?>(moreActions),
     };
   }
 
@@ -291,21 +230,17 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
           String? icon,
           String? title,
           String? launchPath,
+          Value<String?> moreActions = const Value.absent(),
           DateTime? createTime,
-          DateTime? updateTime,
-          Value<String?> gameBgType = const Value.absent(),
-          Value<String?> background = const Value.absent(),
-          Value<String?> moreActions = const Value.absent()}) =>
+          DateTime? updateTime}) =>
       GameInfoDBModel(
         id: id ?? this.id,
         icon: icon ?? this.icon,
         title: title ?? this.title,
         launchPath: launchPath ?? this.launchPath,
+        moreActions: moreActions.present ? moreActions.value : this.moreActions,
         createTime: createTime ?? this.createTime,
         updateTime: updateTime ?? this.updateTime,
-        gameBgType: gameBgType.present ? gameBgType.value : this.gameBgType,
-        background: background.present ? background.value : this.background,
-        moreActions: moreActions.present ? moreActions.value : this.moreActions,
       );
   @override
   String toString() {
@@ -314,18 +249,16 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
           ..write('icon: $icon, ')
           ..write('title: $title, ')
           ..write('launchPath: $launchPath, ')
+          ..write('moreActions: $moreActions, ')
           ..write('createTime: $createTime, ')
-          ..write('updateTime: $updateTime, ')
-          ..write('gameBgType: $gameBgType, ')
-          ..write('background: $background, ')
-          ..write('moreActions: $moreActions')
+          ..write('updateTime: $updateTime')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, icon, title, launchPath, createTime,
-      updateTime, gameBgType, background, moreActions);
+  int get hashCode => Object.hash(
+      id, icon, title, launchPath, moreActions, createTime, updateTime);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -334,11 +267,9 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
           other.icon == this.icon &&
           other.title == this.title &&
           other.launchPath == this.launchPath &&
+          other.moreActions == this.moreActions &&
           other.createTime == this.createTime &&
-          other.updateTime == this.updateTime &&
-          other.gameBgType == this.gameBgType &&
-          other.background == this.background &&
-          other.moreActions == this.moreActions);
+          other.updateTime == this.updateTime);
 }
 
 class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
@@ -346,22 +277,18 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
   final Value<String> icon;
   final Value<String> title;
   final Value<String> launchPath;
+  final Value<String?> moreActions;
   final Value<DateTime> createTime;
   final Value<DateTime> updateTime;
-  final Value<String?> gameBgType;
-  final Value<String?> background;
-  final Value<String?> moreActions;
   final Value<int> rowid;
   const GameInfoTableCompanion({
     this.id = const Value.absent(),
     this.icon = const Value.absent(),
     this.title = const Value.absent(),
     this.launchPath = const Value.absent(),
+    this.moreActions = const Value.absent(),
     this.createTime = const Value.absent(),
     this.updateTime = const Value.absent(),
-    this.gameBgType = const Value.absent(),
-    this.background = const Value.absent(),
-    this.moreActions = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   GameInfoTableCompanion.insert({
@@ -369,11 +296,9 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
     required String icon,
     required String title,
     required String launchPath,
+    this.moreActions = const Value.absent(),
     required DateTime createTime,
     required DateTime updateTime,
-    this.gameBgType = const Value.absent(),
-    this.background = const Value.absent(),
-    this.moreActions = const Value.absent(),
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         icon = Value(icon),
@@ -386,11 +311,9 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
     Expression<String>? icon,
     Expression<String>? title,
     Expression<String>? launchPath,
+    Expression<String>? moreActions,
     Expression<DateTime>? createTime,
     Expression<DateTime>? updateTime,
-    Expression<String>? gameBgType,
-    Expression<String>? background,
-    Expression<String>? moreActions,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -398,11 +321,9 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
       if (icon != null) 'icon': icon,
       if (title != null) 'title': title,
       if (launchPath != null) 'launch_path': launchPath,
+      if (moreActions != null) 'more_actions': moreActions,
       if (createTime != null) 'create_time': createTime,
       if (updateTime != null) 'update_time': updateTime,
-      if (gameBgType != null) 'game_bg_type': gameBgType,
-      if (background != null) 'background': background,
-      if (moreActions != null) 'more_actions': moreActions,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -412,22 +333,18 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
       Value<String>? icon,
       Value<String>? title,
       Value<String>? launchPath,
+      Value<String?>? moreActions,
       Value<DateTime>? createTime,
       Value<DateTime>? updateTime,
-      Value<String?>? gameBgType,
-      Value<String?>? background,
-      Value<String?>? moreActions,
       Value<int>? rowid}) {
     return GameInfoTableCompanion(
       id: id ?? this.id,
       icon: icon ?? this.icon,
       title: title ?? this.title,
       launchPath: launchPath ?? this.launchPath,
+      moreActions: moreActions ?? this.moreActions,
       createTime: createTime ?? this.createTime,
       updateTime: updateTime ?? this.updateTime,
-      gameBgType: gameBgType ?? this.gameBgType,
-      background: background ?? this.background,
-      moreActions: moreActions ?? this.moreActions,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -447,20 +364,14 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
     if (launchPath.present) {
       map['launch_path'] = Variable<String>(launchPath.value);
     }
+    if (moreActions.present) {
+      map['more_actions'] = Variable<String>(moreActions.value);
+    }
     if (createTime.present) {
       map['create_time'] = Variable<DateTime>(createTime.value);
     }
     if (updateTime.present) {
       map['update_time'] = Variable<DateTime>(updateTime.value);
-    }
-    if (gameBgType.present) {
-      map['game_bg_type'] = Variable<String>(gameBgType.value);
-    }
-    if (background.present) {
-      map['background'] = Variable<String>(background.value);
-    }
-    if (moreActions.present) {
-      map['more_actions'] = Variable<String>(moreActions.value);
     }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
@@ -475,11 +386,277 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
           ..write('icon: $icon, ')
           ..write('title: $title, ')
           ..write('launchPath: $launchPath, ')
+          ..write('moreActions: $moreActions, ')
           ..write('createTime: $createTime, ')
           ..write('updateTime: $updateTime, ')
-          ..write('gameBgType: $gameBgType, ')
-          ..write('background: $background, ')
-          ..write('moreActions: $moreActions, ')
+          ..write('rowid: $rowid')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $GameInfoBgTableTable extends GameInfoBgTable
+    with TableInfo<$GameInfoBgTableTable, GameInfoBgDBModel> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $GameInfoBgTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  static const VerificationMeta _durationMeta =
+      const VerificationMeta('duration');
+  @override
+  late final GeneratedColumn<int> duration = GeneratedColumn<int>(
+      'duration', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _animatDuratuionMeta =
+      const VerificationMeta('animatDuratuion');
+  @override
+  late final GeneratedColumn<int> animatDuratuion = GeneratedColumn<int>(
+      'animat_duratuion', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _bgDataMeta = const VerificationMeta('bgData');
+  @override
+  late final GeneratedColumn<String> bgData = GeneratedColumn<String>(
+      'bg_data', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, duration, animatDuratuion, bgData];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'game_info_bg_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<GameInfoBgDBModel> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    if (data.containsKey('duration')) {
+      context.handle(_durationMeta,
+          duration.isAcceptableOrUnknown(data['duration']!, _durationMeta));
+    } else if (isInserting) {
+      context.missing(_durationMeta);
+    }
+    if (data.containsKey('animat_duratuion')) {
+      context.handle(
+          _animatDuratuionMeta,
+          animatDuratuion.isAcceptableOrUnknown(
+              data['animat_duratuion']!, _animatDuratuionMeta));
+    } else if (isInserting) {
+      context.missing(_animatDuratuionMeta);
+    }
+    if (data.containsKey('bg_data')) {
+      context.handle(_bgDataMeta,
+          bgData.isAcceptableOrUnknown(data['bg_data']!, _bgDataMeta));
+    } else if (isInserting) {
+      context.missing(_bgDataMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  GameInfoBgDBModel map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return GameInfoBgDBModel(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+      duration: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}duration'])!,
+      animatDuratuion: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}animat_duratuion'])!,
+      bgData: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}bg_data'])!,
+    );
+  }
+
+  @override
+  $GameInfoBgTableTable createAlias(String alias) {
+    return $GameInfoBgTableTable(attachedDatabase, alias);
+  }
+}
+
+class GameInfoBgDBModel extends DataClass
+    implements Insertable<GameInfoBgDBModel> {
+  /// * [id] 游戏ID
+  final String id;
+
+  /// * [duration] 切换间隔时间
+  final int duration;
+
+  /// * [animatDuratuion] 过度动画时长
+  final int animatDuratuion;
+
+  /// * [bgData] 背景数据
+  final String bgData;
+  const GameInfoBgDBModel(
+      {required this.id,
+      required this.duration,
+      required this.animatDuratuion,
+      required this.bgData});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    map['duration'] = Variable<int>(duration);
+    map['animat_duratuion'] = Variable<int>(animatDuratuion);
+    map['bg_data'] = Variable<String>(bgData);
+    return map;
+  }
+
+  GameInfoBgTableCompanion toCompanion(bool nullToAbsent) {
+    return GameInfoBgTableCompanion(
+      id: Value(id),
+      duration: Value(duration),
+      animatDuratuion: Value(animatDuratuion),
+      bgData: Value(bgData),
+    );
+  }
+
+  factory GameInfoBgDBModel.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return GameInfoBgDBModel(
+      id: serializer.fromJson<String>(json['id']),
+      duration: serializer.fromJson<int>(json['duration']),
+      animatDuratuion: serializer.fromJson<int>(json['animatDuratuion']),
+      bgData: serializer.fromJson<String>(json['bgData']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+      'duration': serializer.toJson<int>(duration),
+      'animatDuratuion': serializer.toJson<int>(animatDuratuion),
+      'bgData': serializer.toJson<String>(bgData),
+    };
+  }
+
+  GameInfoBgDBModel copyWith(
+          {String? id, int? duration, int? animatDuratuion, String? bgData}) =>
+      GameInfoBgDBModel(
+        id: id ?? this.id,
+        duration: duration ?? this.duration,
+        animatDuratuion: animatDuratuion ?? this.animatDuratuion,
+        bgData: bgData ?? this.bgData,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('GameInfoBgDBModel(')
+          ..write('id: $id, ')
+          ..write('duration: $duration, ')
+          ..write('animatDuratuion: $animatDuratuion, ')
+          ..write('bgData: $bgData')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, duration, animatDuratuion, bgData);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is GameInfoBgDBModel &&
+          other.id == this.id &&
+          other.duration == this.duration &&
+          other.animatDuratuion == this.animatDuratuion &&
+          other.bgData == this.bgData);
+}
+
+class GameInfoBgTableCompanion extends UpdateCompanion<GameInfoBgDBModel> {
+  final Value<String> id;
+  final Value<int> duration;
+  final Value<int> animatDuratuion;
+  final Value<String> bgData;
+  final Value<int> rowid;
+  const GameInfoBgTableCompanion({
+    this.id = const Value.absent(),
+    this.duration = const Value.absent(),
+    this.animatDuratuion = const Value.absent(),
+    this.bgData = const Value.absent(),
+    this.rowid = const Value.absent(),
+  });
+  GameInfoBgTableCompanion.insert({
+    required String id,
+    required int duration,
+    required int animatDuratuion,
+    required String bgData,
+    this.rowid = const Value.absent(),
+  })  : id = Value(id),
+        duration = Value(duration),
+        animatDuratuion = Value(animatDuratuion),
+        bgData = Value(bgData);
+  static Insertable<GameInfoBgDBModel> custom({
+    Expression<String>? id,
+    Expression<int>? duration,
+    Expression<int>? animatDuratuion,
+    Expression<String>? bgData,
+    Expression<int>? rowid,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (duration != null) 'duration': duration,
+      if (animatDuratuion != null) 'animat_duratuion': animatDuratuion,
+      if (bgData != null) 'bg_data': bgData,
+      if (rowid != null) 'rowid': rowid,
+    });
+  }
+
+  GameInfoBgTableCompanion copyWith(
+      {Value<String>? id,
+      Value<int>? duration,
+      Value<int>? animatDuratuion,
+      Value<String>? bgData,
+      Value<int>? rowid}) {
+    return GameInfoBgTableCompanion(
+      id: id ?? this.id,
+      duration: duration ?? this.duration,
+      animatDuratuion: animatDuratuion ?? this.animatDuratuion,
+      bgData: bgData ?? this.bgData,
+      rowid: rowid ?? this.rowid,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    if (duration.present) {
+      map['duration'] = Variable<int>(duration.value);
+    }
+    if (animatDuratuion.present) {
+      map['animat_duratuion'] = Variable<int>(animatDuratuion.value);
+    }
+    if (bgData.present) {
+      map['bg_data'] = Variable<String>(bgData.value);
+    }
+    if (rowid.present) {
+      map['rowid'] = Variable<int>(rowid.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('GameInfoBgTableCompanion(')
+          ..write('id: $id, ')
+          ..write('duration: $duration, ')
+          ..write('animatDuratuion: $animatDuratuion, ')
+          ..write('bgData: $bgData, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -489,10 +666,13 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
 abstract class _$MyDatabase extends GeneratedDatabase {
   _$MyDatabase(QueryExecutor e) : super(e);
   late final $GameInfoTableTable gameInfoTable = $GameInfoTableTable(this);
+  late final $GameInfoBgTableTable gameInfoBgTable =
+      $GameInfoBgTableTable(this);
   late final GameInfoDao gameInfoDao = GameInfoDao(this as MyDatabase);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [gameInfoTable];
+  List<DatabaseSchemaEntity> get allSchemaEntities =>
+      [gameInfoTable, gameInfoBgTable];
 }

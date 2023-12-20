@@ -20,18 +20,12 @@ class GameInfoTable extends Table {
   /// * [launchPath] 游戏启动路径
   TextColumn get launchPath => text()();
 
+  /// * [moreActions] 更多操作
+  TextColumn get moreActions => text().nullable()();
+
   /// * [createTime] 创建时间
   DateTimeColumn get createTime => dateTime()();
 
   /// * [updateTime] 更新时间
   DateTimeColumn get updateTime => dateTime()();
-
-  /// * [gameBgType] 游戏背景类型
-  TextColumn get gameBgType => text().nullable()();
-
-  /// * [background] 游戏背景
-  TextColumn get background => text().nullable()();
-
-  /// * [moreActions] 更多操作
-  TextColumn get moreActions => text().nullable()();
 }

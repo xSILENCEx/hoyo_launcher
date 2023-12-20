@@ -1,6 +1,5 @@
 import 'game_info_action.dart';
-import 'game_info_bg/game_info_bg.dart';
-import 'game_info_bg_type.dart';
+import 'game_info_bg.dart';
 
 /// 创建游戏信息实体
 class EditGameInfoEntity {
@@ -10,10 +9,9 @@ class EditGameInfoEntity {
     this.icon,
     this.title,
     this.launchPath,
-    this.gameBgType,
-    this.background,
     this.createTime,
     this.updateTime,
+    this.gameBgInfo,
   });
 
   EditGameInfoEntity.create(this.id)
@@ -22,8 +20,7 @@ class EditGameInfoEntity {
         launchPath = null,
         createTime = null,
         updateTime = null,
-        gameBgType = null,
-        background = null,
+        gameBgInfo = null,
         moreActions = <GameInfoAction>[];
 
   const EditGameInfoEntity.edit({
@@ -32,8 +29,7 @@ class EditGameInfoEntity {
     this.icon,
     this.title,
     this.launchPath,
-    this.gameBgType,
-    this.background,
+    this.gameBgInfo,
     this.createTime,
     this.updateTime,
   });
@@ -45,31 +41,30 @@ class EditGameInfoEntity {
   final DateTime? createTime;
   final DateTime? updateTime;
 
-  final GameInfoBgType? gameBgType;
-  final GameInfoBg? background;
   final List<GameInfoAction> moreActions;
+
+  final GameInfoBg? gameBgInfo;
 
   EditGameInfoEntity copyWith({
     String? id,
     String? icon,
     String? title,
     String? launchPath,
-    GameInfoBgType? gameBgType,
     GameInfoBg? background,
     DateTime? createTime,
     DateTime? updateTime,
     List<GameInfoAction>? moreActions,
+    GameInfoBg? gameBgInfo,
   }) {
     return EditGameInfoEntity._(
       id: id ?? this.id,
       icon: icon ?? this.icon,
       title: title ?? this.title,
       launchPath: launchPath ?? this.launchPath,
-      gameBgType: gameBgType ?? this.gameBgType,
-      background: background ?? this.background,
       createTime: createTime ?? this.createTime,
       updateTime: updateTime ?? this.updateTime,
       moreActions: moreActions ?? this.moreActions,
+      gameBgInfo: gameBgInfo ?? this.gameBgInfo,
     );
   }
 
@@ -84,11 +79,10 @@ class EditGameInfoEntity {
       'icon': icon,
       'title': title,
       'launchPath': launchPath,
-      'gameBgType': gameBgType?.index,
-      'background': background?.toJsonString(),
       'createTime': createTime?.millisecondsSinceEpoch,
       'updateTime': updateTime?.millisecondsSinceEpoch,
       'moreActions': moreActions.map((GameInfoAction action) => action.toJsonString()).join('||'),
+      'bgInfo': gameBgInfo?.toJson(),
     };
   }
 }
