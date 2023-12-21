@@ -32,12 +32,13 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
   void didUpdateWidget(covariant GameBgBuilder oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.gameInfo != widget.gameInfo) {
-      _images.clear();
-      _readyData();
+      _readyData(update: true);
     }
   }
 
-  void _readyData() {
+  void _readyData({bool update = false}) {
+    _images.clear();
+
     final GameInfoBg? gameInfoBg = _gameInfo?.gameBgInfo;
     if (gameInfoBg == null) return;
 
@@ -53,7 +54,7 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
       }
     }
 
-    if (_images.isNotEmpty) {
+    if (_images.isNotEmpty && update) {
       safeSetState(() {});
     }
   }

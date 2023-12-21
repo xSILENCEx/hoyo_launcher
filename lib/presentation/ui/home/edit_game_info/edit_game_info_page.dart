@@ -10,6 +10,7 @@ import 'package:hoyo_launcher/presentation/utils/ex_types/ex_string.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/utils/router_tool.dart';
 import 'package:hoyo_launcher/presentation/widgets/confirm_dialog.dart';
+import 'package:hoyo_launcher/presentation/widgets/info_bar.dart';
 import 'package:hoyo_launcher/presentation/widgets/path_picker.dart';
 
 import 'edit_more_actions_box.dart';
@@ -66,16 +67,21 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
         DateTime.now().millisecondsSinceEpoch.toString(),
       );
 
-  Future<void> _save() async {
-    final DateTime now = DateTime.now();
+  Future<void> _save(BuildContext context) async {
+    try {
+      final DateTime now = DateTime.now();
 
-    if (_editInfo.createTime == null) {
-      _editInfo = _editInfo.copyWith(createTime: now);
+      if (_editInfo.createTime == null) {
+        _editInfo = _editInfo.copyWith(createTime: now);
+      }
+      _editInfo = _editInfo.copyWith(updateTime: now);
+
+      await getIt.get<CreateGameInfoUseCase>()(_editInfo);
+      Navigator.pop(context);
+    } catch (e) {
+      debugPrint(e.toString());
+      AppInfoBar.show(context, e.toString());
     }
-    _editInfo = _editInfo.copyWith(updateTime: now);
-
-    await getIt.get<CreateGameInfoUseCase>()(_editInfo);
-    Navigator.pop(context);
   }
 
   @override
@@ -83,45 +89,47 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
     return ContentDialog(
       constraints: const BoxConstraints(maxWidth: 600),
       title: Text(widget.editGameInfo == null ? l10n.create_info : l10n.edit),
-      content: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          IconSelector(
-            initIconPath: _editInfo.icon,
-            onSelected: (String iconPath) => _editInfo = _editInfo.copyWith(icon: iconPath),
-          ),
-          _spacer(),
-          InfoLabel(
-            label: l10n.game_name.withColon,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 120),
-              child: TextFormBox(
-                initialValue: _editInfo.title,
-                onChanged: (String value) => _editInfo = _editInfo.copyWith(title: value),
-                maxLength: 4000,
+      content: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            IconSelector(
+              initIconPath: _editInfo.icon,
+              onSelected: (String iconPath) => _editInfo = _editInfo.copyWith(icon: iconPath),
+            ),
+            _spacer(),
+            InfoLabel(
+              label: l10n.game_name.withColon,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 120),
+                child: TextFormBox(
+                  initialValue: _editInfo.title,
+                  onChanged: (String value) => _editInfo = _editInfo.copyWith(title: value),
+                  maxLength: 4000,
+                ),
               ),
             ),
-          ),
-          _spacer(),
-          PathPicker(
-            initialPath: _editInfo.launchPath,
-            headerValue: l10n.launch_path.withColon,
-            pickType: PickType.file,
-            onPathChanged: (String path) => _editInfo = _editInfo.copyWith(launchPath: path),
-          ),
-          _spacer(),
-          EditMoreActionsBox(
-            initActions: _editInfo.moreActions,
-            onActionsChanged: (List<GameInfoAction> actions) => _editInfo = _editInfo.copyWith(moreActions: actions),
-          ),
-          _spacer(),
-          EditGameBgBox(
-            id: _editInfo.id,
-            initGameInfoBg: _editInfo.gameBgInfo,
-            onGameInfoBgChanged: (GameInfoBg gameInfoBg) => _editInfo = _editInfo.copyWith(gameBgInfo: gameInfoBg),
-          ),
-        ],
+            _spacer(),
+            PathPicker(
+              initialPath: _editInfo.launchPath,
+              headerValue: l10n.launch_path.withColon,
+              pickType: PickType.file,
+              onPathChanged: (String path) => _editInfo = _editInfo.copyWith(launchPath: path),
+            ),
+            _spacer(),
+            EditMoreActionsBox(
+              initActions: _editInfo.moreActions,
+              onActionsChanged: (List<GameInfoAction> actions) => _editInfo = _editInfo.copyWith(moreActions: actions),
+            ),
+            _spacer(),
+            EditGameBgBox(
+              id: _editInfo.id,
+              initGameInfoBg: _editInfo.gameBgInfo,
+              onGameInfoBgChanged: (GameInfoBg gameInfoBg) => _editInfo = _editInfo.copyWith(gameBgInfo: gameInfoBg),
+            ),
+          ],
+        ),
       ),
       actions: <Widget>[
         Row(
@@ -138,7 +146,7 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
             SizedBox(
               width: 150,
               child: FilledButton(
-                onPressed: _save,
+                onPressed: () => _save(context),
                 child: Text(l10n.ok),
               ),
             ),
