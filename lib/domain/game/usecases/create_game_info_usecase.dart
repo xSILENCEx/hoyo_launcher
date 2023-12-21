@@ -11,7 +11,7 @@ GameInfoEntity _genMapper(EditGameInfoEntity editGameInfo) {
     createTime: editGameInfo.createTime!,
     updateTime: editGameInfo.updateTime!,
     moreActions: editGameInfo.moreActions,
-    gameBgInfo: editGameInfo.gameBgInfo,
+    gameBgInfo: editGameInfo.gameBgInfo ?? GameInfoBg.create(editGameInfo.id),
   );
 }
 

@@ -2,8 +2,7 @@ import 'package:hoyo_launcher/data_provider/data_source/local/database/database.
 import 'package:hoyo_launcher/data_provider/data_source/local/database/models/full_game_info_db_model.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 
-GameInfoBg? gameInfoBgDBToEntity(GameInfoBgDBModel? model) {
-  if (model == null) return null;
+GameInfoBg gameInfoBgDBToEntity(GameInfoBgDBModel model) {
   return GameInfoBg(
     id: model.id,
     duration: Duration(seconds: model.duration),
@@ -34,8 +33,7 @@ List<GameInfoEntity> gameInfoDBListToEntityList(List<FullGameInfoDBModel> list) 
   return list.map(gameInfoDBToEntity).toList();
 }
 
-GameInfoBgDBModel? gameInfoBgEntityToDB(GameInfoBg? entity) {
-  if (entity == null) return null;
+GameInfoBgDBModel gameInfoBgEntityToDB(GameInfoBg entity) {
   return GameInfoBgDBModel(
     id: entity.id,
     duration: entity.duration.inSeconds,

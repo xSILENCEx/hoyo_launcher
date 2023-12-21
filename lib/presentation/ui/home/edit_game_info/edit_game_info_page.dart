@@ -117,9 +117,9 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
           ),
           _spacer(),
           EditGameBgBox(
-            // initInfoBg: _editInfo.background,
-            // initInfoBgType: _editInfo.gameBgType,
-            onGameInfoBgChanged: (gameInfoBg) {},
+            id: _editInfo.id,
+            initGameInfoBg: _editInfo.gameBgInfo,
+            onGameInfoBgChanged: (GameInfoBg gameInfoBg) => _editInfo = _editInfo.copyWith(gameBgInfo: gameInfoBg),
           ),
         ],
       ),

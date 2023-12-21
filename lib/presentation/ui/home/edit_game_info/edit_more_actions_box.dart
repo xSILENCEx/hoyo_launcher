@@ -156,7 +156,7 @@ class _EditMoreActionsBoxState extends State<EditMoreActionsBox> {
           onPressed: () => Navigator.pop(context),
           child: Text(l10n.cancel),
         ),
-        Button(
+        FilledButton(
           onPressed: () {
             if (title.isNullOrBlank || path.isNullOrBlank) {
               AppInfoBar.show(context, l10n.plz_complete_info);

@@ -14,7 +14,7 @@ class GameInfoEntity {
     required this.launchPath,
     required this.createTime,
     required this.updateTime,
-    this.gameBgInfo,
+    required this.gameBgInfo,
     String? moreActionsStr,
     List<GameInfoAction>? moreActions,
   }) : moreActions = moreActions ?? GameInfoAction.generateList(moreActionsStr);
@@ -28,7 +28,7 @@ class GameInfoEntity {
 
   final List<GameInfoAction> moreActions;
 
-  final GameInfoBg? gameBgInfo;
+  final GameInfoBg gameBgInfo;
 
   String? genMoreActionsStr() {
     return moreActions.isEmpty ? null : moreActions.map((GameInfoAction action) => action.toJsonString()).join('||');
@@ -43,7 +43,7 @@ class GameInfoEntity {
       'createTime': createTime.millisecondsSinceEpoch,
       'updateTime': updateTime.millisecondsSinceEpoch,
       'moreActions': genMoreActionsStr(),
-      'bgInfo': gameBgInfo?.toJson(),
+      'bgInfo': gameBgInfo.toJson(),
     };
   }
 

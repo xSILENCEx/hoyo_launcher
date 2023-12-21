@@ -21,9 +21,7 @@ class GameInfoDao extends AppDatabaseAccessor with _$GameInfoDaoMixin {
 
   Future<void> upsert(FullGameInfoDBModel model) async {
     await into(gameInfoTable).insertOnConflictUpdate(model.gameInfoDBModel);
-    if (model.gameInfoBgDBModel != null) {
-      await into(gameInfoBgTable).insertOnConflictUpdate(model.gameInfoBgDBModel!);
-    }
+    await into(gameInfoBgTable).insertOnConflictUpdate(model.gameInfoBgDBModel);
   }
 
   Future<void> upsertAll(List<FullGameInfoDBModel> list) async {
@@ -34,9 +32,7 @@ class GameInfoDao extends AppDatabaseAccessor with _$GameInfoDaoMixin {
 
     final List<GameInfoBgDBModel> bgList = <GameInfoBgDBModel>[];
     for (final FullGameInfoDBModel e in list) {
-      if (e.gameInfoBgDBModel != null) {
-        bgList.add(e.gameInfoBgDBModel!);
-      }
+      bgList.add(e.gameInfoBgDBModel);
     }
 
     if (bgList.isNotEmpty) {
@@ -74,16 +70,13 @@ class GameInfoDao extends AppDatabaseAccessor with _$GameInfoDaoMixin {
   Selectable<FullGameInfoDBModel> _joinQuery({String? id}) {
     final JoinedSelectStatement<HasResultSet, dynamic> q = _baseGet(id: id).join(
       <Join<HasResultSet, dynamic>>[
-        leftOuterJoin(
-          gameInfoBgTable,
-          gameInfoTable.id.equalsExp(gameInfoBgTable.id),
-        ),
+        leftOuterJoin(gameInfoBgTable, gameInfoTable.id.equalsExp(gameInfoBgTable.id)),
       ],
     );
 
     return q.map((TypedResult row) {
       final GameInfoDBModel gameInfo = row.readTable(gameInfoTable);
-      final GameInfoBgDBModel? gameInfoBg = row.readTable(gameInfoBgTable);
+      final GameInfoBgDBModel gameInfoBg = row.readTable(gameInfoBgTable);
       return FullGameInfoDBModel(gameInfo, gameInfoBg);
     });
   }

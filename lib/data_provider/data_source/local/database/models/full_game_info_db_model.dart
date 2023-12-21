@@ -4,5 +4,5 @@ class FullGameInfoDBModel {
   const FullGameInfoDBModel(this.gameInfoDBModel, this.gameInfoBgDBModel);
 
   final GameInfoDBModel gameInfoDBModel;
-  final GameInfoBgDBModel? gameInfoBgDBModel;
+  final GameInfoBgDBModel gameInfoBgDBModel;
 }

@@ -273,35 +273,41 @@ abstract class AppLocalizations {
   /// **'Please select a game icon'**
   String get plz_select_game_icon;
 
-  /// No description provided for @bg_type.
+  /// No description provided for @bg_images.
   ///
   /// In en, this message translates to:
-  /// **'Background type'**
-  String get bg_type;
+  /// **'Background images'**
+  String get bg_images;
 
-  /// No description provided for @one_image_per_line.
+  /// No description provided for @image_source.
   ///
   /// In en, this message translates to:
-  /// **'One picture per line'**
-  String get one_image_per_line;
+  /// **'Image source'**
+  String get image_source;
 
-  /// No description provided for @single_image.
+  /// No description provided for @local_image.
   ///
   /// In en, this message translates to:
-  /// **'Single image'**
-  String get single_image;
+  /// **'Local image'**
+  String get local_image;
 
-  /// No description provided for @folder_loop.
+  /// No description provided for @folder.
   ///
   /// In en, this message translates to:
-  /// **'Folder loop'**
-  String get folder_loop;
+  /// **'Folder'**
+  String get folder;
 
-  /// No description provided for @list_loop.
+  /// No description provided for @path_already_exists.
   ///
   /// In en, this message translates to:
-  /// **'List loop'**
-  String get list_loop;
+  /// **'Path already exists'**
+  String get path_already_exists;
+
+  /// No description provided for @net_image.
+  ///
+  /// In en, this message translates to:
+  /// **'Network image'**
+  String get net_image;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

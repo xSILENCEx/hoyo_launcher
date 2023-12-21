@@ -29,9 +29,10 @@
     "plz_fill_name": "请输入操作名称",
     "plz_complete_info": "请完善信息",
     "plz_select_game_icon": "请选择游戏图标",
-    "bg_type": "背景类型",
-    "one_image_per_line": "每行一张图片",
-    "single_image": "单张图片",
-    "folder_loop": "文件夹循环",
-    "list_loop": "列表循环"
+    "bg_images": "背景图片",
+    "image_source": "图片来源",
+    "local_image": "本地图片",
+    "folder": "文件夹",
+    "path_already_exists": "路径已存在",
+    "net_image": "网络图片"
 }

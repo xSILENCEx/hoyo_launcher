@@ -95,17 +95,20 @@ class AppLocalizationsZh extends AppLocalizations {
   String get plz_select_game_icon => '请选择游戏图标';
 
   @override
-  String get bg_type => '背景类型';
+  String get bg_images => '背景图片';
 
   @override
-  String get one_image_per_line => '每行一张图片';
+  String get image_source => '图片来源';
 
   @override
-  String get single_image => '单张图片';
+  String get local_image => '本地图片';
 
   @override
-  String get folder_loop => '文件夹循环';
+  String get folder => '文件夹';
 
   @override
-  String get list_loop => '列表循环';
+  String get path_already_exists => '路径已存在';
+
+  @override
+  String get net_image => '网络图片';
 }

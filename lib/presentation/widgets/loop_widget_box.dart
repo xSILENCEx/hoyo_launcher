@@ -11,12 +11,14 @@ class LoopWidgetBox extends StatefulWidget {
     super.key,
     required this.children,
     this.interval = const Duration(seconds: 10),
-    this.curve = Curves.linear,
+    this.animateDuration = const Duration(milliseconds: 500),
+    this.curve = Curves.ease,
     this.animationType = LoopAnimationType.fade,
   });
 
   final List<Widget> children;
   final Duration interval;
+  final Duration animateDuration;
   final Curve curve;
   final LoopAnimationType animationType;
 
@@ -47,17 +49,9 @@ class _LoopWidgetBoxState extends State<LoopWidgetBox> {
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 1000),
+      duration: widget.animateDuration,
       switchInCurve: Curves.easeIn,
       switchOutCurve: Curves.easeOut,
-      // transitionBuilder: (Widget child, Animation<double> animation) {
-      //   switch (widget.animationType) {
-      //     case LoopAnimationType.fade:
-      //       return _fadeTransitionBuilder(child, animation);
-      //     case LoopAnimationType.slide:
-      //       return _slideTransitionBuilder(child, animation);
-      //   }
-      // },
       child: KeyedSubtree(
         key: ValueKey<int>(_index),
         child: widget.children[_index],
@@ -65,14 +59,14 @@ class _LoopWidgetBoxState extends State<LoopWidgetBox> {
     );
   }
 
-  Widget _fadeTransitionBuilder(Widget child, Animation<double> animation) {
-    return FadeTransition(opacity: animation, child: child);
-  }
+  // Widget _fadeTransitionBuilder(Widget child, Animation<double> animation) {
+  //   return FadeTransition(opacity: animation, child: child);
+  // }
 
-  Widget _slideTransitionBuilder(Widget child, Animation<double> animation) {
-    return SlideTransition(
-      position: Tween<Offset>(begin: const Offset(0, 0.5), end: Offset.zero).animate(animation),
-      child: child,
-    );
-  }
+  // Widget _slideTransitionBuilder(Widget child, Animation<double> animation) {
+  //   return SlideTransition(
+  //     position: Tween<Offset>(begin: const Offset(0, 0.5), end: Offset.zero).animate(animation),
+  //     child: child,
+  //   );
+  // }
 }

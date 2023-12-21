@@ -95,17 +95,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get plz_select_game_icon => 'Please select a game icon';
 
   @override
-  String get bg_type => 'Background type';
+  String get bg_images => 'Background images';
 
   @override
-  String get one_image_per_line => 'One picture per line';
+  String get image_source => 'Image source';
 
   @override
-  String get single_image => 'Single image';
+  String get local_image => 'Local image';
 
   @override
-  String get folder_loop => 'Folder loop';
+  String get folder => 'Folder';
 
   @override
-  String get list_loop => 'List loop';
+  String get path_already_exists => 'Path already exists';
+
+  @override
+  String get net_image => 'Network image';
 }
