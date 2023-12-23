@@ -158,7 +158,7 @@ class _EditMoreActionsBoxState extends State<EditMoreActionsBox> {
         ),
         FilledButton(
           onPressed: () {
-            if (title.isNullOrBlank || path.isNullOrBlank) {
+            if (title.isNullOrEmpty || path.isNullOrEmpty) {
               AppInfoBar.show(context, l10n.plz_complete_info);
               return;
             }

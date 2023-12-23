@@ -5,6 +5,7 @@ import 'package:hoyo_launcher/presentation/widgets/app_btn.dart';
 import 'package:hoyo_launcher/presentation/widgets/info_bar.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import 'clock.dart';
 import 'more_action_btn.dart';
 
 const double _buttonHeight = 40;
@@ -26,9 +27,10 @@ class GameInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
+        const Clock(),
+        const Spacer(),
         SingleChildScrollView(
           padding: const EdgeInsets.only(right: 40, bottom: 40),
           scrollDirection: Axis.horizontal,

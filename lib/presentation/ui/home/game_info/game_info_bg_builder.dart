@@ -44,6 +44,8 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
 
     final List<String> bgData = gameInfoBg.bgData;
 
+    bgData.removeWhere((String path) => path.trim().isEmpty);
+
     for (final String path in bgData) {
       // 有后缀的文件为图片，直接加入 _images ,使用正则匹配
       if (RegExp(r'\.(png|jpe?g|gif|webp|bmp|wbmp|heic|heif|tiff|raw|svg|ico)$', caseSensitive: false).hasMatch(path)) {

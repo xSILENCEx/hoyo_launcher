@@ -3,7 +3,7 @@ extension ExString on String? {
     return '$this:';
   }
 
-  bool get isNullOrBlank {
+  bool get isNullOrEmpty {
     return this == null || this!.trim().isEmpty;
   }
 }

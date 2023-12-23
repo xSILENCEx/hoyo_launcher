@@ -69,6 +69,21 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
 
   Future<void> _save(BuildContext context) async {
     try {
+      if (_editInfo.icon.isNullOrEmpty) {
+        AppInfoBar.show(context, l10n.plz_select_game_icon);
+        return;
+      }
+
+      if (_editInfo.title.isNullOrEmpty) {
+        AppInfoBar.show(context, l10n.plz_fill_game_name);
+        return;
+      }
+
+      if (_editInfo.launchPath.isNullOrEmpty) {
+        AppInfoBar.show(context, l10n.plz_fill_execution_path);
+        return;
+      }
+
       final DateTime now = DateTime.now();
 
       if (_editInfo.createTime == null) {
@@ -80,7 +95,6 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
       Navigator.pop(context);
     } catch (e) {
       debugPrint(e.toString());
-      AppInfoBar.show(context, e.toString());
     }
   }
 
