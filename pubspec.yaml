@@ -17,9 +17,7 @@ dependencies:
   window_manager: ^0.3.0
   flutter_acrylic: ^1.0.0+2
   url_launcher: ^6.1.7
-  http: ^1.1.0
   intl: ^0.18.1
-  google_fonts: ^6.1.0
   fluent_ui: ^4.8.2
   file_picker: ^6.1.1
   injectable: ^2.3.2

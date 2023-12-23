@@ -10,23 +10,23 @@ const String appTitle = 'Hoyo Launcher';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  SystemTheme.fallbackColor = const Color(0xff67768A);
   SystemTheme.accentColor.load();
+
   await flutter_acrylic.Window.initialize();
   await flutter_acrylic.Window.hideWindowControls();
+
   await WindowManager.instance.ensureInitialized();
 
   configureDependencies();
 
   windowManager.waitUntilReadyToShow().then((_) async {
-    await windowManager.setTitleBarStyle(
-      TitleBarStyle.hidden,
-      windowButtonVisibility: false,
-    );
+    await windowManager.setTitleBarStyle(TitleBarStyle.hidden, windowButtonVisibility: false);
     await windowManager.setMinimumSize(const Size(500, 600));
     await windowManager.show();
     await windowManager.setPreventClose(true);
     await windowManager.setSkipTaskbar(false);
   });
 
-  runApp(const Root());
+  runApp(const RootApp());
 }

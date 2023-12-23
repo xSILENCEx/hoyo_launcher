@@ -8,3 +8,6 @@ AppLocalizations l10nWithContext(BuildContext context) => AppLocalizations.of(co
 
 /// 国际化
 AppLocalizations get l10n => AppLocalizations.of(currentContext);
+
+/// 当前语言环境
+Locale get currentLocale => Localizations.localeOf(currentContext);

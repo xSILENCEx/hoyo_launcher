@@ -106,6 +106,7 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
       '(${l10n.local_image})  C:\\Users\\admin\\Pictures\\zzz.png',
       '(${l10n.folder})  C:\\Users\\admin\\Pictures\\Camera Roll'
     ];
+
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -128,6 +129,7 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
           TextBox(
             onChanged: _onChanged,
             placeholder: placeholder.join('\n'),
+            placeholderStyle: TextStyle(color: _fluentTheme.inactiveColor.withOpacity(0.5)),
             controller: _editingController,
             maxLines: null,
             minLines: 3,
