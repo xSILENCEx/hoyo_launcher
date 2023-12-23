@@ -1,24 +1,33 @@
 import 'package:fluent_ui/fluent_ui.dart' hide Page;
 import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
+import 'package:hoyo_launcher/domain/settings/usecases/settings_usecase.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:window_manager/window_manager.dart';
 
+import 'commons/constant.dart';
 import 'commons/getIt/di.dart';
+import 'data_provider/data_source/local/storage/local_storage.dart';
+import 'presentation/notifiers/app_config/app_config_notifier.dart';
 import 'presentation/ui/root.dart';
 
 const String appTitle = 'Hoyo Launcher';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemTheme.fallbackColor = const Color(0xff67768A);
-  SystemTheme.accentColor.load();
+
+  await LocalStorage.init();
+
+  SystemTheme.fallbackColor = AppConstant.defAccentColor;
+  await SystemTheme.accentColor.load();
+
+  configureDependencies();
+
+  appConfigNotifier.loadConfig(AppConfig.fromEntity(getIt.get<SettingsUsecase>().getSettings()));
 
   await flutter_acrylic.Window.initialize();
   await flutter_acrylic.Window.hideWindowControls();
 
   await WindowManager.instance.ensureInitialized();
-
-  configureDependencies();
 
   windowManager.waitUntilReadyToShow().then((_) async {
     await windowManager.setTitleBarStyle(TitleBarStyle.hidden, windowButtonVisibility: false);

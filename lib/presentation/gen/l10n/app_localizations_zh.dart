@@ -110,5 +110,29 @@ class AppLocalizationsZh extends AppLocalizations {
   String get path_already_exists => '路径已存在';
 
   @override
+  String get close => '关闭';
+
+  @override
+  String get theme_mode => '颜色模式';
+
+  @override
+  String get dark => '深色';
+
+  @override
+  String get light => '浅色';
+
+  @override
+  String get follow_system => '跟随系统';
+
+  @override
+  String get theme_color => '主题颜色';
+
+  @override
+  String get custom_color => '自定义颜色';
+
+  @override
+  String get show_clock => '显示时钟';
+
+  @override
   String get net_image => '网络图片';
 }

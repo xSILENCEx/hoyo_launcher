@@ -1,7 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
+import 'package:hoyo_launcher/presentation/notifiers/app_config/app_config_notifier.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/widgets/app_btn.dart';
+import 'package:hoyo_launcher/presentation/widgets/ex_value_builder/ex_value_builder.dart';
 import 'package:hoyo_launcher/presentation/widgets/info_bar.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
@@ -29,7 +31,15 @@ class GameInfoPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: <Widget>[
-        const Clock(),
+        ExBuilder<AppConfig>(
+          valueListenable: appConfigNotifier,
+          shouldRebuild: (AppConfig p, AppConfig n) => p.showClock != n.showClock,
+          builder: (AppConfig value) {
+            if (!value.showClock) return const SizedBox.shrink();
+
+            return const RepaintBoundary(child: Clock());
+          },
+        ),
         const Spacer(),
         SingleChildScrollView(
           padding: const EdgeInsets.only(right: 40, bottom: 40),

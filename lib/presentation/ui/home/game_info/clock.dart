@@ -56,7 +56,7 @@ class _ClockState extends State<Clock> {
         height: 1,
         fontFamily: FontFamily.bebasNeue,
         shadows: <Shadow>[
-          Shadow(offset: const Offset(1, 1), color: Colors.black.withOpacity(0.2), blurRadius: 10),
+          Shadow(offset: const Offset(1, 1), color: Colors.black.withOpacity(0.6), blurRadius: 5),
         ],
       );
     }
@@ -68,16 +68,13 @@ class _ClockState extends State<Clock> {
         children: <Widget>[
           Text(DateFormat('HH:mm:ss').format(_dateTime), style: _textStyle(74)),
           Positioned(
-            bottom: -30,
+            bottom: -20,
             left: 0,
             right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(DateFormat('EEEE').format(_dateTime), style: _textStyle(26)),
-                const SizedBox(width: 10),
-                Text(DateFormat('dd/MM/yyy').format(_dateTime), style: _textStyle(26)),
-              ],
+            child: Text(
+              DateFormat('EEEE 🌱 dd/MM/yyy').format(_dateTime),
+              style: _textStyle(20),
+              textAlign: TextAlign.end,
             ),
           ),
         ],

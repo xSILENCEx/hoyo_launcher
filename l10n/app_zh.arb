@@ -34,5 +34,13 @@
     "local_image": "本地图片",
     "folder": "文件夹",
     "path_already_exists": "路径已存在",
+    "close": "关闭",
+    "theme_mode": "颜色模式",
+    "dark": "深色",
+    "light": "浅色",
+    "follow_system": "跟随系统",
+    "theme_color": "主题颜色",
+    "custom_color": "自定义颜色",
+    "show_clock": "显示时钟",
     "net_image": "网络图片"
 }

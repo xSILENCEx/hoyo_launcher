@@ -34,5 +34,13 @@
     "local_image": "Local image",
     "folder": "Folder",
     "path_already_exists": "Path already exists",
+    "close": "Close",
+    "theme_mode": "Theme mode",
+    "dark": "Dark",
+    "light": "Light",
+    "follow_system": "Follow system",
+    "theme_color": "Theme color",
+    "custom_color": "Custom color",
+    "show_clock": "Show clock",
     "net_image": "Network image"
 }

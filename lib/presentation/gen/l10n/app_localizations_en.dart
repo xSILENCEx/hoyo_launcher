@@ -110,5 +110,29 @@ class AppLocalizationsEn extends AppLocalizations {
   String get path_already_exists => 'Path already exists';
 
   @override
+  String get close => 'Close';
+
+  @override
+  String get theme_mode => 'Theme mode';
+
+  @override
+  String get dark => 'Dark';
+
+  @override
+  String get light => 'Light';
+
+  @override
+  String get follow_system => 'Follow system';
+
+  @override
+  String get theme_color => 'Theme color';
+
+  @override
+  String get custom_color => 'Custom color';
+
+  @override
+  String get show_clock => 'Show clock';
+
+  @override
   String get net_image => 'Network image';
 }

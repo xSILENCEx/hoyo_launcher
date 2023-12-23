@@ -99,10 +99,12 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
 
     final GameInfoBg gameInfoBg = info.gameBgInfo;
 
-    return LoopWidgetBox(
-      interval: gameInfoBg.duration,
-      animateDuration: gameInfoBg.animatDuratuion,
-      children: _images.map((String url) => SizedBox.expand(child: AppImg.cover(url: url))).toList(),
+    return RepaintBoundary(
+      child: LoopWidgetBox(
+        interval: gameInfoBg.duration,
+        animateDuration: gameInfoBg.animatDuratuion,
+        children: _images.map((String url) => SizedBox.expand(child: AppImg.cover(url: url))).toList(),
+      ),
     );
   }
 

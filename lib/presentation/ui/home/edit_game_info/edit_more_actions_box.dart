@@ -152,23 +152,35 @@ class _EditMoreActionsBoxState extends State<EditMoreActionsBox> {
         ],
       ),
       actions: <Widget>[
-        Button(
-          onPressed: () => Navigator.pop(context),
-          child: Text(l10n.cancel),
-        ),
-        FilledButton(
-          onPressed: () {
-            if (title.isNullOrEmpty || path.isNullOrEmpty) {
-              AppInfoBar.show(context, l10n.plz_complete_info);
-              return;
-            }
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: <Widget>[
+            SizedBox(
+              width: 150,
+              child: Button(
+                onPressed: () => Navigator.pop(context),
+                child: Text(l10n.cancel),
+              ),
+            ),
+            const SizedBox(width: 20),
+            SizedBox(
+              width: 150,
+              child: FilledButton(
+                onPressed: () {
+                  if (title.isNullOrEmpty || path.isNullOrEmpty) {
+                    AppInfoBar.show(context, l10n.plz_complete_info);
+                    return;
+                  }
 
-            Navigator.pop(
-              context,
-              GameInfoAction(name: title!, executePath: path!),
-            );
-          },
-          child: Text(l10n.ok),
+                  Navigator.pop(
+                    context,
+                    GameInfoAction(name: title!, executePath: path!),
+                  );
+                },
+                child: Text(l10n.ok),
+              ),
+            ),
+          ],
         ),
       ],
     );

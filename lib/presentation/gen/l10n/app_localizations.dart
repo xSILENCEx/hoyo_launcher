@@ -303,6 +303,54 @@ abstract class AppLocalizations {
   /// **'Path already exists'**
   String get path_already_exists;
 
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @theme_mode.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme mode'**
+  String get theme_mode;
+
+  /// No description provided for @dark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get dark;
+
+  /// No description provided for @light.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get light;
+
+  /// No description provided for @follow_system.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow system'**
+  String get follow_system;
+
+  /// No description provided for @theme_color.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme color'**
+  String get theme_color;
+
+  /// No description provided for @custom_color.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom color'**
+  String get custom_color;
+
+  /// No description provided for @show_clock.
+  ///
+  /// In en, this message translates to:
+  /// **'Show clock'**
+  String get show_clock;
+
   /// No description provided for @net_image.
   ///
   /// In en, this message translates to:
