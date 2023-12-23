@@ -14,6 +14,18 @@ import 'package:flutter/services.dart';
 class R {
   R._();
 
+  /// File path: assets/fonts/BebasNeue.ttf
+  static const String fontsBebasNeue = 'assets/fonts/BebasNeue.ttf';
+
+  /// File path: assets/fonts/Manrope.ttf
+  static const String fontsManrope = 'assets/fonts/Manrope.ttf';
+
+  /// File path: assets/fonts/RobotoMono.ttf
+  static const String fontsRobotoMono = 'assets/fonts/RobotoMono.ttf';
+
+  /// File path: assets/fonts/Teko.ttf
+  static const String fontsTeko = 'assets/fonts/Teko.ttf';
+
   /// File path: assets/icons/genshin_impact.png
   static const AssetGenImage iconsGenshinImpact = AssetGenImage('assets/icons/genshin_impact.png');
 
@@ -30,7 +42,17 @@ class R {
   static const SvgGenImage imagesMihoyoLogo = SvgGenImage('assets/images/mihoyo_logo.svg');
 
   /// List of all assets
-  List<dynamic> get values => [iconsGenshinImpact, iconsHonkaiImpact3, iconsHonkaiStarRail, iconsZzz, imagesMihoyoLogo];
+  List<dynamic> get values => [
+        fontsBebasNeue,
+        fontsManrope,
+        fontsRobotoMono,
+        fontsTeko,
+        iconsGenshinImpact,
+        iconsHonkaiImpact3,
+        iconsHonkaiStarRail,
+        iconsZzz,
+        imagesMihoyoLogo
+      ];
 }
 
 class AssetGenImage {

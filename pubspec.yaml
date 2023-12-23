@@ -69,19 +69,20 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/fonts/
   fonts:
     - family: BebasNeue
       fonts:
-        - asset: assets\fonts\BebasNeue.ttf
+        - asset: assets/fonts/BebasNeue.ttf
     - family: Manrope
       fonts:
-        - asset: assets\fonts\Manrope.ttf
+        - asset: assets/fonts/Manrope.ttf
     - family: RobotoMono
       fonts:
-        - asset: assets\fonts\RobotoMono.ttf
+        - asset: assets/fonts/RobotoMono.ttf
     - family: Teko
       fonts:
-        - asset: assets\fonts\.ttf
+        - asset: assets/fonts/Teko.ttf
 
 flutter_native_splash:
   color: "#000000"

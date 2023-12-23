@@ -6,8 +6,8 @@ import 'package:hoyo_launcher/presentation/widgets/path_picker.dart';
 
 final List<String> _innerIcons = <String>[
   R.iconsHonkaiImpact3.path,
-  R.iconsGenshinImpact.path,
   R.iconsHonkaiStarRail.path,
+  R.iconsGenshinImpact.path,
   R.iconsZzz.path,
 ];
 
