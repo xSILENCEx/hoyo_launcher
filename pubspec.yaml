@@ -50,12 +50,38 @@ dev_dependencies:
   build_runner: ^2.3.3
   flutter_gen_runner: ^5.3.2
 
+flutter_gen:
+  output: lib\presentation\gen # Optional (default: lib/gen/)
+  line_length: 120 # Optional (default: 80)
+  assets:
+    outputs:
+      style: camel-case
+      class_name: R
+    
+  
+  # Optional
+  integrations:
+    flutter_svg: true
+
 flutter:
   uses-material-design: true
 
   assets:
     - assets/images/
     - assets/icons/
+  fonts:
+    - family: BebasNeue
+      fonts:
+        - asset: assets\fonts\BebasNeue.ttf
+    - family: Manrope
+      fonts:
+        - asset: assets\fonts\Manrope.ttf
+    - family: RobotoMono
+      fonts:
+        - asset: assets\fonts\RobotoMono.ttf
+    - family: Teko
+      fonts:
+        - asset: assets\fonts\.ttf
 
 flutter_native_splash:
   color: "#000000"

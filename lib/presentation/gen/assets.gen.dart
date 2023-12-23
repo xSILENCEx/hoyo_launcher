@@ -8,45 +8,29 @@
 // ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/services.dart';
 
-class $AssetsIconsGen {
-  const $AssetsIconsGen();
+class R {
+  R._();
 
   /// File path: assets/icons/genshin_impact.png
-  AssetGenImage get genshinImpact =>
-      const AssetGenImage('assets/icons/genshin_impact.png');
+  static const AssetGenImage iconsGenshinImpact = AssetGenImage('assets/icons/genshin_impact.png');
 
   /// File path: assets/icons/honkai_impact_3.png
-  AssetGenImage get honkaiImpact3 =>
-      const AssetGenImage('assets/icons/honkai_impact_3.png');
+  static const AssetGenImage iconsHonkaiImpact3 = AssetGenImage('assets/icons/honkai_impact_3.png');
 
   /// File path: assets/icons/honkai_star_rail.png
-  AssetGenImage get honkaiStarRail =>
-      const AssetGenImage('assets/icons/honkai_star_rail.png');
+  static const AssetGenImage iconsHonkaiStarRail = AssetGenImage('assets/icons/honkai_star_rail.png');
 
   /// File path: assets/icons/zzz.png
-  AssetGenImage get zzz => const AssetGenImage('assets/icons/zzz.png');
-
-  /// List of all assets
-  List<AssetGenImage> get values =>
-      [genshinImpact, honkaiImpact3, honkaiStarRail, zzz];
-}
-
-class $AssetsImagesGen {
-  const $AssetsImagesGen();
+  static const AssetGenImage iconsZzz = AssetGenImage('assets/icons/zzz.png');
 
   /// File path: assets/images/mihoyo_logo.svg
-  String get mihoyoLogo => 'assets/images/mihoyo_logo.svg';
+  static const SvgGenImage imagesMihoyoLogo = SvgGenImage('assets/images/mihoyo_logo.svg');
 
   /// List of all assets
-  List<String> get values => [mihoyoLogo];
-}
-
-class Assets {
-  Assets._();
-
-  static const $AssetsIconsGen icons = $AssetsIconsGen();
-  static const $AssetsImagesGen images = $AssetsImagesGen();
+  List<dynamic> get values => [iconsGenshinImpact, iconsHonkaiImpact3, iconsHonkaiStarRail, iconsZzz, imagesMihoyoLogo];
 }
 
 class AssetGenImage {
@@ -115,6 +99,59 @@ class AssetGenImage {
       _assetName,
       bundle: bundle,
       package: package,
+    );
+  }
+
+  String get path => _assetName;
+
+  String get keyName => _assetName;
+}
+
+class SvgGenImage {
+  const SvgGenImage(this._assetName);
+
+  final String _assetName;
+
+  SvgPicture svg({
+    Key? key,
+    bool matchTextDirection = false,
+    AssetBundle? bundle,
+    String? package,
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.contain,
+    AlignmentGeometry alignment = Alignment.center,
+    bool allowDrawingOutsideViewBox = false,
+    WidgetBuilder? placeholderBuilder,
+    String? semanticsLabel,
+    bool excludeFromSemantics = false,
+    SvgTheme theme = const SvgTheme(),
+    ColorFilter? colorFilter,
+    Clip clipBehavior = Clip.hardEdge,
+    @deprecated Color? color,
+    @deprecated BlendMode colorBlendMode = BlendMode.srcIn,
+    @deprecated bool cacheColorFilter = false,
+  }) {
+    return SvgPicture.asset(
+      _assetName,
+      key: key,
+      matchTextDirection: matchTextDirection,
+      bundle: bundle,
+      package: package,
+      width: width,
+      height: height,
+      fit: fit,
+      alignment: alignment,
+      allowDrawingOutsideViewBox: allowDrawingOutsideViewBox,
+      placeholderBuilder: placeholderBuilder,
+      semanticsLabel: semanticsLabel,
+      excludeFromSemantics: excludeFromSemantics,
+      theme: theme,
+      colorFilter: colorFilter,
+      color: color,
+      colorBlendMode: colorBlendMode,
+      clipBehavior: clipBehavior,
+      cacheColorFilter: cacheColorFilter,
     );
   }
 

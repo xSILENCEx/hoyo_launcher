@@ -1,13 +1,14 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:hoyo_launcher/presentation/gen/assets.gen.dart';
 import 'package:hoyo_launcher/presentation/utils/ex_types/ex_string.dart';
 import 'package:hoyo_launcher/presentation/widgets/app_image.dart';
 import 'package:hoyo_launcher/presentation/widgets/path_picker.dart';
 
-const List<String> _innerIcons = <String>[
-  'assets/icons/genshin_impact.png',
-  'assets/icons/honkai_impact_3.png',
-  'assets/icons/honkai_star_rail.png',
-  'assets/icons/zzz.png',
+final List<String> _innerIcons = <String>[
+  R.iconsHonkaiImpact3.path,
+  R.iconsGenshinImpact.path,
+  R.iconsHonkaiStarRail.path,
+  R.iconsZzz.path,
 ];
 
 const double _size = 60;
