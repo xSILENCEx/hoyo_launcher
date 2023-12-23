@@ -28,23 +28,23 @@ class GameInfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        ExBuilder<AppConfig>(
-          valueListenable: appConfigNotifier,
-          shouldRebuild: (AppConfig p, AppConfig n) => p.showClock != n.showClock,
-          builder: (AppConfig value) {
-            if (!value.showClock) return const SizedBox.shrink();
+    return Padding(
+      padding: const EdgeInsets.all(40.0).copyWith(top: 90),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          ExBuilder<AppConfig>(
+            valueListenable: appConfigNotifier,
+            shouldRebuild: (AppConfig p, AppConfig n) => p.clockConfig != n.clockConfig,
+            builder: (AppConfig value) {
+              if (!value.clockConfig.showClock) return const SizedBox.shrink();
 
-            return const RepaintBoundary(child: Clock());
-          },
-        ),
-        const Spacer(),
-        SingleChildScrollView(
-          padding: const EdgeInsets.only(right: 40, bottom: 40),
-          scrollDirection: Axis.horizontal,
-          child: Row(
+              return const RepaintBoundary(child: Clock());
+            },
+          ),
+          const Spacer(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               AppBtn(
                 onTap: () => _onStartGame(context),
@@ -61,8 +61,8 @@ class GameInfoPage extends StatelessWidget {
               MoreActionBtn(actions: gameInfo.moreActions, btnSize: _buttonHeight),
             ],
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

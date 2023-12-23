@@ -128,12 +128,12 @@ class _ThemeColorSelectorState extends State<ThemeColorSelector> {
         GestureDetector(
           onTap: onTap,
           child: Container(
-            width: 90,
+            width: 100,
             height: 28,
             alignment: Alignment.center,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(4), color: color),
             child: Text(
-              '#${color.value.toRadixString(16).toUpperCase()}',
+              '0X${color.value.toRadixString(16).toUpperCase()}',
               style: TextStyle(
                 color: color.computeLuminance() > 0.5 ? Colors.black : Colors.white,
               ),

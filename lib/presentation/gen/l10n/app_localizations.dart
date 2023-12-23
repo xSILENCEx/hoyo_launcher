@@ -351,6 +351,18 @@ abstract class AppLocalizations {
   /// **'Show clock'**
   String get show_clock;
 
+  /// No description provided for @shadow_color.
+  ///
+  /// In en, this message translates to:
+  /// **'Shadow color'**
+  String get shadow_color;
+
+  /// No description provided for @date_text.
+  ///
+  /// In en, this message translates to:
+  /// **'Date text'**
+  String get date_text;
+
   /// No description provided for @net_image.
   ///
   /// In en, this message translates to:

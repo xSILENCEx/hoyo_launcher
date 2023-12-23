@@ -46,29 +46,22 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
           children: <Widget>[
             Positioned.fill(child: ColoredBox(color: fluentTheme.scaffoldBackgroundColor)),
             GameBgBuilder(gameInfo: gameInfoList.isEmpty ? null : gameInfoList[navIndex]),
+            if (gameInfoList.isEmpty) const SizedBox.shrink() else GameInfoPage(gameInfo: gameInfoList[navIndex]),
             Positioned.fill(child: BlurBox(navBarWithNotifier)),
             NavigationView(
               appBar: buildAppBar(),
-              content: Row(
-                children: <Widget>[
-                  NavBar(
-                    onEditItemTap: EditGameInfoPage.edit,
-                    onDelItemTap: EditGameInfoPage.del,
-                    onSettingItemTap: SettingsPage.open,
-                    onAddItemTap: EditGameInfoPage.create,
-                    onNavHover: onNavHover,
-                    selectIndex: navIndex,
-                    navItems: gameInfoList,
-                    onItemTap: changeNav,
-                  ),
-                  Expanded(
-                    child: gameInfoList.isEmpty
-                        ? const SizedBox.shrink()
-                        : GameInfoPage(
-                            gameInfo: gameInfoList[navIndex],
-                          ),
-                  ),
-                ],
+              content: Align(
+                alignment: Alignment.centerLeft,
+                child: NavBar(
+                  onEditItemTap: EditGameInfoPage.edit,
+                  onDelItemTap: EditGameInfoPage.del,
+                  onSettingItemTap: SettingsPage.open,
+                  onAddItemTap: EditGameInfoPage.create,
+                  onNavHover: onNavHover,
+                  selectIndex: navIndex,
+                  navItems: gameInfoList,
+                  onItemTap: changeNav,
+                ),
               ),
             ),
           ],

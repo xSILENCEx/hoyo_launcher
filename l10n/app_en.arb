@@ -42,5 +42,7 @@
     "theme_color": "Theme color",
     "custom_color": "Custom color",
     "show_clock": "Show clock",
+    "shadow_color": "Shadow color",
+    "date_text": "Date text",
     "net_image": "Network image"
 }

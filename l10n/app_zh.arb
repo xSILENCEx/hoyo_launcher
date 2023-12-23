@@ -42,5 +42,7 @@
     "theme_color": "主题颜色",
     "custom_color": "自定义颜色",
     "show_clock": "显示时钟",
+    "shadow_color": "阴影颜色",
+    "date_text": "日期文字",
     "net_image": "网络图片"
 }

@@ -9,16 +9,16 @@ class AppConfig {
     required this.darkAccentColor,
     required this.lightAccentColor,
     required this.useSystemAccentColor,
-    required this.showClock,
+    required this.clockConfig,
   });
 
   factory AppConfig.init() {
-    return const AppConfig(
+    return AppConfig(
       themeMode: ThemeMode.light,
       darkAccentColor: AppConstant.defAccentColor,
       lightAccentColor: AppConstant.defAccentColor,
       useSystemAccentColor: true,
-      showClock: true,
+      clockConfig: ClockConfig.def(),
     );
   }
 
@@ -28,7 +28,7 @@ class AppConfig {
       darkAccentColor: Color(entity.darkAccentColor),
       lightAccentColor: Color(entity.lightAccentColor),
       useSystemAccentColor: entity.useSystemAccentColor,
-      showClock: entity.showClock,
+      clockConfig: entity.clockConfig,
     );
   }
 
@@ -36,7 +36,7 @@ class AppConfig {
   final Color darkAccentColor;
   final Color lightAccentColor;
   final bool useSystemAccentColor;
-  final bool showClock;
+  final ClockConfig clockConfig;
 
   SettingsEntity get settings {
     return SettingsEntity(
@@ -44,7 +44,7 @@ class AppConfig {
       darkAccentColor: darkAccentColor.value,
       lightAccentColor: lightAccentColor.value,
       useSystemAccentColor: useSystemAccentColor,
-      showClock: showClock,
+      clockConfig: clockConfig,
     );
   }
 
@@ -53,19 +53,19 @@ class AppConfig {
     Color? darkAccentColor,
     Color? lightAccentColor,
     bool? useSystemAccentColor,
-    bool? showClock,
+    ClockConfig? clockConfig,
   }) {
     return AppConfig(
       themeMode: themeMode ?? this.themeMode,
       darkAccentColor: darkAccentColor ?? this.darkAccentColor,
       lightAccentColor: lightAccentColor ?? this.lightAccentColor,
       useSystemAccentColor: useSystemAccentColor ?? this.useSystemAccentColor,
-      showClock: showClock ?? this.showClock,
+      clockConfig: clockConfig ?? this.clockConfig,
     );
   }
 
   @override
-  int get hashCode => Object.hash(themeMode, darkAccentColor, lightAccentColor, useSystemAccentColor, showClock);
+  int get hashCode => Object.hash(themeMode, darkAccentColor, lightAccentColor, useSystemAccentColor, clockConfig);
 
   @override
   bool operator ==(Object other) {
@@ -76,6 +76,6 @@ class AppConfig {
             darkAccentColor == other.darkAccentColor &&
             lightAccentColor == other.lightAccentColor &&
             useSystemAccentColor == other.useSystemAccentColor &&
-            showClock == other.showClock;
+            clockConfig == other.clockConfig;
   }
 }

@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:hoyo_launcher/domain/settings/entities/clock_config.dart';
 import 'package:hoyo_launcher/presentation/gen/fonts.gen.dart';
+import 'package:hoyo_launcher/presentation/notifiers/app_config/app_config_notifier.dart';
+import 'package:hoyo_launcher/presentation/widgets/ex_value_builder/ex_value_builder.dart';
 import 'package:intl/intl.dart';
 
 class Clock extends StatefulWidget {
@@ -49,36 +52,49 @@ class _ClockState extends State<Clock> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle _textStyle(double fontSize) {
-      return TextStyle(
-        fontSize: fontSize,
-        color: _fluentTheme.activeColor,
-        height: 1,
-        fontFamily: FontFamily.bebasNeue,
-        shadows: <Shadow>[
-          Shadow(offset: const Offset(1, 1), color: Colors.black.withOpacity(0.6), blurRadius: 5),
-        ],
-      );
-    }
+    return ExBuilder<AppConfig>(
+      valueListenable: appConfigNotifier,
+      shouldRebuild: (AppConfig p, AppConfig n) => p.clockConfig != n.clockConfig,
+      builder: (AppConfig config) {
+        final ClockConfig clock = config.clockConfig;
 
-    return Padding(
-      padding: const EdgeInsets.only(right: 40, top: 40),
-      child: Stack(
-        clipBehavior: Clip.none,
-        children: <Widget>[
-          Text(DateFormat('HH:mm:ss').format(_dateTime), style: _textStyle(74)),
-          Positioned(
-            bottom: -20,
-            left: 0,
-            right: 0,
-            child: Text(
-              DateFormat('EEEE 🌱 dd/MM/yyy').format(_dateTime),
-              style: _textStyle(20),
-              textAlign: TextAlign.end,
+        TextStyle _textStyle(double fontSize) {
+          return TextStyle(
+            fontSize: fontSize,
+            color: _fluentTheme.activeColor,
+            height: 1,
+            fontFamily: FontFamily.bebasNeue,
+            shadows: <Shadow>[
+              Shadow(
+                offset: Offset(clock.blurX, clock.blurY),
+                color: Color(clock.shadowColor),
+                blurRadius: clock.blurRadius,
+              ),
+            ],
+          );
+        }
+
+        return Stack(
+          clipBehavior: Clip.none,
+          children: <Widget>[
+            Text(DateFormat('HH:mm:ss').format(_dateTime), style: _textStyle(74)),
+            Positioned(
+              bottom: -20,
+              right: 0,
+              child: DefaultTextStyle(
+                style: _textStyle(20),
+                child: Row(
+                  children: <Widget>[
+                    Text(DateFormat('EEEE').format(_dateTime)),
+                    Text(clock.dateIcon),
+                    Text(DateFormat('dd/MM/yyy').format(_dateTime)),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        );
+      },
     );
   }
 }

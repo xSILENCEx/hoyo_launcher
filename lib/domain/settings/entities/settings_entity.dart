@@ -2,13 +2,16 @@ import 'dart:convert';
 
 import 'package:hoyo_launcher/commons/constant.dart';
 
+import 'clock_config.dart';
+export 'clock_config.dart';
+
 class SettingsEntity {
   const SettingsEntity({
     required this.themeMode,
     required this.darkAccentColor,
     required this.lightAccentColor,
     required this.useSystemAccentColor,
-    required this.showClock,
+    required this.clockConfig,
   });
 
   factory SettingsEntity.def() {
@@ -17,7 +20,7 @@ class SettingsEntity {
       darkAccentColor: AppConstant.defAccentColor.value,
       lightAccentColor: AppConstant.defAccentColor.value,
       useSystemAccentColor: true,
-      showClock: true,
+      clockConfig: ClockConfig.def(),
     );
   }
 
@@ -25,7 +28,7 @@ class SettingsEntity {
   final int darkAccentColor;
   final int lightAccentColor;
   final bool useSystemAccentColor;
-  final bool showClock;
+  final ClockConfig clockConfig;
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -33,7 +36,7 @@ class SettingsEntity {
       'darkAccentColor': darkAccentColor,
       'lightAccentColor': lightAccentColor,
       'useSystemAccentColor': useSystemAccentColor,
-      'showClock': showClock,
+      'clockConfig': clockConfig.toJsonString(),
     };
   }
 

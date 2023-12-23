@@ -134,5 +134,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get show_clock => 'Show clock';
 
   @override
+  String get shadow_color => 'Shadow color';
+
+  @override
+  String get date_text => 'Date text';
+
+  @override
   String get net_image => 'Network image';
 }
