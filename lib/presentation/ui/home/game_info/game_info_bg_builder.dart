@@ -96,7 +96,7 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
     } else {
       final bool confirmDel = await ConfirmDialog.show(l10n.confirm_del_file, contentWidth: _buildConfirmImg(path));
       if (!confirmDel) return;
-      File(path).delete();
+      await File(path).delete();
 
       _readyData(update: true);
     }

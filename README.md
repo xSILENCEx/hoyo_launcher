@@ -1,10 +1,16 @@
-# Windows UI for Flutter Showcase
+# miHoYo 游戏启动器
 
-The app showcase for [fluent_ui](https://pub.dev/packages/fluent_ui).
+* 添加启动路径
+* 添加其它路径操作
+* 设置轮播图资源(图片链接、文件、文件夹)
+* 自定义时钟样式
 
-To run this app, run `flutter create .` in the terminal to generate the platform specific builds, and then run `flutter run`
+### 预览图片
 
-## Acknowledgements
+#### 原神
 
-* App launcher icon
-  https://mobile.twitter.com/fluentui/photo
+<img src="https://raw.githubusercontent.com/xSILENCEx/project_images/main/hoyo_launcher/preview_1.png"  height=300>
+
+#### 崩坏：星穹铁道   
+
+<img src="https://raw.githubusercontent.com/xSILENCEx/project_images/main/hoyo_launcher/preview_2.png"  height=300>
