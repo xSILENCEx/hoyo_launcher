@@ -47,7 +47,10 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
           children: <Widget>[
             Positioned.fill(child: ColoredBox(color: fluentTheme.scaffoldBackgroundColor)),
             if (gameInfoList.isNotEmpty) GameBgBuilder(gameInfo: gameInfoList[navIndex]),
-            if (gameInfoList.isEmpty) const SizedBox.shrink() else GameInfoPage(gameInfo: gameInfoList[navIndex]),
+            if (gameInfoList.isEmpty)
+              Container(color: Colors.black.withOpacity(0.2))
+            else
+              GameInfoPage(gameInfo: gameInfoList[navIndex]),
             Positioned.fill(child: BlurBox(navBarWithNotifier)),
             Padding(
               padding: const EdgeInsets.only(top: AppConstant.defAppBarHeight),
