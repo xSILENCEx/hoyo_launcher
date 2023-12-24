@@ -39,9 +39,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_native_splash: ^2.1.6
   flutter_lints: ^3.0.1
-  flutter_launcher_icons: ^0.13.1
   injectable_generator: ^2.1.5    # 依赖注入代码生成
   json_serializable: ^6.7.1       # json 序列化代码生成
   freezed: ^2.3.2

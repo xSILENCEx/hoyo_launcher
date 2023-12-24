@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.hoyo_launcher" "\0"
-            VALUE "FileDescription", "hoyo_launcher" "\0"
+            VALUE "FileDescription", "Hoyo Launcher" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "hoyo_launcher" "\0"
+            VALUE "InternalName", "Hoyo Launcher" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.hoyo_launcher. All rights reserved." "\0"
             VALUE "OriginalFilename", "hoyo_launcher.exe" "\0"
-            VALUE "ProductName", "hoyo_launcher" "\0"
+            VALUE "ProductName", "Hoyo Launcher" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
