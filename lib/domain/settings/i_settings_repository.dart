@@ -4,4 +4,6 @@ abstract class ISettingsRepository {
   SettingsEntity getSettings();
 
   void updateSettings(SettingsEntity settings);
+
+  String getVersion();
 }

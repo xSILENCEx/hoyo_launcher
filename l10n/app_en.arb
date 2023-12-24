@@ -44,5 +44,7 @@
     "show_clock": "Show clock",
     "shadow_color": "Shadow color",
     "date_text": "Date text",
+    "reset": "Reset",
+    "verison": "Verison",
     "net_image": "Network image"
 }

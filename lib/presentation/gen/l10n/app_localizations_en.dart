@@ -140,5 +140,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get date_text => 'Date text';
 
   @override
+  String get reset => 'Reset';
+
+  @override
+  String get verison => 'Verison';
+
+  @override
   String get net_image => 'Network image';
 }

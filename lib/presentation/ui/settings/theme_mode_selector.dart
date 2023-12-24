@@ -45,6 +45,16 @@ class _ThemeModeSelectorState extends State<ThemeModeSelector> {
   }
 
   @override
+  void didUpdateWidget(covariant ThemeModeSelector oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.initThemeMode != _themeMode) {
+      _themeMode = widget.initThemeMode ?? ThemeMode.system;
+      setState(() {});
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final fu.FluentThemeData fluentTheme = fu.FluentTheme.of(context);
 

@@ -44,5 +44,7 @@
     "show_clock": "显示时钟",
     "shadow_color": "阴影颜色",
     "date_text": "日期文字",
+    "reset": "重置",
+    "verison": "版本",
     "net_image": "网络图片"
 }

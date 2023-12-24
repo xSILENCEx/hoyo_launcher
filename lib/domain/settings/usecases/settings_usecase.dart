@@ -9,4 +9,6 @@ class SettingsUsecase {
   SettingsEntity getSettings() => _settingsRepository.getSettings();
 
   void updateSettings(SettingsEntity settings) => _settingsRepository.updateSettings(settings);
+
+  String getVersion() => _settingsRepository.getVersion();
 }

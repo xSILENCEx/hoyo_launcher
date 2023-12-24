@@ -1,3 +1,4 @@
+import 'package:hoyo_launcher/data_provider/data_source/local/package/package_info_tools.dart';
 import 'package:hoyo_launcher/data_provider/data_source/local/storage/local_storage.dart';
 import 'package:hoyo_launcher/domain/settings/entities/settings_entity.dart';
 import 'package:hoyo_launcher/domain/settings/i_settings_repository.dart';
@@ -23,4 +24,7 @@ class SettingsRepository implements ISettingsRepository {
   void updateSettings(SettingsEntity settings) {
     LocalStorage.setV(_settingsValueKey, settings.toJsonString());
   }
+
+  @override
+  String getVersion() => PackageTool.getVersionStr();
 }

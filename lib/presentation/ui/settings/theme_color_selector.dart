@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart' as fu;
 import 'package:flutter/material.dart';
 import 'package:flutter_hsvcolor_picker/flutter_hsvcolor_picker.dart';
+import 'package:hoyo_launcher/commons/constant.dart';
 import 'package:hoyo_launcher/presentation/utils/ex_types/ex_string.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 
@@ -61,6 +62,32 @@ class _ThemeColorSelectorState extends State<ThemeColorSelector> {
     setState(() {});
 
     widget.onThemeColorChanged(_useSystemAccentColor, _darkAccentColor, _lightAccentColor);
+  }
+
+  @override
+  void didUpdateWidget(covariant ThemeColorSelector oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    bool update = false;
+
+    if (widget.initUseSystemAccentColor != _useSystemAccentColor) {
+      _useSystemAccentColor = widget.initUseSystemAccentColor ?? true;
+      update = true;
+    }
+
+    if (widget.initDarkAccentColor != _darkAccentColor) {
+      _darkAccentColor = widget.initDarkAccentColor ?? AppConstant.defAccentColor;
+      update = true;
+    }
+
+    if (widget.initLightAccentColor != _lightAccentColor) {
+      _lightAccentColor = widget.initLightAccentColor ?? AppConstant.defAccentColor;
+      update = true;
+    }
+
+    if (update) {
+      setState(() {});
+    }
   }
 
   @override

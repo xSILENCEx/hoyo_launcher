@@ -18,6 +18,8 @@ class ClockEditer extends StatefulWidget {
 class _ClockEditerState extends State<ClockEditer> {
   late ClockConfig _clockConfig = widget.initClockConfig;
 
+  late final TextEditingController _textEditingController = TextEditingController(text: _clockConfig.dateIcon);
+
   void _onShowClockChanged(bool showClock) {
     if (showClock == _clockConfig.showClock) {
       return;
@@ -64,6 +66,23 @@ class _ClockEditerState extends State<ClockEditer> {
     setState(() {});
 
     widget.onShowClockChanged(_clockConfig);
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant ClockEditer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (widget.initClockConfig != _clockConfig) {
+      _clockConfig = widget.initClockConfig;
+      _textEditingController.text = _clockConfig.dateIcon;
+      setState(() {});
+    }
   }
 
   @override
@@ -126,8 +145,8 @@ class _ClockEditerState extends State<ClockEditer> {
                   l10n.date_text,
                   SizedBox(
                     width: 200,
-                    child: TextFormBox(
-                      initialValue: _clockConfig.dateIcon,
+                    child: TextBox(
+                      controller: _textEditingController,
                       onChanged: _onDateIconChanged,
                       maxLength: 50,
                     ),

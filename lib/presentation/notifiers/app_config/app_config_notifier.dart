@@ -34,4 +34,9 @@ class AppConfigNotifier extends ExValue<AppConfig> {
       getIt.get<SettingsUsecase>().updateSettings(value.settings);
     }
   }
+
+  void reset() {
+    value = AppConfig.init();
+    getIt.get<SettingsUsecase>().updateSettings(value.settings);
+  }
 }

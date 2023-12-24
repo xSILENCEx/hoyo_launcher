@@ -6,6 +6,7 @@ import 'package:window_manager/window_manager.dart';
 
 import 'commons/constant.dart';
 import 'commons/getIt/di.dart';
+import 'data_provider/data_source/local/package/package_info_tools.dart';
 import 'data_provider/data_source/local/storage/local_storage.dart';
 import 'presentation/notifiers/app_config/app_config_notifier.dart';
 import 'presentation/ui/root.dart';
@@ -16,6 +17,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await LocalStorage.init();
+  await PackageTool.initDevice();
 
   SystemTheme.fallbackColor = AppConstant.defAccentColor;
   await SystemTheme.accentColor.load();

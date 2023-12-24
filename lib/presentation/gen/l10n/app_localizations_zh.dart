@@ -140,5 +140,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get date_text => '日期文字';
 
   @override
+  String get reset => '重置';
+
+  @override
+  String get verison => '版本';
+
+  @override
   String get net_image => '网络图片';
 }

@@ -363,6 +363,18 @@ abstract class AppLocalizations {
   /// **'Date text'**
   String get date_text;
 
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// No description provided for @verison.
+  ///
+  /// In en, this message translates to:
+  /// **'Verison'**
+  String get verison;
+
   /// No description provided for @net_image.
   ///
   /// In en, this message translates to:
