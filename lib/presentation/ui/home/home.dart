@@ -3,7 +3,10 @@ import 'package:hoyo_launcher/commons/constant.dart';
 import 'package:hoyo_launcher/commons/getIt/di.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/usecases/get_game_info_usecase.dart';
+import 'package:hoyo_launcher/presentation/notifiers/app_config/app_config_notifier.dart';
 import 'package:hoyo_launcher/presentation/ui/settings/settings_page.dart';
+import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
+import 'package:hoyo_launcher/presentation/widgets/confirm_dialog.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'app_bar.dart';
@@ -77,32 +80,15 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
 
   @override
   Future<void> onWindowClose() async {
-    final bool isPreventClose = await windowManager.isPreventClose();
-    if (isPreventClose && mounted) {
-      showDialog(
-        context: context,
-        builder: (_) {
-          return ContentDialog(
-            title: const Text('Confirm close'),
-            content: const Text('Are you sure you want to close this window?'),
-            actions: <Widget>[
-              FilledButton(
-                child: const Text('Yes'),
-                onPressed: () {
-                  Navigator.pop(context);
-                  windowManager.destroy();
-                },
-              ),
-              Button(
-                child: const Text('No'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          );
-        },
-      );
+    // final bool isPreventClose = await windowManager.isPreventClose();
+    final bool confirmBeforeClose = appConfigNotifier.value.confirmBeforeClose;
+    if (mounted) {
+      if (confirmBeforeClose) {
+        final bool close = await ConfirmDialog.show(l10n.confirm_close);
+        if (!close) return;
+      }
+
+      windowManager.destroy();
     }
   }
 }

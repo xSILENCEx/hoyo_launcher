@@ -10,6 +10,7 @@ class AppConfig {
     required this.lightAccentColor,
     required this.useSystemAccentColor,
     required this.clockConfig,
+    required this.confirmBeforeClose,
   });
 
   factory AppConfig.init() {
@@ -19,6 +20,7 @@ class AppConfig {
       lightAccentColor: AppConstant.defAccentColor,
       useSystemAccentColor: true,
       clockConfig: ClockConfig.def(),
+      confirmBeforeClose: true,
     );
   }
 
@@ -29,6 +31,7 @@ class AppConfig {
       lightAccentColor: Color(entity.lightAccentColor),
       useSystemAccentColor: entity.useSystemAccentColor,
       clockConfig: entity.clockConfig,
+      confirmBeforeClose: entity.confirmBeforeClose,
     );
   }
 
@@ -37,6 +40,7 @@ class AppConfig {
   final Color lightAccentColor;
   final bool useSystemAccentColor;
   final ClockConfig clockConfig;
+  final bool confirmBeforeClose;
 
   SettingsEntity get settings {
     return SettingsEntity(
@@ -45,6 +49,7 @@ class AppConfig {
       lightAccentColor: lightAccentColor.value,
       useSystemAccentColor: useSystemAccentColor,
       clockConfig: clockConfig,
+      confirmBeforeClose: confirmBeforeClose,
     );
   }
 
@@ -54,6 +59,7 @@ class AppConfig {
     Color? lightAccentColor,
     bool? useSystemAccentColor,
     ClockConfig? clockConfig,
+    bool? confirmBeforeClose,
   }) {
     return AppConfig(
       themeMode: themeMode ?? this.themeMode,
@@ -61,11 +67,13 @@ class AppConfig {
       lightAccentColor: lightAccentColor ?? this.lightAccentColor,
       useSystemAccentColor: useSystemAccentColor ?? this.useSystemAccentColor,
       clockConfig: clockConfig ?? this.clockConfig,
+      confirmBeforeClose: confirmBeforeClose ?? this.confirmBeforeClose,
     );
   }
 
   @override
-  int get hashCode => Object.hash(themeMode, darkAccentColor, lightAccentColor, useSystemAccentColor, clockConfig);
+  int get hashCode =>
+      Object.hash(themeMode, darkAccentColor, lightAccentColor, useSystemAccentColor, clockConfig, confirmBeforeClose);
 
   @override
   bool operator ==(Object other) {
@@ -76,6 +84,7 @@ class AppConfig {
             darkAccentColor == other.darkAccentColor &&
             lightAccentColor == other.lightAccentColor &&
             useSystemAccentColor == other.useSystemAccentColor &&
-            clockConfig == other.clockConfig;
+            clockConfig == other.clockConfig &&
+            confirmBeforeClose == other.confirmBeforeClose;
   }
 }

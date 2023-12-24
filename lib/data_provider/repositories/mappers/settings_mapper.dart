@@ -12,5 +12,6 @@ SettingsEntity jsonStrToEntity(String jsonStr) {
     lightAccentColor: json['lightAccentColor'] as int? ?? AppConstant.defAccentColor.value,
     useSystemAccentColor: json['useSystemAccentColor'] as bool? ?? true,
     clockConfig: json['clockConfig'] == null ? ClockConfig.def() : ClockConfig.fromStr(json['clockConfig'] as String),
+    confirmBeforeClose: json['confirmBeforeClose'] as bool? ?? true,
   );
 }

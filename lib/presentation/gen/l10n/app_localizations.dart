@@ -387,6 +387,18 @@ abstract class AppLocalizations {
   /// **'Confirm delete?'**
   String get confirm_del;
 
+  /// No description provided for @confirm_close.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm close?'**
+  String get confirm_close;
+
+  /// No description provided for @confirm_brfore_close.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm before close'**
+  String get confirm_brfore_close;
+
   /// No description provided for @net_image.
   ///
   /// In en, this message translates to:

@@ -12,6 +12,7 @@ class SettingsEntity {
     required this.lightAccentColor,
     required this.useSystemAccentColor,
     required this.clockConfig,
+    required this.confirmBeforeClose,
   });
 
   factory SettingsEntity.def() {
@@ -21,6 +22,7 @@ class SettingsEntity {
       lightAccentColor: AppConstant.defAccentColor.value,
       useSystemAccentColor: true,
       clockConfig: ClockConfig.def(),
+      confirmBeforeClose: true,
     );
   }
 
@@ -29,6 +31,7 @@ class SettingsEntity {
   final int lightAccentColor;
   final bool useSystemAccentColor;
   final ClockConfig clockConfig;
+  final bool confirmBeforeClose;
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -37,6 +40,7 @@ class SettingsEntity {
       'lightAccentColor': lightAccentColor,
       'useSystemAccentColor': useSystemAccentColor,
       'clockConfig': clockConfig.toJsonString(),
+      'confirmBeforeClose': confirmBeforeClose,
     };
   }
 

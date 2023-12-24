@@ -152,5 +152,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirm_del => 'Confirm delete?';
 
   @override
+  String get confirm_close => 'Confirm close?';
+
+  @override
+  String get confirm_brfore_close => 'Confirm before close';
+
+  @override
   String get net_image => 'Network image';
 }

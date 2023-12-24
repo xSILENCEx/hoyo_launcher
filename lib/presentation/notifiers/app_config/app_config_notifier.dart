@@ -20,6 +20,7 @@ class AppConfigNotifier extends ExValue<AppConfig> {
     Color? lightAccentColor,
     bool? useSystemAccentColor,
     ClockConfig? clockConfig,
+    bool? confirmBeforeClose,
   }) {
     final AppConfig newConfig = value.copyWith(
       themeMode: themeMode,
@@ -27,6 +28,7 @@ class AppConfigNotifier extends ExValue<AppConfig> {
       lightAccentColor: lightAccentColor,
       useSystemAccentColor: useSystemAccentColor,
       clockConfig: clockConfig,
+      confirmBeforeClose: confirmBeforeClose,
     );
 
     if (newConfig != value) {

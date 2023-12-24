@@ -48,5 +48,7 @@
     "verison": "Verison",
     "confirm_del_file": "Confirm delete the file?",
     "confirm_del": "Confirm delete?",
+    "confirm_close": "Confirm close?",
+    "confirm_brfore_close": "Confirm before close",
     "net_image": "Network image"
 }

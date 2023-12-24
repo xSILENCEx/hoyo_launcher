@@ -152,5 +152,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get confirm_del => '确认删除？';
 
   @override
+  String get confirm_close => '确认退出？';
+
+  @override
+  String get confirm_brfore_close => '退出前确认';
+
+  @override
   String get net_image => '网络图片';
 }

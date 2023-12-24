@@ -7,6 +7,7 @@ import 'package:hoyo_launcher/presentation/notifiers/app_config/app_config_notif
 import 'package:hoyo_launcher/presentation/utils/ex_types/ex_string.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/utils/router_tool.dart';
+import 'package:hoyo_launcher/presentation/widgets/app_switch.dart';
 
 import 'clock_editer.dart';
 import 'theme_color_selector.dart';
@@ -73,6 +74,14 @@ class _SettingsPageState extends State<SettingsPage> {
             ClockEditer(
               initClockConfig: appConfigNotifier.value.clockConfig,
               onShowClockChanged: (ClockConfig config) => appConfigNotifier.update(clockConfig: config),
+            ),
+          ),
+          _buildDivider(),
+          _buildRow(
+            l10n.confirm_brfore_close,
+            AppSwitch(
+              value: appConfigNotifier.value.confirmBeforeClose,
+              onValueChanged: (bool value) => appConfigNotifier.update(confirmBeforeClose: value),
             ),
           ),
           _buildDivider(),
