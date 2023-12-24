@@ -88,7 +88,7 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
       if (!confirmDel) return;
 
       final GameInfoBg gameInfoBg = _gameInfo.gameBgInfo;
-      gameInfoBg.bgData.remove(path);
+      gameInfoBg.bgData.remove('$path\n');
       final GameInfoEntity newInfo = _gameInfo.copyWith(gameBgInfo: gameInfoBg);
       getIt.get<UpdateGameInfoUseCase>().call(newInfo);
     } else {
