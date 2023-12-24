@@ -84,19 +84,21 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
 
   Future<void> _deleteImage(String path) async {
     if (path.startsWith('http')) {
-      final bool confirmDel = await ConfirmDialog.show(l10n.confirm_del);
+      final bool confirmDel = await ConfirmDialog.show(l10n.confirm_del, contentWidth: _buildConfirmImg(path));
       if (!confirmDel) return;
 
       final GameInfoBg gameInfoBg = _gameInfo.gameBgInfo;
       gameInfoBg.bgData.remove('$path\n');
-      final GameInfoEntity newInfo = _gameInfo.copyWith(gameBgInfo: gameInfoBg);
+      final GameInfoEntity newInfo = _gameInfo.copyWith(
+        gameBgInfo: gameInfoBg,
+      );
       getIt.get<UpdateGameInfoUseCase>().call(newInfo);
     } else {
-      final bool confirmDel = await ConfirmDialog.show(l10n.confirm_del_file);
+      final bool confirmDel = await ConfirmDialog.show(l10n.confirm_del_file, contentWidth: _buildConfirmImg(path));
       if (!confirmDel) return;
       File(path).delete();
 
-      _readyData();
+      _readyData(update: true);
     }
   }
 
@@ -121,7 +123,7 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
       child: LoopImageBox(
         interval: gameInfoBg.duration,
         animateDuration: gameInfoBg.animatDuratuion,
-        children: _images.map(_buildImg).toList(),
+        children: _images.map(_buildImgBox).toList(),
       ),
     );
   }
@@ -140,7 +142,7 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
     );
   }
 
-  Widget _buildImg(String url) {
+  Widget _buildImgBox(String url) {
     return Stack(
       alignment: Alignment.bottomLeft,
       children: <Widget>[
@@ -157,5 +159,9 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
         ),
       ],
     );
+  }
+
+  Widget _buildConfirmImg(String url) {
+    return Padding(padding: const EdgeInsets.only(top: 20), child: AppImg(url: url, radius: 8));
   }
 }
