@@ -30,6 +30,50 @@ class GameInfoEntity {
 
   final GameInfoBg gameBgInfo;
 
+  GameInfoEntity copyWith({
+    String? id,
+    String? icon,
+    String? title,
+    String? launchPath,
+    DateTime? createTime,
+    DateTime? updateTime,
+    List<GameInfoAction>? moreActions,
+    GameInfoBg? gameBgInfo,
+  }) {
+    return GameInfoEntity(
+      id: id ?? this.id,
+      icon: icon ?? this.icon,
+      title: title ?? this.title,
+      launchPath: launchPath ?? this.launchPath,
+      createTime: createTime ?? this.createTime,
+      updateTime: updateTime ?? this.updateTime,
+      moreActions: moreActions ?? this.moreActions,
+      gameBgInfo: gameBgInfo ?? this.gameBgInfo,
+    );
+  }
+
+  bool bgSameWith(GameInfoBg infoBg) {
+    bool same = true;
+    if (gameBgInfo.id != infoBg.id) {
+      same = false;
+    } else if (gameBgInfo.duration != infoBg.duration) {
+      same = false;
+    } else if (gameBgInfo.animatDuratuion != infoBg.animatDuratuion) {
+      same = false;
+    } else if (gameBgInfo.bgData.length != infoBg.bgData.length) {
+      same = false;
+    } else {
+      for (int i = 0; i < gameBgInfo.bgData.length; i++) {
+        if (gameBgInfo.bgData[i] != infoBg.bgData[i]) {
+          same = false;
+          break;
+        }
+      }
+    }
+
+    return same;
+  }
+
   String? genMoreActionsStr() {
     return moreActions.isEmpty ? null : moreActions.map((GameInfoAction action) => action.toJsonString()).join('||');
   }

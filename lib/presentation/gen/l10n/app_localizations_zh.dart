@@ -146,5 +146,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get verison => '版本';
 
   @override
+  String get confirm_del_file => '确认删除文件？';
+
+  @override
+  String get confirm_del => '确认删除？';
+
+  @override
   String get net_image => '网络图片';
 }

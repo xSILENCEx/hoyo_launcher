@@ -6,8 +6,8 @@ enum LoopAnimationType { fade, slide }
 
 /// 自动循环播放 children 的 widget
 /// 可以自定义切换动画
-class LoopWidgetBox extends StatefulWidget {
-  const LoopWidgetBox({
+class LoopImageBox extends StatefulWidget {
+  const LoopImageBox({
     super.key,
     required this.children,
     this.interval = const Duration(seconds: 10),
@@ -23,10 +23,10 @@ class LoopWidgetBox extends StatefulWidget {
   final LoopAnimationType animationType;
 
   @override
-  State<LoopWidgetBox> createState() => _LoopWidgetBoxState();
+  State<LoopImageBox> createState() => _LoopImageBoxState();
 }
 
-class _LoopWidgetBoxState extends State<LoopWidgetBox> {
+class _LoopImageBoxState extends State<LoopImageBox> {
   late int _index = Random().nextInt(widget.children.length);
 
   @override

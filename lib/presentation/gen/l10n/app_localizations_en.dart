@@ -146,5 +146,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get verison => 'Verison';
 
   @override
+  String get confirm_del_file => 'Confirm delete the file?';
+
+  @override
+  String get confirm_del => 'Confirm delete?';
+
+  @override
   String get net_image => 'Network image';
 }

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:hoyo_launcher/commons/constant.dart';
 import 'package:hoyo_launcher/presentation/widgets/ex_value_builder/ex_value_builder.dart';
 import 'package:hoyo_launcher/presentation/widgets/ex_value_builder/ex_value_notifier.dart';
 
@@ -37,13 +38,15 @@ class _BlurBoxClipper extends CustomClipper<Path> {
     final double h = size.height;
     const double radius = 8;
 
+    const double appBarHeight = AppConstant.defAppBarHeight;
+
     final Path path = Path()
       ..moveTo(0, 0)
       ..lineTo(w, 0)
-      ..lineTo(w, 50)
-      ..lineTo(width + radius, 50)
+      ..lineTo(w, appBarHeight)
+      ..lineTo(width + radius, appBarHeight)
       ..arcToPoint(
-        Offset(width, 50 + radius),
+        Offset(width, appBarHeight + radius),
         clockwise: false,
         radius: const Radius.circular(radius),
       )

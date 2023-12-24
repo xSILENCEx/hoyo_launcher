@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:hoyo_launcher/commons/constant.dart';
 import 'package:hoyo_launcher/commons/getIt/di.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/usecases/get_game_info_usecase.dart';
@@ -45,24 +46,25 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
         return Stack(
           children: <Widget>[
             Positioned.fill(child: ColoredBox(color: fluentTheme.scaffoldBackgroundColor)),
-            GameBgBuilder(gameInfo: gameInfoList.isEmpty ? null : gameInfoList[navIndex]),
+            if (gameInfoList.isNotEmpty) GameBgBuilder(gameInfo: gameInfoList[navIndex]),
             if (gameInfoList.isEmpty) const SizedBox.shrink() else GameInfoPage(gameInfo: gameInfoList[navIndex]),
             Positioned.fill(child: BlurBox(navBarWithNotifier)),
-            NavigationView(
-              appBar: buildAppBar(),
-              content: Align(
-                alignment: Alignment.centerLeft,
-                child: NavBar(
-                  onEditItemTap: EditGameInfoPage.edit,
-                  onDelItemTap: EditGameInfoPage.del,
-                  onSettingItemTap: SettingsPage.open,
-                  onAddItemTap: EditGameInfoPage.create,
-                  onNavHover: onNavHover,
-                  selectIndex: navIndex,
-                  navItems: gameInfoList,
-                  onItemTap: changeNav,
-                ),
+            Padding(
+              padding: const EdgeInsets.only(top: AppConstant.defAppBarHeight),
+              child: NavBar(
+                onEditItemTap: EditGameInfoPage.edit,
+                onDelItemTap: EditGameInfoPage.del,
+                onSettingItemTap: SettingsPage.open,
+                onAddItemTap: EditGameInfoPage.create,
+                onNavHover: onNavHover,
+                selectIndex: navIndex,
+                navItems: gameInfoList,
+                onItemTap: changeNav,
               ),
+            ),
+            SizedBox(
+              height: AppConstant.defAppBarHeight,
+              child: NavigationView(appBar: buildAppBar(), content: const SizedBox.shrink()),
             ),
           ],
         );

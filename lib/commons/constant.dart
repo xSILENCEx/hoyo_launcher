@@ -5,4 +5,6 @@ class AppConstant {
 
   static const Color defAccentColor = Color(0xff67768A);
   static final Color defShadowColor = Colors.black.withOpacity(0.6);
+
+  static const double defAppBarHeight = 50;
 }

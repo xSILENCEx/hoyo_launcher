@@ -375,6 +375,18 @@ abstract class AppLocalizations {
   /// **'Verison'**
   String get verison;
 
+  /// No description provided for @confirm_del_file.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm delete the file?'**
+  String get confirm_del_file;
+
+  /// No description provided for @confirm_del.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm delete?'**
+  String get confirm_del;
+
   /// No description provided for @net_image.
   ///
   /// In en, this message translates to:

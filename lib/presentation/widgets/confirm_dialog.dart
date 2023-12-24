@@ -26,7 +26,7 @@ class ConfirmDialog extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
           child: Text(l10n.no),
         ),
-        Button(
+        FilledButton(
           onPressed: () => Navigator.pop(context, true),
           child: Text(l10n.ok),
         ),
