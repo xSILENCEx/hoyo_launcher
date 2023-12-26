@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/domain/settings/entities/clock_config.dart';
 import 'package:hoyo_launcher/presentation/utils/ex_types/ex_string.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
+import 'package:hoyo_launcher/presentation/widgets/app_switch.dart';
 
 import 'color_selector.dart';
 
@@ -62,6 +63,22 @@ class _ClockEditerState extends State<ClockEditer> {
 
   void _onDateIconChanged(String value) {
     _clockConfig = _clockConfig.copyWith(dateIcon: value);
+
+    setState(() {});
+
+    widget.onShowClockChanged(_clockConfig);
+  }
+
+  void _onShowSecondChanged(bool value) {
+    _clockConfig = _clockConfig.copyWith(showSecond: value);
+
+    setState(() {});
+
+    widget.onShowClockChanged(_clockConfig);
+  }
+
+  void _onScaleChanged(double value) {
+    _clockConfig = _clockConfig.copyWith(scale: value);
 
     setState(() {});
 
@@ -152,6 +169,22 @@ class _ClockEditerState extends State<ClockEditer> {
                     ),
                   ),
                 ),
+                const SizedBox(height: 10),
+                _moreConfigItem(
+                  l10n.show_sed,
+                  AppSwitch(value: _clockConfig.showSecond, onValueChanged: _onShowSecondChanged),
+                ),
+                const SizedBox(height: 14),
+                _moreConfigItem(
+                  l10n.clock_size,
+                  _BlurSlider(
+                    onChanged: (double v) => _onScaleChanged(v),
+                    min: 0.1,
+                    max: 2,
+                    value: _clockConfig.scale,
+                    label: _clockConfig.scale.toStringAsFixed(2),
+                  ),
+                ),
               ],
             ),
           ),
@@ -189,9 +222,16 @@ class _BlurSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final FluentThemeData _fluentTheme = FluentTheme.of(context);
 
+    double realValue = value;
+    if (realValue < min) {
+      realValue = min;
+    } else if (realValue > max) {
+      realValue = max;
+    }
+
     return Slider(
       onChanged: onChanged,
-      value: value,
+      value: realValue,
       label: label,
       min: min,
       max: max,

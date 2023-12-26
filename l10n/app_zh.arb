@@ -50,5 +50,7 @@
     "confirm_del": "确认删除？",
     "confirm_close": "确认退出？",
     "confirm_brfore_close": "退出前确认",
+    "show_sed": "显示秒",
+    "clock_size": "时钟大小",
     "net_image": "网络图片"
 }

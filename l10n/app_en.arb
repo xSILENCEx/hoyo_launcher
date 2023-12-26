@@ -50,5 +50,7 @@
     "confirm_del": "Confirm delete?",
     "confirm_close": "Confirm close?",
     "confirm_brfore_close": "Confirm before close",
+    "show_sed": "Show seconds",
+    "clock_size": "Clock size",
     "net_image": "Network image"
 }

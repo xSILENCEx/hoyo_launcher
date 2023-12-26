@@ -399,6 +399,18 @@ abstract class AppLocalizations {
   /// **'Confirm before close'**
   String get confirm_brfore_close;
 
+  /// No description provided for @show_sed.
+  ///
+  /// In en, this message translates to:
+  /// **'Show seconds'**
+  String get show_sed;
+
+  /// No description provided for @clock_size.
+  ///
+  /// In en, this message translates to:
+  /// **'Clock size'**
+  String get clock_size;
+
   /// No description provided for @net_image.
   ///
   /// In en, this message translates to:

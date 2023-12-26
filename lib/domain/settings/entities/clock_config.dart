@@ -12,6 +12,8 @@ class ClockConfig {
     required this.shadowColor,
     required this.blurX,
     required this.blurY,
+    required this.showSecond,
+    required this.scale,
   });
 
   factory ClockConfig.def() {
@@ -22,6 +24,8 @@ class ClockConfig {
       shadowColor: AppConstant.defShadowColor.value,
       blurX: 1,
       blurY: 1,
+      showSecond: true,
+      scale: 1,
     );
   }
 
@@ -35,6 +39,8 @@ class ClockConfig {
       shadowColor: map['shadowColor'] as int? ?? AppConstant.defShadowColor.value,
       blurX: map['blurX'] as double? ?? 1,
       blurY: map['blurY'] as double? ?? 1,
+      showSecond: map['showSecond'] as bool? ?? true,
+      scale: map['scale'] as double? ?? 1,
     );
   }
 
@@ -44,6 +50,8 @@ class ClockConfig {
   final int shadowColor;
   final double blurX;
   final double blurY;
+  final bool showSecond;
+  final double scale;
 
   ClockConfig copyWith({
     bool? showClock,
@@ -52,6 +60,8 @@ class ClockConfig {
     int? shadowColor,
     double? blurX,
     double? blurY,
+    bool? showSecond,
+    double? scale,
   }) {
     return ClockConfig(
       showClock: showClock ?? this.showClock,
@@ -60,6 +70,8 @@ class ClockConfig {
       shadowColor: shadowColor ?? this.shadowColor,
       blurX: blurX ?? this.blurX,
       blurY: blurY ?? this.blurY,
+      showSecond: showSecond ?? this.showSecond,
+      scale: scale ?? this.scale,
     );
   }
 
@@ -71,6 +83,8 @@ class ClockConfig {
       'shadowColor': shadowColor,
       'blurX': blurX,
       'blurY': blurY,
+      'showSecond': showSecond,
+      'scale': scale,
     };
   }
 
@@ -79,7 +93,7 @@ class ClockConfig {
   }
 
   @override
-  int get hashCode => Object.hash(showClock, dateIcon, blurRadius, shadowColor, blurX, blurY);
+  int get hashCode => Object.hash(showClock, dateIcon, blurRadius, shadowColor, blurX, blurY, showSecond, scale);
 
   @override
   bool operator ==(Object other) {
@@ -91,6 +105,8 @@ class ClockConfig {
         other.blurRadius == blurRadius &&
         other.shadowColor == shadowColor &&
         other.blurX == blurX &&
-        other.blurY == blurY;
+        other.blurY == blurY &&
+        other.showSecond == showSecond &&
+        other.scale == scale;
   }
 }

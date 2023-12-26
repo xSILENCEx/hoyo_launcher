@@ -158,5 +158,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get confirm_brfore_close => 'Confirm before close';
 
   @override
+  String get show_sed => 'Show seconds';
+
+  @override
+  String get clock_size => 'Clock size';
+
+  @override
   String get net_image => 'Network image';
 }

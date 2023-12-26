@@ -158,5 +158,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get confirm_brfore_close => '退出前确认';
 
   @override
+  String get show_sed => '显示秒';
+
+  @override
+  String get clock_size => '时钟大小';
+
+  @override
   String get net_image => '网络图片';
 }

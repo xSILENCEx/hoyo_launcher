@@ -60,7 +60,7 @@ class _ClockState extends State<Clock> {
 
         TextStyle _textStyle(double fontSize) {
           return TextStyle(
-            fontSize: fontSize,
+            fontSize: fontSize * clock.scale,
             color: _fluentTheme.activeColor,
             height: 1,
             fontFamily: FontFamily.bebasNeue,
@@ -77,9 +77,12 @@ class _ClockState extends State<Clock> {
         return Stack(
           clipBehavior: Clip.none,
           children: <Widget>[
-            Text(DateFormat('HH:mm:ss').format(_dateTime), style: _textStyle(74)),
+            Text(
+              (clock.showSecond ? DateFormat('HH:mm:ss') : DateFormat('HH:mm')).format(_dateTime),
+              style: _textStyle(74),
+            ),
             Positioned(
-              bottom: -20,
+              bottom: -20 * clock.scale,
               right: 0,
               child: DefaultTextStyle(
                 style: _textStyle(20),
