@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/commons/getIt/di.dart';
 import 'package:hoyo_launcher/domain/game/entities/edit_game_info_entity.dart';
@@ -6,6 +8,7 @@ import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/domain/game/usecases/create_game_info_usecase.dart';
 import 'package:hoyo_launcher/domain/game/usecases/del_game_info_usecase.dart';
 import 'package:hoyo_launcher/presentation/ui/home/edit_game_info/edit_game_bg_box.dart';
+import 'package:hoyo_launcher/presentation/utils/ex_types/ex_list.dart';
 import 'package:hoyo_launcher/presentation/utils/ex_types/ex_string.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/utils/router_tool.dart';
@@ -98,6 +101,58 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
     }
   }
 
+  Future<void> _onLaunchPathChanged(String path) async {
+    if (_editInfo.launchPath == path) return;
+
+    _editInfo = _editInfo.copyWith(launchPath: path);
+
+    try {
+      // 当前文件所在的上一个文件夹路径
+      final List<String> pathList = path.split(r'\');
+      pathList.removeLast();
+      pathList.removeLast();
+      final String dirPath = pathList.join(r'\');
+
+      // 文件夹
+      final Directory dir = Directory(dirPath);
+
+      // 扫描 launcher.exe
+      final List<FileSystemEntity> files = dir.listSync();
+      final FileSystemEntity? launcherFile = files.firstWhereOrNull(
+        (FileSystemEntity file) => file.path.endsWith('launcher.exe'),
+      );
+      final List<GameInfoAction> actions = List<GameInfoAction>.from(_editInfo.moreActions);
+
+      if (launcherFile != null) {
+        final GameInfoAction launcherAction = GameInfoAction(name: l10n.open_launcher, executePath: launcherFile.path);
+        if (!actions.contains(launcherAction)) {
+          actions.add(launcherAction);
+        }
+      }
+
+      // 扫描 uninstall.exe
+      final FileSystemEntity? uninstallFile = files.firstWhereOrNull(
+        (FileSystemEntity file) => file.path.endsWith('uninstall.exe'),
+      );
+      if (uninstallFile != null) {
+        final GameInfoAction uninstallAction = GameInfoAction(
+          name: l10n.uninstall_game,
+          executePath: uninstallFile.path,
+        );
+        if (!actions.contains(uninstallAction)) {
+          actions.add(uninstallAction);
+        }
+      }
+
+      if (actions.length != _editInfo.moreActions.length) {
+        _editInfo = _editInfo.copyWith(moreActions: actions);
+        setState(() {});
+      }
+    } catch (e) {
+      AppInfoBar.show(context, e.toString(), severity: InfoBarSeverity.error);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return ContentDialog(
@@ -129,7 +184,7 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
               initialPath: _editInfo.launchPath,
               headerValue: l10n.launch_path.withColon,
               pickType: PickType.file,
-              onPathChanged: (String path) => _editInfo = _editInfo.copyWith(launchPath: path),
+              onPathChanged: _onLaunchPathChanged,
             ),
             _spacer(),
             EditMoreActionsBox(

@@ -164,5 +164,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get clock_size => '时钟大小';
 
   @override
+  String get open_launcher => '打开启动器';
+
+  @override
+  String get uninstall_game => '卸载游戏';
+
+  @override
+  String get path_not_exists => '路径不存在';
+
+  @override
   String get net_image => '网络图片';
 }

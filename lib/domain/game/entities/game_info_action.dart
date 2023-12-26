@@ -1,6 +1,9 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 /// 菜单项
+@immutable
 class GameInfoAction {
   const GameInfoAction({required this.name, required this.executePath});
 
@@ -27,5 +30,14 @@ class GameInfoAction {
 
   String toJsonString() {
     return jsonEncode(toJson());
+  }
+
+  @override
+  int get hashCode => executePath.hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        other is GameInfoAction && runtimeType == other.runtimeType && executePath == other.executePath;
   }
 }

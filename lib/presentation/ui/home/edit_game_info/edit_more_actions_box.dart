@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_action.dart';
+import 'package:hoyo_launcher/presentation/utils/ex_types/ex_list.dart';
 import 'package:hoyo_launcher/presentation/utils/ex_types/ex_string.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/widgets/hover_builder.dart';
@@ -33,6 +36,11 @@ class _EditMoreActionsBoxState extends State<EditMoreActionsBox> {
 
     if (action == null) return;
 
+    if (_actions.contains(action)) {
+      AppInfoBar.show(context, l10n.path_already_exists);
+      return;
+    }
+
     setState(() {
       _actions.add(action);
       widget.onActionsChanged(_actions);
@@ -44,6 +52,18 @@ class _EditMoreActionsBoxState extends State<EditMoreActionsBox> {
       _actions.removeAt(index);
     });
     widget.onActionsChanged(_actions);
+  }
+
+  @override
+  void didUpdateWidget(covariant EditMoreActionsBox oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (!_actions.sameWith(widget.initActions)) {
+      setState(() {
+        _actions.clear();
+        _actions.addAll(widget.initActions);
+      });
+    }
   }
 
   @override
@@ -147,6 +167,7 @@ class _EditMoreActionsBoxState extends State<EditMoreActionsBox> {
           PathPicker(
             headerValue: l10n.execution_path.withColon,
             onPathChanged: (String value) => path = value,
+            onValueChanged: (String value) => path = value,
             pickType: PickType.file,
           ),
         ],
@@ -169,6 +190,12 @@ class _EditMoreActionsBoxState extends State<EditMoreActionsBox> {
                 onPressed: () {
                   if (title.isNullOrEmpty || path.isNullOrEmpty) {
                     AppInfoBar.show(context, l10n.plz_complete_info);
+                    return;
+                  }
+
+                  // 判断它是一个合法文件路径或网址
+                  if (!File(path!).existsSync() && !path!.startsWith('http')) {
+                    AppInfoBar.show(context, l10n.path_not_exists);
                     return;
                   }
 

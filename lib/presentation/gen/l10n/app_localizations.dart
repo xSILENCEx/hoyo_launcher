@@ -411,6 +411,24 @@ abstract class AppLocalizations {
   /// **'Clock size'**
   String get clock_size;
 
+  /// No description provided for @open_launcher.
+  ///
+  /// In en, this message translates to:
+  /// **'Open launcher'**
+  String get open_launcher;
+
+  /// No description provided for @uninstall_game.
+  ///
+  /// In en, this message translates to:
+  /// **'Uninstall'**
+  String get uninstall_game;
+
+  /// No description provided for @path_not_exists.
+  ///
+  /// In en, this message translates to:
+  /// **'Path does not exist'**
+  String get path_not_exists;
+
   /// No description provided for @net_image.
   ///
   /// In en, this message translates to:

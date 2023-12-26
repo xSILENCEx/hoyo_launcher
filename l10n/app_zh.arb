@@ -52,5 +52,8 @@
     "confirm_brfore_close": "退出前确认",
     "show_sed": "显示秒",
     "clock_size": "时钟大小",
+    "open_launcher": "打开启动器",
+    "uninstall_game": "卸载游戏",
+    "path_not_exists": "路径不存在",
     "net_image": "网络图片"
 }

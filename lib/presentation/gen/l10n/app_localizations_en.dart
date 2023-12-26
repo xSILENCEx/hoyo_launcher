@@ -164,5 +164,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get clock_size => 'Clock size';
 
   @override
+  String get open_launcher => 'Open launcher';
+
+  @override
+  String get uninstall_game => 'Uninstall';
+
+  @override
+  String get path_not_exists => 'Path does not exist';
+
+  @override
   String get net_image => 'Network image';
 }

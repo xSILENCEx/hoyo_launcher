@@ -52,5 +52,8 @@
     "confirm_brfore_close": "Confirm before close",
     "show_sed": "Show seconds",
     "clock_size": "Clock size",
+    "open_launcher": "Open launcher",
+    "uninstall_game": "Uninstall",
+    "path_not_exists": "Path does not exist",
     "net_image": "Network image"
 }
