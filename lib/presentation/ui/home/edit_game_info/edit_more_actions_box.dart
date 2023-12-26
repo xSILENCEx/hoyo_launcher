@@ -167,7 +167,6 @@ class _EditMoreActionsBoxState extends State<EditMoreActionsBox> {
           PathPicker(
             headerValue: l10n.execution_path.withColon,
             onPathChanged: (String value) => path = value,
-            onValueChanged: (String value) => path = value,
             pickType: PickType.file,
           ),
         ],

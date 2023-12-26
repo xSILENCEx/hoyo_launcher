@@ -12,7 +12,6 @@ class PathPicker extends StatefulWidget {
     required this.pickType,
     this.headerValue,
     this.initialPath,
-    this.onValueChanged,
   });
 
   final String? initialPath;
@@ -20,7 +19,6 @@ class PathPicker extends StatefulWidget {
   final String? headerValue;
   final PickType pickType;
   final Function(String path) onPathChanged;
-  final Function(String value)? onValueChanged;
 
   @override
   State<PathPicker> createState() => _PathPickerState();
@@ -81,7 +79,7 @@ class _PathPickerState extends State<PathPicker> {
         Flexible(
           child: TextBox(
             controller: _controller,
-            onChanged: widget.onValueChanged,
+            onChanged: widget.onPathChanged,
             onEditingComplete: () => widget.onPathChanged(_controller.text),
             maxLength: 4000,
           ),
