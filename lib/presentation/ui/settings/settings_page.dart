@@ -43,53 +43,66 @@ class _SettingsPageState extends State<SettingsPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[Text(l10n.settings), m.TextButton(onPressed: _reset, child: Text(l10n.reset))],
       ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          _buildRow(
-            l10n.theme_mode,
-            ThemeModeSelector(
-              initThemeMode: appConfigNotifier.value.themeMode,
-              onThemeModeChanged: (ThemeMode themeMode) => appConfigNotifier.update(themeMode: themeMode),
-            ),
-          ),
-          _buildDivider(),
-          _buildRow(
-            l10n.theme_color,
-            ThemeColorSelector(
-              initUseSystemAccentColor: appConfigNotifier.value.useSystemAccentColor,
-              initDarkAccentColor: appConfigNotifier.value.darkAccentColor,
-              initLightAccentColor: appConfigNotifier.value.lightAccentColor,
-              onThemeColorChanged: (bool useSystemAccentColor, Color darkAccentColor, Color lightAccentColor) =>
-                  appConfigNotifier.update(
-                useSystemAccentColor: useSystemAccentColor,
-                darkAccentColor: darkAccentColor,
-                lightAccentColor: lightAccentColor,
+      content: ScrollConfiguration(
+        behavior: const ScrollBehavior().copyWith(scrollbars: false),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              _buildRow(
+                l10n.theme_mode,
+                ThemeModeSelector(
+                  initThemeMode: appConfigNotifier.value.themeMode,
+                  onThemeModeChanged: (ThemeMode themeMode) => appConfigNotifier.update(themeMode: themeMode),
+                ),
               ),
-            ),
+              _buildDivider(),
+              _buildRow(
+                l10n.theme_color,
+                ThemeColorSelector(
+                  initUseSystemAccentColor: appConfigNotifier.value.useSystemAccentColor,
+                  initDarkAccentColor: appConfigNotifier.value.darkAccentColor,
+                  initLightAccentColor: appConfigNotifier.value.lightAccentColor,
+                  onThemeColorChanged: (bool useSystemAccentColor, Color darkAccentColor, Color lightAccentColor) =>
+                      appConfigNotifier.update(
+                    useSystemAccentColor: useSystemAccentColor,
+                    darkAccentColor: darkAccentColor,
+                    lightAccentColor: lightAccentColor,
+                  ),
+                ),
+              ),
+              _buildDivider(),
+              _buildRow(
+                l10n.show_clock,
+                ClockEditer(
+                  initClockConfig: appConfigNotifier.value.clockConfig,
+                  onShowClockChanged: (ClockConfig config) => appConfigNotifier.update(clockConfig: config),
+                ),
+              ),
+              _buildDivider(),
+              _buildRow(
+                l10n.start_with_full,
+                AppSwitch(
+                  value: appConfigNotifier.value.startWithFullScreen,
+                  onValueChanged: (bool value) => appConfigNotifier.update(startWithFullScreen: value),
+                ),
+              ),
+              const SizedBox(height: 10),
+              _buildRow(
+                l10n.confirm_brfore_close,
+                AppSwitch(
+                  value: appConfigNotifier.value.confirmBeforeClose,
+                  onValueChanged: (bool value) => appConfigNotifier.update(confirmBeforeClose: value),
+                ),
+              ),
+              _buildDivider(),
+              _buildRow(
+                l10n.verison,
+                Text(getIt.get<SettingsUsecase>().getVersion()),
+              ),
+            ],
           ),
-          _buildDivider(),
-          _buildRow(
-            l10n.show_clock,
-            ClockEditer(
-              initClockConfig: appConfigNotifier.value.clockConfig,
-              onShowClockChanged: (ClockConfig config) => appConfigNotifier.update(clockConfig: config),
-            ),
-          ),
-          _buildDivider(),
-          _buildRow(
-            l10n.confirm_brfore_close,
-            AppSwitch(
-              value: appConfigNotifier.value.confirmBeforeClose,
-              onValueChanged: (bool value) => appConfigNotifier.update(confirmBeforeClose: value),
-            ),
-          ),
-          _buildDivider(),
-          _buildRow(
-            l10n.verison,
-            Text(getIt.get<SettingsUsecase>().getVersion()),
-          ),
-        ],
+        ),
       ),
       actions: <Widget>[
         SizedBox(width: 150, child: FilledButton(onPressed: () => Navigator.pop(context), child: Text(l10n.close))),

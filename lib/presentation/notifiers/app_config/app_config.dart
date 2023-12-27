@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:hoyo_launcher/commons/constant.dart';
 import 'package:hoyo_launcher/domain/settings/entities/settings_entity.dart';
 
 @immutable
@@ -11,17 +10,11 @@ class AppConfig {
     required this.useSystemAccentColor,
     required this.clockConfig,
     required this.confirmBeforeClose,
+    required this.startWithFullScreen,
   });
 
   factory AppConfig.init() {
-    return AppConfig(
-      themeMode: ThemeMode.light,
-      darkAccentColor: AppConstant.defAccentColor,
-      lightAccentColor: AppConstant.defAccentColor,
-      useSystemAccentColor: true,
-      clockConfig: ClockConfig.def(),
-      confirmBeforeClose: true,
-    );
+    return AppConfig.fromEntity(SettingsEntity.def());
   }
 
   factory AppConfig.fromEntity(SettingsEntity entity) {
@@ -32,6 +25,7 @@ class AppConfig {
       useSystemAccentColor: entity.useSystemAccentColor,
       clockConfig: entity.clockConfig,
       confirmBeforeClose: entity.confirmBeforeClose,
+      startWithFullScreen: entity.startWithFullScreen,
     );
   }
 
@@ -41,6 +35,7 @@ class AppConfig {
   final bool useSystemAccentColor;
   final ClockConfig clockConfig;
   final bool confirmBeforeClose;
+  final bool startWithFullScreen;
 
   SettingsEntity get settings {
     return SettingsEntity(
@@ -50,6 +45,7 @@ class AppConfig {
       useSystemAccentColor: useSystemAccentColor,
       clockConfig: clockConfig,
       confirmBeforeClose: confirmBeforeClose,
+      startWithFullScreen: startWithFullScreen,
     );
   }
 
@@ -60,6 +56,7 @@ class AppConfig {
     bool? useSystemAccentColor,
     ClockConfig? clockConfig,
     bool? confirmBeforeClose,
+    bool? startWithFullScreen,
   }) {
     return AppConfig(
       themeMode: themeMode ?? this.themeMode,
@@ -68,12 +65,13 @@ class AppConfig {
       useSystemAccentColor: useSystemAccentColor ?? this.useSystemAccentColor,
       clockConfig: clockConfig ?? this.clockConfig,
       confirmBeforeClose: confirmBeforeClose ?? this.confirmBeforeClose,
+      startWithFullScreen: startWithFullScreen ?? this.startWithFullScreen,
     );
   }
 
   @override
-  int get hashCode =>
-      Object.hash(themeMode, darkAccentColor, lightAccentColor, useSystemAccentColor, clockConfig, confirmBeforeClose);
+  int get hashCode => Object.hash(themeMode, darkAccentColor, lightAccentColor, useSystemAccentColor, clockConfig,
+      confirmBeforeClose, startWithFullScreen);
 
   @override
   bool operator ==(Object other) {
@@ -85,6 +83,7 @@ class AppConfig {
             lightAccentColor == other.lightAccentColor &&
             useSystemAccentColor == other.useSystemAccentColor &&
             clockConfig == other.clockConfig &&
-            confirmBeforeClose == other.confirmBeforeClose;
+            confirmBeforeClose == other.confirmBeforeClose &&
+            startWithFullScreen == other.startWithFullScreen;
   }
 }

@@ -429,6 +429,12 @@ abstract class AppLocalizations {
   /// **'Path does not exist'**
   String get path_not_exists;
 
+  /// No description provided for @start_with_full.
+  ///
+  /// In en, this message translates to:
+  /// **'Start with full screen'**
+  String get start_with_full;
+
   /// No description provided for @net_image.
   ///
   /// In en, this message translates to:

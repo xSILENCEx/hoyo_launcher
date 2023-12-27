@@ -21,6 +21,7 @@ class AppConfigNotifier extends ExValue<AppConfig> {
     bool? useSystemAccentColor,
     ClockConfig? clockConfig,
     bool? confirmBeforeClose,
+    bool? startWithFullScreen,
   }) {
     final AppConfig newConfig = value.copyWith(
       themeMode: themeMode,
@@ -29,6 +30,7 @@ class AppConfigNotifier extends ExValue<AppConfig> {
       useSystemAccentColor: useSystemAccentColor,
       clockConfig: clockConfig,
       confirmBeforeClose: confirmBeforeClose,
+      startWithFullScreen: startWithFullScreen,
     );
 
     if (newConfig != value) {

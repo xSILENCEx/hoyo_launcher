@@ -13,6 +13,7 @@ class SettingsEntity {
     required this.useSystemAccentColor,
     required this.clockConfig,
     required this.confirmBeforeClose,
+    required this.startWithFullScreen,
   });
 
   factory SettingsEntity.def() {
@@ -23,6 +24,7 @@ class SettingsEntity {
       useSystemAccentColor: true,
       clockConfig: ClockConfig.def(),
       confirmBeforeClose: true,
+      startWithFullScreen: false,
     );
   }
 
@@ -32,6 +34,7 @@ class SettingsEntity {
   final bool useSystemAccentColor;
   final ClockConfig clockConfig;
   final bool confirmBeforeClose;
+  final bool startWithFullScreen;
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -41,6 +44,7 @@ class SettingsEntity {
       'useSystemAccentColor': useSystemAccentColor,
       'clockConfig': clockConfig.toJsonString(),
       'confirmBeforeClose': confirmBeforeClose,
+      'startWithFullScreen': startWithFullScreen,
     };
   }
 

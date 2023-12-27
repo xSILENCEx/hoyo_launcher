@@ -36,9 +36,15 @@ class _AppSwitchState extends State<AppSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    return ToggleSwitch(
-      checked: _value,
-      onChanged: _onValueChanged,
+    return SizedBox(
+      height: 32,
+      child: Center(
+        widthFactor: 1,
+        child: ToggleSwitch(
+          checked: _value,
+          onChanged: _onValueChanged,
+        ),
+      ),
     );
   }
 }

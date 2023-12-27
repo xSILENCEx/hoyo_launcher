@@ -173,5 +173,8 @@ class AppLocalizationsZh extends AppLocalizations {
   String get path_not_exists => '路径不存在';
 
   @override
+  String get start_with_full => '启动时全屏';
+
+  @override
   String get net_image => '网络图片';
 }

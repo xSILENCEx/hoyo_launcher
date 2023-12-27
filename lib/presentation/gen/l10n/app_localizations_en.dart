@@ -173,5 +173,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get path_not_exists => 'Path does not exist';
 
   @override
+  String get start_with_full => 'Start with full screen';
+
+  @override
   String get net_image => 'Network image';
 }

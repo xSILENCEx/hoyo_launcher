@@ -55,5 +55,6 @@
     "open_launcher": "打开启动器",
     "uninstall_game": "卸载游戏",
     "path_not_exists": "路径不存在",
+    "start_with_full": "启动时全屏",
     "net_image": "网络图片"
 }

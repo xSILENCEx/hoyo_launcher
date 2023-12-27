@@ -3,6 +3,7 @@ import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
 import 'package:hoyo_launcher/domain/settings/usecases/settings_usecase.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:window_manager/window_manager.dart';
+// import 'package:window_size/window_size.dart' as window_size;
 
 import 'commons/constant.dart';
 import 'commons/getIt/di.dart';
@@ -33,7 +34,17 @@ void main() async {
 
   windowManager.waitUntilReadyToShow().then((_) async {
     await windowManager.setTitleBarStyle(TitleBarStyle.hidden, windowButtonVisibility: false);
-    await windowManager.setMinimumSize(const Size(500, 600));
+
+    await windowManager.setMinimumSize(const Size(600, 500));
+    await windowManager.setSize(const Size(1200, 600));
+
+    if (appConfigNotifier.value.startWithFullScreen) {
+      await windowManager.setResizable(true);
+      await windowManager.setFullScreen(true);
+    } else {
+      await windowManager.center();
+    }
+
     await windowManager.show();
     await windowManager.setPreventClose(true);
     await windowManager.setSkipTaskbar(false);
