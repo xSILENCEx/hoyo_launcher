@@ -27,7 +27,7 @@ class GameBgBuilder extends StatefulWidget {
 class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuilder> {
   final List<String> _images = <String>[];
 
-  GameInfoEntity get _gameInfo => widget.gameInfo;
+  late GameInfoEntity _gameInfo = widget.gameInfo;
 
   @override
   void initState() {
@@ -38,7 +38,8 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
   @override
   void didUpdateWidget(covariant GameBgBuilder oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.gameInfo != widget.gameInfo || oldWidget.gameInfo.bgSameWith(widget.gameInfo.gameBgInfo)) {
+    if (_gameInfo != widget.gameInfo || !_gameInfo.bgSameWith(widget.gameInfo.gameBgInfo)) {
+      _gameInfo = widget.gameInfo;
       _readyData(update: true);
     }
   }
