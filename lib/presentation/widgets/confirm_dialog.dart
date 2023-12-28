@@ -3,16 +3,16 @@ import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/utils/router_tool.dart';
 
 class ConfirmDialog extends StatelessWidget {
-  const ConfirmDialog._({required this.content, this.contentWidth});
+  const ConfirmDialog._({required this.content, this.contentWidget});
 
   final String content;
 
-  final Widget? contentWidth;
+  final Widget? contentWidget;
 
-  static Future<bool> show(String content, {Widget? contentWidth}) async {
+  static Future<bool> show(String content, {Widget? contentWidget}) async {
     return await showDialog<bool>(
           context: currentContext,
-          builder: (_) => ConfirmDialog._(content: content, contentWidth: contentWidth),
+          builder: (_) => ConfirmDialog._(content: content, contentWidget: contentWidget),
           barrierDismissible: true,
         ) ??
         false;
@@ -21,15 +21,8 @@ class ConfirmDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ContentDialog(
-      title: Text(l10n.confirm_delete),
-      content: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          Text(content),
-          if (contentWidth != null) contentWidth!,
-        ],
-      ),
+      title: Text(content),
+      content: contentWidget,
       actions: <Widget>[
         Button(
           onPressed: () => Navigator.pop(context),

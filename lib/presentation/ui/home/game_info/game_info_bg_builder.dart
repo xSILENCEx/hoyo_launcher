@@ -85,7 +85,7 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
 
   Future<void> _deleteImage(String path) async {
     if (path.startsWith('http')) {
-      final bool confirmDel = await ConfirmDialog.show(l10n.confirm_del, contentWidth: _buildConfirmImg(path));
+      final bool confirmDel = await ConfirmDialog.show(l10n.confirm_del, contentWidget: _buildConfirmImg(path));
       if (!confirmDel) return;
 
       final GameInfoBg gameInfoBg = _gameInfo.gameBgInfo;
@@ -95,7 +95,7 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
       );
       getIt.get<UpdateGameInfoUseCase>().call(newInfo);
     } else {
-      final bool confirmDel = await ConfirmDialog.show(l10n.confirm_del_file, contentWidth: _buildConfirmImg(path));
+      final bool confirmDel = await ConfirmDialog.show(l10n.confirm_del_file, contentWidget: _buildConfirmImg(path));
       if (!confirmDel) return;
       await File(path).delete();
 

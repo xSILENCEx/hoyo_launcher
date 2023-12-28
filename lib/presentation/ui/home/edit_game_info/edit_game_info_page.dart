@@ -55,7 +55,10 @@ class EditGameInfoPage extends StatefulWidget {
   }
 
   static Future<void> del(GameInfoEntity gameInfo) async {
-    final bool confirmDel = await ConfirmDialog.show(gameInfo.title);
+    final bool confirmDel = await ConfirmDialog.show(
+      l10n.confirm_del,
+      contentWidget: Text(gameInfo.title),
+    );
     if (confirmDel) {
       await getIt.get<DelGameInfoUsecase>()(gameInfo.id);
     }
