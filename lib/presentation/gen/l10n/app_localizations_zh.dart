@@ -176,5 +176,8 @@ class AppLocalizationsZh extends AppLocalizations {
   String get start_with_full => '启动时全屏';
 
   @override
+  String get minimize_after_launch => '启动游戏后最小化';
+
+  @override
   String get net_image => '网络图片';
 }

@@ -176,5 +176,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get start_with_full => 'Start with full screen';
 
   @override
+  String get minimize_after_launch => 'Minimize after launch';
+
+  @override
   String get net_image => 'Network image';
 }

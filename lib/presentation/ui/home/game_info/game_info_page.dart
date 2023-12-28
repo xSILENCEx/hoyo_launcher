@@ -6,6 +6,7 @@ import 'package:hoyo_launcher/presentation/widgets/app_btn.dart';
 import 'package:hoyo_launcher/presentation/widgets/ex_value_builder/ex_value_builder.dart';
 import 'package:hoyo_launcher/presentation/widgets/info_bar.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'package:window_manager/window_manager.dart';
 
 import 'clock.dart';
 import 'more_action_btn.dart';
@@ -19,7 +20,10 @@ class GameInfoPage extends StatelessWidget {
 
   Future<void> _onStartGame(BuildContext context) async {
     try {
-      launchUrlString(gameInfo.launchPath);
+      await launchUrlString(gameInfo.launchPath);
+      if (appConfigNotifier.value.minimizeAfterLaunch) {
+        windowManager.minimize();
+      }
     } catch (e) {
       debugPrint(e.toString());
       AppInfoBar.show(context, e.toString());

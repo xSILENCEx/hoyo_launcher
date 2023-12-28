@@ -88,6 +88,14 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
             const SizedBox(height: 10),
             _buildRow(
+              l10n.minimize_after_launch,
+              AppSwitch(
+                value: appConfigNotifier.value.minimizeAfterLaunch,
+                onValueChanged: (bool value) => appConfigNotifier.update(minimizeAfterLaunch: value),
+              ),
+            ),
+            const SizedBox(height: 10),
+            _buildRow(
               l10n.confirm_brfore_close,
               AppSwitch(
                 value: appConfigNotifier.value.confirmBeforeClose,

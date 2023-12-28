@@ -11,6 +11,7 @@ class AppConfig {
     required this.clockConfig,
     required this.confirmBeforeClose,
     required this.startWithFullScreen,
+    required this.minimizeAfterLaunch,
   });
 
   factory AppConfig.init() {
@@ -26,6 +27,7 @@ class AppConfig {
       clockConfig: entity.clockConfig,
       confirmBeforeClose: entity.confirmBeforeClose,
       startWithFullScreen: entity.startWithFullScreen,
+      minimizeAfterLaunch: entity.minimizeAfterLaunch,
     );
   }
 
@@ -36,6 +38,7 @@ class AppConfig {
   final ClockConfig clockConfig;
   final bool confirmBeforeClose;
   final bool startWithFullScreen;
+  final bool minimizeAfterLaunch;
 
   SettingsEntity get settings {
     return SettingsEntity(
@@ -46,6 +49,7 @@ class AppConfig {
       clockConfig: clockConfig,
       confirmBeforeClose: confirmBeforeClose,
       startWithFullScreen: startWithFullScreen,
+      minimizeAfterLaunch: minimizeAfterLaunch,
     );
   }
 
@@ -57,6 +61,7 @@ class AppConfig {
     ClockConfig? clockConfig,
     bool? confirmBeforeClose,
     bool? startWithFullScreen,
+    bool? minimizeAfterLaunch,
   }) {
     return AppConfig(
       themeMode: themeMode ?? this.themeMode,
@@ -66,6 +71,7 @@ class AppConfig {
       clockConfig: clockConfig ?? this.clockConfig,
       confirmBeforeClose: confirmBeforeClose ?? this.confirmBeforeClose,
       startWithFullScreen: startWithFullScreen ?? this.startWithFullScreen,
+      minimizeAfterLaunch: minimizeAfterLaunch ?? this.minimizeAfterLaunch,
     );
   }
 

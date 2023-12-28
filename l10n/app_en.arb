@@ -56,5 +56,6 @@
     "uninstall_game": "Uninstall",
     "path_not_exists": "Path does not exist",
     "start_with_full": "Start with full screen",
+    "minimize_after_launch": "Minimize after launch",
     "net_image": "Network image"
 }

@@ -14,5 +14,6 @@ SettingsEntity jsonStrToEntity(String jsonStr) {
     clockConfig: json['clockConfig'] == null ? ClockConfig.def() : ClockConfig.fromStr(json['clockConfig'] as String),
     confirmBeforeClose: json['confirmBeforeClose'] as bool? ?? true,
     startWithFullScreen: json['startWithFullScreen'] as bool? ?? false,
+    minimizeAfterLaunch: json['minimizeAfterLaunch'] as bool? ?? true,
   );
 }

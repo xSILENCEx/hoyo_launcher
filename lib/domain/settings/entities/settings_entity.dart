@@ -14,6 +14,7 @@ class SettingsEntity {
     required this.clockConfig,
     required this.confirmBeforeClose,
     required this.startWithFullScreen,
+    required this.minimizeAfterLaunch,
   });
 
   factory SettingsEntity.def() {
@@ -25,6 +26,7 @@ class SettingsEntity {
       clockConfig: ClockConfig.def(),
       confirmBeforeClose: true,
       startWithFullScreen: false,
+      minimizeAfterLaunch: true,
     );
   }
 
@@ -35,6 +37,7 @@ class SettingsEntity {
   final ClockConfig clockConfig;
   final bool confirmBeforeClose;
   final bool startWithFullScreen;
+  final bool minimizeAfterLaunch;
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -45,6 +48,7 @@ class SettingsEntity {
       'clockConfig': clockConfig.toJsonString(),
       'confirmBeforeClose': confirmBeforeClose,
       'startWithFullScreen': startWithFullScreen,
+      'minimizeAfterLaunch': minimizeAfterLaunch,
     };
   }
 

@@ -435,6 +435,12 @@ abstract class AppLocalizations {
   /// **'Start with full screen'**
   String get start_with_full;
 
+  /// No description provided for @minimize_after_launch.
+  ///
+  /// In en, this message translates to:
+  /// **'Minimize after launch'**
+  String get minimize_after_launch;
+
   /// No description provided for @net_image.
   ///
   /// In en, this message translates to:

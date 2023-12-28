@@ -56,5 +56,6 @@
     "uninstall_game": "卸载游戏",
     "path_not_exists": "路径不存在",
     "start_with_full": "启动时全屏",
+    "minimize_after_launch": "启动游戏后最小化",
     "net_image": "网络图片"
 }
