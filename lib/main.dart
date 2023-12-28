@@ -3,7 +3,7 @@ import 'package:flutter_acrylic/flutter_acrylic.dart' as flutter_acrylic;
 import 'package:hoyo_launcher/domain/settings/usecases/settings_usecase.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:window_manager/window_manager.dart';
-// import 'package:window_size/window_size.dart' as window_size;
+import 'package:window_size/window_size.dart' as window_size;
 
 import 'commons/constant.dart';
 import 'commons/getIt/di.dart';
@@ -32,17 +32,26 @@ void main() async {
 
   await WindowManager.instance.ensureInitialized();
 
+  final window_size.Screen? screen = await window_size.getCurrentScreen();
+
+  double screenWidth = 1200;
+
+  if (screen != null) {
+    screenWidth = screen.visibleFrame.size.width * 0.5;
+  }
+
+  final double screenHeight = screenWidth / 2;
+
   windowManager.waitUntilReadyToShow().then((_) async {
     await windowManager.setTitleBarStyle(TitleBarStyle.hidden, windowButtonVisibility: false);
 
     await windowManager.setMinimumSize(const Size(600, 500));
-    await windowManager.setSize(const Size(1200, 600));
+    await windowManager.setSize(Size(screenWidth, screenHeight));
 
-    if (appConfigNotifier.value.startWithFullScreen) {
-      await windowManager.setResizable(true);
-      await windowManager.setFullScreen(true);
-    } else {
+    if (!appConfigNotifier.value.startWithFullScreen) {
       await windowManager.center();
+    } else {
+      await windowManager.maximize();
     }
 
     await windowManager.show();

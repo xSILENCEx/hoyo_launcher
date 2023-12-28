@@ -15,6 +15,7 @@ import 'package:hoyo_launcher/presentation/utils/router_tool.dart';
 import 'package:hoyo_launcher/presentation/widgets/confirm_dialog.dart';
 import 'package:hoyo_launcher/presentation/widgets/info_bar.dart';
 import 'package:hoyo_launcher/presentation/widgets/path_picker.dart';
+import 'package:hoyo_launcher/presentation/widgets/smooth_scroll_view.dart';
 
 import 'edit_more_actions_box.dart';
 import 'icon_selector.dart';
@@ -158,7 +159,7 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
     return ContentDialog(
       constraints: const BoxConstraints(maxWidth: 600),
       title: Text(widget.editGameInfo == null ? l10n.create_info : l10n.edit),
-      content: SingleChildScrollView(
+      content: SmoothScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,

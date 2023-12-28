@@ -27,8 +27,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with WindowListener, NavMixin {
   @override
   void initState() {
-    windowManager.addListener(this);
     super.initState();
+    windowManager.addListener(this);
   }
 
   @override
