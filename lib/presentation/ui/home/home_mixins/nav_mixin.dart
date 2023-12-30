@@ -9,6 +9,12 @@ mixin NavMixin on State<Home> {
 
   final ExValue<double> navBarWithNotifier = ExValue<double>(NavBar.navBarMinWidth);
 
+  @override
+  void dispose() {
+    navBarWithNotifier.dispose();
+    super.dispose();
+  }
+
   void changeNavValue(GameInfoEntity? info) {
     selectedIem = info;
   }
@@ -23,9 +29,7 @@ mixin NavMixin on State<Home> {
     navBarWithNotifier.value = value;
   }
 
-  @override
-  void dispose() {
-    navBarWithNotifier.dispose();
-    super.dispose();
+  bool firstWhereTest(GameInfoEntity data) {
+    return data == selectedIem;
   }
 }

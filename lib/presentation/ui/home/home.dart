@@ -45,6 +45,8 @@ class _HomeState extends State<Home> with WindowListener, GameInfoDataMixin, Nav
       } else {
         changeNavValue(null);
       }
+    } else {
+      selectedIem = gameInfoList.firstWhere(firstWhereTest);
     }
 
     return Stack(
