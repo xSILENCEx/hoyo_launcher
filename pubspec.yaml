@@ -39,6 +39,7 @@ dependencies:
       url: https://github.com/google/flutter-desktop-embedding.git
       path: plugins/window_size
   reorderables: ^0.6.0
+  windows_single_instance: ^1.0.1
   
   
 dev_dependencies:

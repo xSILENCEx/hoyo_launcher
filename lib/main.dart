@@ -4,6 +4,7 @@ import 'package:hoyo_launcher/domain/settings/usecases/settings_usecase.dart';
 import 'package:system_theme/system_theme.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:window_size/window_size.dart' as window_size;
+import 'package:windows_single_instance/windows_single_instance.dart';
 
 import 'commons/constant.dart';
 import 'commons/getIt/di.dart';
@@ -14,8 +15,9 @@ import 'presentation/ui/root.dart';
 
 const String appTitle = 'Hoyo Launcher';
 
-void main() async {
+Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await WindowsSingleInstance.ensureSingleInstance(args, 'com.hoyo_launcher');
 
   await LocalStorage.init();
   await PackageTool.initDevice();
