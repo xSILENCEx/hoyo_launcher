@@ -157,7 +157,6 @@ class NavBar extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: _leadingMargin).copyWith(top: 6),
         height: leadingSize,
-        width: double.infinity,
         decoration: BoxDecoration(
           color: isSelected ? navColor : navColor.withOpacity(0),
           borderRadius: BorderRadius.circular(6),
@@ -184,11 +183,12 @@ class NavBar extends StatelessWidget {
                   Container(width: leadingSize, height: leadingSize, padding: iconPadding, child: icon),
                   const SizedBox(width: _leadingMargin),
                   SizedBox(
-                    width: navBarMaxWidth + _leadingMargin * 2 - navBarMinWidth * (trailings.length + 1),
+                    width: navBarMaxWidth - navMinWidth - kMinInteractiveDimension * trailings.length,
                     child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
                   ),
                   if (trailings.isNotEmpty) const SizedBox(width: _leadingMargin),
                   if (trailings.isNotEmpty) ...trailings,
+                  const SizedBox(width: _leadingMargin),
                 ],
               ),
             ),

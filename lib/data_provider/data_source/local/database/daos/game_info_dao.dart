@@ -20,8 +20,8 @@ class GameInfoDao extends AppDatabaseAccessor with _$GameInfoDaoMixin {
   GameInfoDao(MyDatabase db) : super(db);
 
   Future<void> upsert(FullGameInfoDBModel model) async {
-    await into(gameInfoTable).insertOnConflictUpdate(model.gameInfoDBModel);
     await into(gameInfoBgTable).insertOnConflictUpdate(model.gameInfoBgDBModel);
+    await into(gameInfoTable).insertOnConflictUpdate(model.gameInfoDBModel);
   }
 
   Future<void> upsertAll(List<FullGameInfoDBModel> list) async {

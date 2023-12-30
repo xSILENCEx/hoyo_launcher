@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 
 enum LoopAnimationType { fade, slide }
 
@@ -29,7 +30,7 @@ class LoopImageBox extends StatefulWidget {
   State<LoopImageBox> createState() => _LoopImageBoxState();
 }
 
-class _LoopImageBoxState extends State<LoopImageBox> {
+class _LoopImageBoxState extends State<LoopImageBox> with WindowListener {
   late final Random _random = Random();
 
   late int _index = _random.nextInt(widget.children.length);
@@ -39,13 +40,26 @@ class _LoopImageBoxState extends State<LoopImageBox> {
   @override
   void initState() {
     super.initState();
+    windowManager.addListener(this);
     _start();
   }
 
   @override
   void dispose() {
     _cancel();
+    windowManager.removeListener(this);
     super.dispose();
+  }
+
+  @override
+  void onWindowEvent(String eventName) {
+    super.onWindowEvent(eventName);
+
+    if (eventName == 'minimize') {
+      _cancel();
+    } else if (eventName == 'restore') {
+      _start();
+    }
   }
 
   void _start() {

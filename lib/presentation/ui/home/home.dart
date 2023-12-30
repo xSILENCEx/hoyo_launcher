@@ -36,6 +36,25 @@ class _HomeState extends State<Home> with WindowListener, GameInfoDataMixin, Nav
   }
 
   @override
+  Future<void> onWindowClose() async {
+    // final bool isPreventClose = await windowManager.isPreventClose();
+    final bool confirmBeforeClose = appConfigNotifier.value.confirmBeforeClose;
+    if (mounted) {
+      if (confirmBeforeClose) {
+        final bool close = await ConfirmDialog.show(l10n.confirm_close);
+        if (!close) return;
+      }
+
+      windowManager.destroy();
+    }
+  }
+
+  @override
+  void onWindowFocus() {
+    setState(() {});
+  }
+
+  @override
   Widget build(BuildContext context) {
     final FluentThemeData fluentTheme = FluentTheme.of(context);
 
@@ -78,19 +97,5 @@ class _HomeState extends State<Home> with WindowListener, GameInfoDataMixin, Nav
         ),
       ],
     );
-  }
-
-  @override
-  Future<void> onWindowClose() async {
-    // final bool isPreventClose = await windowManager.isPreventClose();
-    final bool confirmBeforeClose = appConfigNotifier.value.confirmBeforeClose;
-    if (mounted) {
-      if (confirmBeforeClose) {
-        final bool close = await ConfirmDialog.show(l10n.confirm_close);
-        if (!close) return;
-      }
-
-      windowManager.destroy();
-    }
   }
 }
