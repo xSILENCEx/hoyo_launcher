@@ -20,6 +20,7 @@ class NavBar extends StatelessWidget {
     required this.onDelItemTap,
     required this.onEditItemTap,
     required this.onAddItemTap,
+    required this.onReorder,
     this.onNavHover,
   });
 
@@ -36,6 +37,7 @@ class NavBar extends StatelessWidget {
   final Function() onAddItemTap;
 
   final Function(double animationValue)? onNavHover;
+  final Function(int fromIndex, int toIndex) onReorder;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +55,7 @@ class NavBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ReorderableColumn(
-                onReorder: (int oldIndex, int newIndex) {
-                  print('onReorder oldIndex = $oldIndex, newIndex = $newIndex');
-                },
+                onReorder: onReorder,
                 needsLongPressDraggable: false,
                 padding: EdgeInsets.zero,
                 buildDraggableFeedback: (_, __, Widget child) => child,
