@@ -46,6 +46,10 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
       builder: (_, AsyncSnapshot<List<GameInfoEntity>> snapshot) {
         final List<GameInfoEntity> gameInfoList = snapshot.data ?? <GameInfoEntity>[];
 
+        if (navIndex >= gameInfoList.length) {
+          changeNavValue(gameInfoList.length - 1);
+        }
+
         return Stack(
           children: <Widget>[
             Positioned.fill(child: ColoredBox(color: fluentTheme.scaffoldBackgroundColor)),

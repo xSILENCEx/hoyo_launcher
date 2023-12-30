@@ -110,6 +110,10 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
 
     _editInfo = _editInfo.copyWith(launchPath: path);
 
+    if (path.startsWith('http')) {
+      return;
+    }
+
     try {
       // 当前文件所在的上一个文件夹路径
       final List<String> pathList = path.split(r'\');

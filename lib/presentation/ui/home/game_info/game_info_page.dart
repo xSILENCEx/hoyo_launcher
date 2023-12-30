@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:hoyo_launcher/commons/logger.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/presentation/notifiers/app_config/app_config_notifier.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
@@ -25,8 +26,8 @@ class GameInfoPage extends StatelessWidget {
         windowManager.minimize();
       }
     } catch (e) {
-      debugPrint(e.toString());
-      AppInfoBar.show(context, e.toString());
+      errorLog(e.toString());
+      AppInfoBar.show(context, e.toString(), severity: InfoBarSeverity.error);
     }
   }
 

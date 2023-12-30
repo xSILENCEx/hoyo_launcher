@@ -8,9 +8,18 @@ mixin NavMixin on State<Home> {
 
   final ExValue<double> navBarWithNotifier = ExValue<double>(NavBar.navBarMinWidth);
 
+  void changeNavValue(int index) {
+    if (index < 0) {
+      navIndex = 0;
+    } else {
+      navIndex = index;
+    }
+  }
+
   void changeNav(int index) {
     if (navIndex == index) return;
-    setState(() => navIndex = index);
+    changeNavValue(index);
+    setState(() {});
   }
 
   void onNavHover(double value) {
