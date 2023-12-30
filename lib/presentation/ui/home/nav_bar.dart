@@ -67,10 +67,7 @@ class NavBar extends StatelessWidget {
               ),
               _buildAddItem(context, navMinWidth),
               const Spacer(),
-              SizedBox(
-                width: double.infinity,
-                child: _buildSettingItem(context, navMinWidth),
-              ),
+              _buildSettingItem(context, navMinWidth),
               const SizedBox(height: _leadingMargin),
             ],
           ),
@@ -115,7 +112,6 @@ class NavBar extends StatelessWidget {
           isSelected: isHover,
           hasIndicator: false,
           onTap: onAddItemTap,
-          iconPadding: const EdgeInsets.all(_leadingMargin * 2),
         );
       },
     );
@@ -159,8 +155,9 @@ class NavBar extends StatelessWidget {
     return GestureDetector(
       onTap: onTap ?? () => onItemTap(navItems[index]),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: _leadingMargin),
+        margin: const EdgeInsets.symmetric(horizontal: _leadingMargin).copyWith(top: 6),
         height: leadingSize,
+        width: double.infinity,
         decoration: BoxDecoration(
           color: isSelected ? navColor : navColor.withOpacity(0),
           borderRadius: BorderRadius.circular(6),

@@ -9,7 +9,7 @@ class GameInfoBg {
 
   GameInfoBg.create(this.id)
       : interval = const Duration(seconds: 10),
-        animateDuration = const Duration(milliseconds: 1000),
+        animateDuration = const Duration(milliseconds: 500),
         random = false,
         bgData = const <String>[];
 
