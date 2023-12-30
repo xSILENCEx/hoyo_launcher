@@ -1,4 +1,5 @@
 {
+    "@@locale": "zh",
     "app_name": "miHoYo 启动器",
     "launcher": "启动器",
     "create_info": "添加",
@@ -57,5 +58,8 @@
     "path_not_exists": "路径不存在",
     "start_with_full": "启动时全屏",
     "minimize_after_launch": "启动游戏后最小化",
+    "random_swich": "随机切换",
+    "swich_interval": "切换间隔",
+    "animate_duration": "动画时长",
     "net_image": "网络图片"
 }

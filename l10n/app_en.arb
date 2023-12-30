@@ -1,4 +1,5 @@
 {
+    "@@locale": "en",
     "app_name": "Hoyo Launcher",
     "launcher": "Launcher",
     "create_info": "Create",
@@ -57,5 +58,8 @@
     "path_not_exists": "Path does not exist",
     "start_with_full": "Start with full screen",
     "minimize_after_launch": "Minimize after launch",
+    "random_swich": "Random switch",
+    "swich_interval": "Switch interval",
+    "animate_duration": "Animate duration",
     "net_image": "Network image"
 }

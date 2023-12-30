@@ -56,9 +56,9 @@ class GameInfoEntity {
     bool same = true;
     if (gameBgInfo.id != infoBg.id) {
       same = false;
-    } else if (gameBgInfo.duration != infoBg.duration) {
+    } else if (gameBgInfo.interval != infoBg.interval) {
       same = false;
-    } else if (gameBgInfo.animatDuratuion != infoBg.animatDuratuion) {
+    } else if (gameBgInfo.animateDuration != infoBg.animateDuration) {
       same = false;
     } else if (gameBgInfo.bgData.length != infoBg.bgData.length) {
       same = false;

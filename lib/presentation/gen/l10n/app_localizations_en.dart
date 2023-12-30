@@ -179,5 +179,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get minimize_after_launch => 'Minimize after launch';
 
   @override
+  String get random_swich => 'Random switch';
+
+  @override
+  String get swich_interval => 'Switch interval';
+
+  @override
+  String get animate_duration => 'Animate duration';
+
+  @override
   String get net_image => 'Network image';
 }

@@ -1,31 +1,36 @@
 class GameInfoBg {
   const GameInfoBg({
     required this.id,
-    required this.duration,
-    required this.animatDuratuion,
+    required this.interval,
+    required this.animateDuration,
+    required this.random,
     required this.bgData,
   });
 
   GameInfoBg.create(this.id)
-      : duration = const Duration(seconds: 10),
-        animatDuratuion = const Duration(milliseconds: 1000),
+      : interval = const Duration(seconds: 10),
+        animateDuration = const Duration(milliseconds: 1000),
+        random = false,
         bgData = const <String>[];
 
   final String id;
-  final Duration duration;
-  final Duration animatDuratuion;
+  final Duration interval;
+  final Duration animateDuration;
+  final bool random;
   final List<String> bgData;
 
   GameInfoBg copyWith({
     String? id,
-    Duration? duration,
-    Duration? animatDuratuion,
+    Duration? interval,
+    Duration? animateDuration,
+    bool? random,
     List<String>? bgData,
   }) {
     return GameInfoBg(
       id: id ?? this.id,
-      duration: duration ?? this.duration,
-      animatDuratuion: animatDuratuion ?? this.animatDuratuion,
+      interval: interval ?? this.interval,
+      animateDuration: animateDuration ?? this.animateDuration,
+      random: random ?? this.random,
       bgData: bgData ?? this.bgData,
     );
   }
@@ -33,8 +38,9 @@ class GameInfoBg {
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'id': id,
-      'duration': duration.inMilliseconds,
-      'animatDuratuion': animatDuratuion.inMilliseconds,
+      'duration': interval.inMilliseconds,
+      'animateDuration': animateDuration.inMilliseconds,
+      'random': random,
       'bgData': bgData,
     };
   }

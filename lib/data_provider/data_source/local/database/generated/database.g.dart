@@ -418,13 +418,22 @@ class $GameInfoBgTableTable extends GameInfoBgTable
   late final GeneratedColumn<int> animatDuratuion = GeneratedColumn<int>(
       'animat_duratuion', aliasedName, false,
       type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _randomMeta = const VerificationMeta('random');
+  @override
+  late final GeneratedColumn<bool> random = GeneratedColumn<bool>(
+      'random', aliasedName, true,
+      type: DriftSqlType.bool,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('CHECK ("random" IN (0, 1))'));
   static const VerificationMeta _bgDataMeta = const VerificationMeta('bgData');
   @override
   late final GeneratedColumn<String> bgData = GeneratedColumn<String>(
       'bg_data', aliasedName, false,
       type: DriftSqlType.string, requiredDuringInsert: true);
   @override
-  List<GeneratedColumn> get $columns => [id, duration, animatDuratuion, bgData];
+  List<GeneratedColumn> get $columns =>
+      [id, duration, animatDuratuion, random, bgData];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -454,6 +463,10 @@ class $GameInfoBgTableTable extends GameInfoBgTable
     } else if (isInserting) {
       context.missing(_animatDuratuionMeta);
     }
+    if (data.containsKey('random')) {
+      context.handle(_randomMeta,
+          random.isAcceptableOrUnknown(data['random']!, _randomMeta));
+    }
     if (data.containsKey('bg_data')) {
       context.handle(_bgDataMeta,
           bgData.isAcceptableOrUnknown(data['bg_data']!, _bgDataMeta));
@@ -475,6 +488,8 @@ class $GameInfoBgTableTable extends GameInfoBgTable
           .read(DriftSqlType.int, data['${effectivePrefix}duration'])!,
       animatDuratuion: attachedDatabase.typeMapping
           .read(DriftSqlType.int, data['${effectivePrefix}animat_duratuion'])!,
+      random: attachedDatabase.typeMapping
+          .read(DriftSqlType.bool, data['${effectivePrefix}random']),
       bgData: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}bg_data'])!,
     );
@@ -497,12 +512,16 @@ class GameInfoBgDBModel extends DataClass
   /// * [animatDuratuion] 过度动画时长
   final int animatDuratuion;
 
+  /// * 随机切换
+  final bool? random;
+
   /// * [bgData] 背景数据
   final String bgData;
   const GameInfoBgDBModel(
       {required this.id,
       required this.duration,
       required this.animatDuratuion,
+      this.random,
       required this.bgData});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -510,6 +529,9 @@ class GameInfoBgDBModel extends DataClass
     map['id'] = Variable<String>(id);
     map['duration'] = Variable<int>(duration);
     map['animat_duratuion'] = Variable<int>(animatDuratuion);
+    if (!nullToAbsent || random != null) {
+      map['random'] = Variable<bool>(random);
+    }
     map['bg_data'] = Variable<String>(bgData);
     return map;
   }
@@ -519,6 +541,8 @@ class GameInfoBgDBModel extends DataClass
       id: Value(id),
       duration: Value(duration),
       animatDuratuion: Value(animatDuratuion),
+      random:
+          random == null && nullToAbsent ? const Value.absent() : Value(random),
       bgData: Value(bgData),
     );
   }
@@ -530,6 +554,7 @@ class GameInfoBgDBModel extends DataClass
       id: serializer.fromJson<String>(json['id']),
       duration: serializer.fromJson<int>(json['duration']),
       animatDuratuion: serializer.fromJson<int>(json['animatDuratuion']),
+      random: serializer.fromJson<bool?>(json['random']),
       bgData: serializer.fromJson<String>(json['bgData']),
     );
   }
@@ -540,16 +565,22 @@ class GameInfoBgDBModel extends DataClass
       'id': serializer.toJson<String>(id),
       'duration': serializer.toJson<int>(duration),
       'animatDuratuion': serializer.toJson<int>(animatDuratuion),
+      'random': serializer.toJson<bool?>(random),
       'bgData': serializer.toJson<String>(bgData),
     };
   }
 
   GameInfoBgDBModel copyWith(
-          {String? id, int? duration, int? animatDuratuion, String? bgData}) =>
+          {String? id,
+          int? duration,
+          int? animatDuratuion,
+          Value<bool?> random = const Value.absent(),
+          String? bgData}) =>
       GameInfoBgDBModel(
         id: id ?? this.id,
         duration: duration ?? this.duration,
         animatDuratuion: animatDuratuion ?? this.animatDuratuion,
+        random: random.present ? random.value : this.random,
         bgData: bgData ?? this.bgData,
       );
   @override
@@ -558,13 +589,15 @@ class GameInfoBgDBModel extends DataClass
           ..write('id: $id, ')
           ..write('duration: $duration, ')
           ..write('animatDuratuion: $animatDuratuion, ')
+          ..write('random: $random, ')
           ..write('bgData: $bgData')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, duration, animatDuratuion, bgData);
+  int get hashCode =>
+      Object.hash(id, duration, animatDuratuion, random, bgData);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -572,6 +605,7 @@ class GameInfoBgDBModel extends DataClass
           other.id == this.id &&
           other.duration == this.duration &&
           other.animatDuratuion == this.animatDuratuion &&
+          other.random == this.random &&
           other.bgData == this.bgData);
 }
 
@@ -579,12 +613,14 @@ class GameInfoBgTableCompanion extends UpdateCompanion<GameInfoBgDBModel> {
   final Value<String> id;
   final Value<int> duration;
   final Value<int> animatDuratuion;
+  final Value<bool?> random;
   final Value<String> bgData;
   final Value<int> rowid;
   const GameInfoBgTableCompanion({
     this.id = const Value.absent(),
     this.duration = const Value.absent(),
     this.animatDuratuion = const Value.absent(),
+    this.random = const Value.absent(),
     this.bgData = const Value.absent(),
     this.rowid = const Value.absent(),
   });
@@ -592,6 +628,7 @@ class GameInfoBgTableCompanion extends UpdateCompanion<GameInfoBgDBModel> {
     required String id,
     required int duration,
     required int animatDuratuion,
+    this.random = const Value.absent(),
     required String bgData,
     this.rowid = const Value.absent(),
   })  : id = Value(id),
@@ -602,6 +639,7 @@ class GameInfoBgTableCompanion extends UpdateCompanion<GameInfoBgDBModel> {
     Expression<String>? id,
     Expression<int>? duration,
     Expression<int>? animatDuratuion,
+    Expression<bool>? random,
     Expression<String>? bgData,
     Expression<int>? rowid,
   }) {
@@ -609,6 +647,7 @@ class GameInfoBgTableCompanion extends UpdateCompanion<GameInfoBgDBModel> {
       if (id != null) 'id': id,
       if (duration != null) 'duration': duration,
       if (animatDuratuion != null) 'animat_duratuion': animatDuratuion,
+      if (random != null) 'random': random,
       if (bgData != null) 'bg_data': bgData,
       if (rowid != null) 'rowid': rowid,
     });
@@ -618,12 +657,14 @@ class GameInfoBgTableCompanion extends UpdateCompanion<GameInfoBgDBModel> {
       {Value<String>? id,
       Value<int>? duration,
       Value<int>? animatDuratuion,
+      Value<bool?>? random,
       Value<String>? bgData,
       Value<int>? rowid}) {
     return GameInfoBgTableCompanion(
       id: id ?? this.id,
       duration: duration ?? this.duration,
       animatDuratuion: animatDuratuion ?? this.animatDuratuion,
+      random: random ?? this.random,
       bgData: bgData ?? this.bgData,
       rowid: rowid ?? this.rowid,
     );
@@ -641,6 +682,9 @@ class GameInfoBgTableCompanion extends UpdateCompanion<GameInfoBgDBModel> {
     if (animatDuratuion.present) {
       map['animat_duratuion'] = Variable<int>(animatDuratuion.value);
     }
+    if (random.present) {
+      map['random'] = Variable<bool>(random.value);
+    }
     if (bgData.present) {
       map['bg_data'] = Variable<String>(bgData.value);
     }
@@ -656,6 +700,7 @@ class GameInfoBgTableCompanion extends UpdateCompanion<GameInfoBgDBModel> {
           ..write('id: $id, ')
           ..write('duration: $duration, ')
           ..write('animatDuratuion: $animatDuratuion, ')
+          ..write('random: $random, ')
           ..write('bgData: $bgData, ')
           ..write('rowid: $rowid')
           ..write(')'))

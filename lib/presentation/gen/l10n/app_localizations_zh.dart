@@ -179,5 +179,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get minimize_after_launch => '启动游戏后最小化';
 
   @override
+  String get random_swich => '随机切换';
+
+  @override
+  String get swich_interval => '切换间隔';
+
+  @override
+  String get animate_duration => '动画时长';
+
+  @override
   String get net_image => '网络图片';
 }

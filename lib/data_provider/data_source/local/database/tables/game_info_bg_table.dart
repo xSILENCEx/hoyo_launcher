@@ -17,6 +17,9 @@ class GameInfoBgTable extends Table {
   /// * [animatDuratuion] 过度动画时长
   IntColumn get animatDuratuion => integer()();
 
+  /// * 随机切换
+  BoolColumn get random => boolean().nullable()();
+
   /// * [bgData] 背景数据
   TextColumn get bgData => text()();
 }

@@ -441,6 +441,24 @@ abstract class AppLocalizations {
   /// **'Minimize after launch'**
   String get minimize_after_launch;
 
+  /// No description provided for @random_swich.
+  ///
+  /// In en, this message translates to:
+  /// **'Random switch'**
+  String get random_swich;
+
+  /// No description provided for @swich_interval.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch interval'**
+  String get swich_interval;
+
+  /// No description provided for @animate_duration.
+  ///
+  /// In en, this message translates to:
+  /// **'Animate duration'**
+  String get animate_duration;
+
   /// No description provided for @net_image.
   ///
   /// In en, this message translates to:

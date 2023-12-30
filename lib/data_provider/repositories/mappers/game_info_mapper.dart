@@ -5,8 +5,9 @@ import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 GameInfoBg gameInfoBgDBToEntity(GameInfoBgDBModel model) {
   return GameInfoBg(
     id: model.id,
-    duration: Duration(seconds: model.duration),
-    animatDuratuion: Duration(seconds: model.animatDuratuion),
+    interval: Duration(seconds: model.duration),
+    animateDuration: Duration(milliseconds: model.animatDuratuion),
+    random: model.random ?? true,
     bgData: model.bgData.split(','),
   );
 }
@@ -36,8 +37,9 @@ List<GameInfoEntity> gameInfoDBListToEntityList(List<FullGameInfoDBModel> list) 
 GameInfoBgDBModel gameInfoBgEntityToDB(GameInfoBg entity) {
   return GameInfoBgDBModel(
     id: entity.id,
-    duration: entity.duration.inSeconds,
-    animatDuratuion: entity.animatDuratuion.inSeconds,
+    duration: entity.interval.inSeconds,
+    animatDuratuion: entity.animateDuration.inMilliseconds,
+    random: entity.random,
     bgData: entity.bgData.join(','),
   );
 }

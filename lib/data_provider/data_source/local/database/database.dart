@@ -20,7 +20,7 @@ class MyDatabase extends _$MyDatabase {
   // you should bump this number whenever you change or add a table definition.
   // Migrations are covered later in the documentation.
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration {
@@ -28,15 +28,13 @@ class MyDatabase extends _$MyDatabase {
       onCreate: (Migrator m) async {
         await m.createAll();
       },
-      onUpgrade: (Migrator m, int from, int to) async {},
+      onUpgrade: (Migrator m, int from, int to) async {
+        if (from < 2) {
+          await m.addColumn(gameInfoBgTable, gameInfoBgTable.random);
+        }
+      },
     );
   }
-
-  // Future<void> deleteDBFile() async {
-  //   // final Directory dbFolder = await getApplicationDocumentsDirectory();
-  //   // final File file = File(p.join(dbFolder.path, 'gps_db.sqlite'));
-  //   // await file.delete();
-  // }
 
   Future<void> deleteEverything() {
     return transaction(() async {

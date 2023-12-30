@@ -122,8 +122,9 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
 
     return RepaintBoundary(
       child: LoopImageBox(
-        interval: gameInfoBg.duration,
-        animateDuration: gameInfoBg.animatDuratuion,
+        interval: gameInfoBg.interval,
+        randomSwitch: gameInfoBg.random,
+        animateDuration: gameInfoBg.animateDuration,
         children: _images.map(_buildImgBox).toList(),
       ),
     );
