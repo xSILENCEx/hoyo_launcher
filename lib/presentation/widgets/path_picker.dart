@@ -72,6 +72,11 @@ class _PathPickerState extends State<PathPicker> {
     _controller.text = path;
   }
 
+  void _onEdit() {
+    if (_controller.text.trim().isEmpty) return;
+    widget.onPathChanged(_controller.text);
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget child = Row(
@@ -79,8 +84,9 @@ class _PathPickerState extends State<PathPicker> {
         Flexible(
           child: TextBox(
             controller: _controller,
-            onChanged: widget.onPathChanged,
-            onEditingComplete: () => widget.onPathChanged(_controller.text),
+            // onChanged: widget.onPathChanged,
+            onTapOutside: (_) => _onEdit(),
+            onEditingComplete: _onEdit,
             maxLength: 4000,
           ),
         ),

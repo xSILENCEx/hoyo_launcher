@@ -120,15 +120,21 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
       // 文件夹
       final Directory dir = Directory(dirPath);
 
-      // 扫描 launcher.exe
       final List<FileSystemEntity> files = dir.listSync();
+
+      final List<GameInfoAction> actions = List<GameInfoAction>.from(_editInfo.moreActions);
+
+      // 扫描 launcher.exe
       final FileSystemEntity? launcherFile = files.firstWhereOrNull(
         (FileSystemEntity file) => file.path.endsWith('launcher.exe'),
       );
-      final List<GameInfoAction> actions = List<GameInfoAction>.from(_editInfo.moreActions);
 
       if (launcherFile != null) {
-        final GameInfoAction launcherAction = GameInfoAction(name: l10n.open_launcher, executePath: launcherFile.path);
+        final GameInfoAction launcherAction = GameInfoAction(
+          name: l10n.open_launcher,
+          executePath: launcherFile.path,
+        );
+
         if (!actions.contains(launcherAction)) {
           actions.removeWhere((GameInfoAction action) => action.name == l10n.open_launcher);
           actions.add(launcherAction);
@@ -139,11 +145,13 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
       final FileSystemEntity? uninstallFile = files.firstWhereOrNull(
         (FileSystemEntity file) => file.path.endsWith('uninstall.exe'),
       );
+
       if (uninstallFile != null) {
         final GameInfoAction uninstallAction = GameInfoAction(
           name: l10n.uninstall_game,
           executePath: uninstallFile.path,
         );
+
         if (!actions.contains(uninstallAction)) {
           actions.removeWhere((GameInfoAction action) => action.name == l10n.uninstall_game);
           actions.add(uninstallAction);
