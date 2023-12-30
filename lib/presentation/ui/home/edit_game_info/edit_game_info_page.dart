@@ -130,6 +130,7 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
       if (launcherFile != null) {
         final GameInfoAction launcherAction = GameInfoAction(name: l10n.open_launcher, executePath: launcherFile.path);
         if (!actions.contains(launcherAction)) {
+          actions.removeWhere((GameInfoAction action) => action.name == l10n.open_launcher);
           actions.add(launcherAction);
         }
       }
@@ -144,11 +145,12 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
           executePath: uninstallFile.path,
         );
         if (!actions.contains(uninstallAction)) {
+          actions.removeWhere((GameInfoAction action) => action.name == l10n.uninstall_game);
           actions.add(uninstallAction);
         }
       }
 
-      if (actions.length != _editInfo.moreActions.length) {
+      if (!actions.sameWith(_editInfo.moreActions)) {
         _editInfo = _editInfo.copyWith(moreActions: actions);
         setState(() {});
       }
