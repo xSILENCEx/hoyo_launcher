@@ -31,6 +31,7 @@ class MyDatabase extends _$MyDatabase {
       onUpgrade: (Migrator m, int from, int to) async {
         if (from < 2) {
           await m.addColumn(gameInfoBgTable, gameInfoBgTable.random);
+          await m.addColumn(gameInfoTable, gameInfoTable.sortValue);
         }
       },
     );

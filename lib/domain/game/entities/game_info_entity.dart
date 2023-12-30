@@ -15,6 +15,7 @@ class GameInfoEntity {
     required this.createTime,
     required this.updateTime,
     required this.gameBgInfo,
+    required this.sortValue,
     String? moreActionsStr,
     List<GameInfoAction>? moreActions,
   }) : moreActions = moreActions ?? GameInfoAction.generateList(moreActionsStr);
@@ -25,6 +26,7 @@ class GameInfoEntity {
   final String launchPath;
   final DateTime createTime;
   final DateTime updateTime;
+  final int sortValue;
 
   final List<GameInfoAction> moreActions;
 
@@ -37,6 +39,7 @@ class GameInfoEntity {
     String? launchPath,
     DateTime? createTime,
     DateTime? updateTime,
+    int? sortValue,
     List<GameInfoAction>? moreActions,
     GameInfoBg? gameBgInfo,
   }) {
@@ -47,6 +50,7 @@ class GameInfoEntity {
       launchPath: launchPath ?? this.launchPath,
       createTime: createTime ?? this.createTime,
       updateTime: updateTime ?? this.updateTime,
+      sortValue: sortValue ?? this.sortValue,
       moreActions: moreActions ?? this.moreActions,
       gameBgInfo: gameBgInfo ?? this.gameBgInfo,
     );

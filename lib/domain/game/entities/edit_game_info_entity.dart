@@ -11,6 +11,7 @@ class EditGameInfoEntity {
     this.launchPath,
     this.createTime,
     this.updateTime,
+    this.sortValue,
     this.gameBgInfo,
   });
 
@@ -20,6 +21,7 @@ class EditGameInfoEntity {
         launchPath = null,
         createTime = null,
         updateTime = null,
+        sortValue = null,
         gameBgInfo = null,
         moreActions = <GameInfoAction>[];
 
@@ -31,6 +33,7 @@ class EditGameInfoEntity {
     this.launchPath,
     this.gameBgInfo,
     this.createTime,
+    this.sortValue,
     this.updateTime,
   });
 
@@ -40,6 +43,7 @@ class EditGameInfoEntity {
   final String? launchPath;
   final DateTime? createTime;
   final DateTime? updateTime;
+  final int? sortValue;
 
   final List<GameInfoAction> moreActions;
 
@@ -53,6 +57,7 @@ class EditGameInfoEntity {
     GameInfoBg? background,
     DateTime? createTime,
     DateTime? updateTime,
+    int? sortValue,
     List<GameInfoAction>? moreActions,
     GameInfoBg? gameBgInfo,
   }) {
@@ -63,6 +68,7 @@ class EditGameInfoEntity {
       launchPath: launchPath ?? this.launchPath,
       createTime: createTime ?? this.createTime,
       updateTime: updateTime ?? this.updateTime,
+      sortValue: sortValue ?? this.sortValue,
       moreActions: moreActions ?? this.moreActions,
       gameBgInfo: gameBgInfo ?? this.gameBgInfo,
     );

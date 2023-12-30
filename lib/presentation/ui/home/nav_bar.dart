@@ -6,13 +6,14 @@ import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/widgets/app_image.dart';
 import 'package:hoyo_launcher/presentation/widgets/hover_builder.dart';
+import 'package:reorderables/reorderables.dart';
 
 import 'widgets/nav_hover_box.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({
     super.key,
-    required this.selectIndex,
+    required this.selectItem,
     required this.navItems,
     required this.onItemTap,
     required this.onSettingItemTap,
@@ -26,9 +27,9 @@ class NavBar extends StatelessWidget {
   static const double navBarMaxWidth = 280;
   static const double _leadingMargin = 6;
 
-  final int selectIndex;
+  final GameInfoEntity? selectItem;
   final List<GameInfoEntity> navItems;
-  final Function(int index) onItemTap;
+  final Function(GameInfoEntity info) onItemTap;
   final Function(GameInfoEntity info) onEditItemTap;
   final Function(GameInfoEntity info) onDelItemTap;
   final Function() onSettingItemTap;
@@ -51,20 +52,21 @@ class NavBar extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Expanded(
-                child: ListView.separated(
-                  padding: const EdgeInsets.only(top: 10),
-                  itemCount: navItems.length + 1,
-                  itemBuilder: (_, int index) {
-                    if (index == navItems.length) {
-                      return _buildAddItem(context, navMinWidth);
-                    }
-
-                    return _buildItem(context, index, navItems[index], navMinWidth);
-                  },
-                  separatorBuilder: (_, __) => const SizedBox(height: 10),
+              ReorderableColumn(
+                onReorder: (int oldIndex, int newIndex) {
+                  print('onReorder oldIndex = $oldIndex, newIndex = $newIndex');
+                },
+                needsLongPressDraggable: false,
+                padding: EdgeInsets.zero,
+                buildDraggableFeedback: (_, __, Widget child) => child,
+                draggedItemBuilder: (_, int index) => _buildItem(context, index, navItems[index], navMinWidth),
+                children: List<Widget>.generate(
+                  navItems.length,
+                  (int i) => _buildItem(context, i, navItems[i], navMinWidth),
                 ),
               ),
+              _buildAddItem(context, navMinWidth),
+              const Spacer(),
               SizedBox(
                 width: double.infinity,
                 child: _buildSettingItem(context, navMinWidth),
@@ -78,24 +80,27 @@ class NavBar extends StatelessWidget {
   }
 
   Widget _buildItem(BuildContext context, int index, GameInfoEntity item, double navMinWidth) {
-    return _buildBasicItem(
-      context,
-      item.title,
-      AppImg.cover(url: item.icon, width: 26, height: 26, radius: 4),
-      navMinWidth,
-      isSelected: selectIndex == index,
-      index: index,
-      trailings: <Widget>[
-        IconButton(
-          onPressed: () => onEditItemTap(item),
-          icon: const Icon(fu.FluentIcons.edit, size: 12),
-        ),
-        IconButton(
-          onPressed: () => onDelItemTap(item),
-          icon: const Icon(fu.FluentIcons.delete, size: 12),
-        ),
-      ],
-      iconPadding: const EdgeInsets.all(_leadingMargin * 2),
+    return KeyedSubtree(
+      key: ValueKey<String>(item.id),
+      child: _buildBasicItem(
+        context,
+        item.title,
+        AppImg.cover(url: item.icon, width: 26, height: 26, radius: 4),
+        navMinWidth,
+        isSelected: selectItem == item,
+        index: index,
+        trailings: <Widget>[
+          IconButton(
+            onPressed: () => onEditItemTap(item),
+            icon: const Icon(fu.FluentIcons.edit, size: 12),
+          ),
+          IconButton(
+            onPressed: () => onDelItemTap(item),
+            icon: const Icon(fu.FluentIcons.delete, size: 12),
+          ),
+        ],
+        iconPadding: const EdgeInsets.all(_leadingMargin * 2),
+      ),
     );
   }
 
@@ -110,6 +115,7 @@ class NavBar extends StatelessWidget {
           isSelected: isHover,
           hasIndicator: false,
           onTap: onAddItemTap,
+          iconPadding: const EdgeInsets.all(_leadingMargin * 2),
         );
       },
     );
@@ -151,7 +157,7 @@ class NavBar extends StatelessWidget {
     final Color indicatorColor = fluentTheme.accentColor;
 
     return GestureDetector(
-      onTap: onTap ?? () => onItemTap(index),
+      onTap: onTap ?? () => onItemTap(navItems[index]),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: _leadingMargin),
         height: leadingSize,

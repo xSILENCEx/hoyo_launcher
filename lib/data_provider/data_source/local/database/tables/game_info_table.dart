@@ -28,4 +28,7 @@ class GameInfoTable extends Table {
 
   /// * [updateTime] 更新时间
   DateTimeColumn get updateTime => dateTime()();
+
+  /// * [sortValue] 排序值
+  IntColumn get sortValue => integer().nullable()();
 }

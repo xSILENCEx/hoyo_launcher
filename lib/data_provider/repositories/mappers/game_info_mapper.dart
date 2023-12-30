@@ -20,6 +20,7 @@ GameInfoEntity gameInfoDBToEntity(FullGameInfoDBModel model) {
     launchPath: model.gameInfoDBModel.launchPath,
     createTime: model.gameInfoDBModel.createTime,
     updateTime: model.gameInfoDBModel.updateTime,
+    sortValue: model.gameInfoDBModel.sortValue ?? 0,
     moreActionsStr: model.gameInfoDBModel.moreActions,
     gameBgInfo: gameInfoBgDBToEntity(model.gameInfoBgDBModel),
   );
@@ -53,6 +54,7 @@ FullGameInfoDBModel gameInfoEntityToDB(GameInfoEntity entity) {
       launchPath: entity.launchPath,
       createTime: entity.createTime,
       updateTime: entity.updateTime,
+      sortValue: entity.sortValue,
       moreActions: entity.genMoreActionsStr(),
     ),
     gameInfoBgEntityToDB(entity.gameBgInfo),

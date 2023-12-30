@@ -28,6 +28,7 @@ EditGameInfoEntity _resolveMapper(GameInfoEntity editGameInfo) {
     launchPath: editGameInfo.launchPath,
     createTime: editGameInfo.createTime,
     updateTime: editGameInfo.updateTime,
+    sortValue: editGameInfo.sortValue,
     moreActions: editGameInfo.moreActions,
     gameBgInfo: editGameInfo.gameBgInfo,
   );
@@ -94,7 +95,7 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
       final DateTime now = DateTime.now();
 
       if (_editInfo.createTime == null) {
-        _editInfo = _editInfo.copyWith(createTime: now);
+        _editInfo = _editInfo.copyWith(createTime: now, sortValue: now.millisecondsSinceEpoch);
       }
       _editInfo = _editInfo.copyWith(updateTime: now);
 

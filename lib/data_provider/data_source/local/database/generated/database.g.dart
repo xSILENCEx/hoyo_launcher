@@ -48,9 +48,23 @@ class $GameInfoTableTable extends GameInfoTable
   late final GeneratedColumn<DateTime> updateTime = GeneratedColumn<DateTime>(
       'update_time', aliasedName, false,
       type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  static const VerificationMeta _sortValueMeta =
+      const VerificationMeta('sortValue');
   @override
-  List<GeneratedColumn> get $columns =>
-      [id, icon, title, launchPath, moreActions, createTime, updateTime];
+  late final GeneratedColumn<int> sortValue = GeneratedColumn<int>(
+      'sort_value', aliasedName, true,
+      type: DriftSqlType.int, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns => [
+        id,
+        icon,
+        title,
+        launchPath,
+        moreActions,
+        createTime,
+        updateTime,
+        sortValue
+      ];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -108,6 +122,10 @@ class $GameInfoTableTable extends GameInfoTable
     } else if (isInserting) {
       context.missing(_updateTimeMeta);
     }
+    if (data.containsKey('sort_value')) {
+      context.handle(_sortValueMeta,
+          sortValue.isAcceptableOrUnknown(data['sort_value']!, _sortValueMeta));
+    }
     return context;
   }
 
@@ -131,6 +149,8 @@ class $GameInfoTableTable extends GameInfoTable
           .read(DriftSqlType.dateTime, data['${effectivePrefix}create_time'])!,
       updateTime: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}update_time'])!,
+      sortValue: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}sort_value']),
     );
   }
 
@@ -161,6 +181,9 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
 
   /// * [updateTime] 更新时间
   final DateTime updateTime;
+
+  /// * [sortValue] 排序值
+  final int? sortValue;
   const GameInfoDBModel(
       {required this.id,
       required this.icon,
@@ -168,7 +191,8 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
       required this.launchPath,
       this.moreActions,
       required this.createTime,
-      required this.updateTime});
+      required this.updateTime,
+      this.sortValue});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -181,6 +205,9 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
     }
     map['create_time'] = Variable<DateTime>(createTime);
     map['update_time'] = Variable<DateTime>(updateTime);
+    if (!nullToAbsent || sortValue != null) {
+      map['sort_value'] = Variable<int>(sortValue);
+    }
     return map;
   }
 
@@ -195,6 +222,9 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
           : Value(moreActions),
       createTime: Value(createTime),
       updateTime: Value(updateTime),
+      sortValue: sortValue == null && nullToAbsent
+          ? const Value.absent()
+          : Value(sortValue),
     );
   }
 
@@ -209,6 +239,7 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
       moreActions: serializer.fromJson<String?>(json['moreActions']),
       createTime: serializer.fromJson<DateTime>(json['createTime']),
       updateTime: serializer.fromJson<DateTime>(json['updateTime']),
+      sortValue: serializer.fromJson<int?>(json['sortValue']),
     );
   }
   @override
@@ -222,6 +253,7 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
       'moreActions': serializer.toJson<String?>(moreActions),
       'createTime': serializer.toJson<DateTime>(createTime),
       'updateTime': serializer.toJson<DateTime>(updateTime),
+      'sortValue': serializer.toJson<int?>(sortValue),
     };
   }
 
@@ -232,7 +264,8 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
           String? launchPath,
           Value<String?> moreActions = const Value.absent(),
           DateTime? createTime,
-          DateTime? updateTime}) =>
+          DateTime? updateTime,
+          Value<int?> sortValue = const Value.absent()}) =>
       GameInfoDBModel(
         id: id ?? this.id,
         icon: icon ?? this.icon,
@@ -241,6 +274,7 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
         moreActions: moreActions.present ? moreActions.value : this.moreActions,
         createTime: createTime ?? this.createTime,
         updateTime: updateTime ?? this.updateTime,
+        sortValue: sortValue.present ? sortValue.value : this.sortValue,
       );
   @override
   String toString() {
@@ -251,14 +285,15 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
           ..write('launchPath: $launchPath, ')
           ..write('moreActions: $moreActions, ')
           ..write('createTime: $createTime, ')
-          ..write('updateTime: $updateTime')
+          ..write('updateTime: $updateTime, ')
+          ..write('sortValue: $sortValue')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(
-      id, icon, title, launchPath, moreActions, createTime, updateTime);
+  int get hashCode => Object.hash(id, icon, title, launchPath, moreActions,
+      createTime, updateTime, sortValue);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -269,7 +304,8 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
           other.launchPath == this.launchPath &&
           other.moreActions == this.moreActions &&
           other.createTime == this.createTime &&
-          other.updateTime == this.updateTime);
+          other.updateTime == this.updateTime &&
+          other.sortValue == this.sortValue);
 }
 
 class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
@@ -280,6 +316,7 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
   final Value<String?> moreActions;
   final Value<DateTime> createTime;
   final Value<DateTime> updateTime;
+  final Value<int?> sortValue;
   final Value<int> rowid;
   const GameInfoTableCompanion({
     this.id = const Value.absent(),
@@ -289,6 +326,7 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
     this.moreActions = const Value.absent(),
     this.createTime = const Value.absent(),
     this.updateTime = const Value.absent(),
+    this.sortValue = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   GameInfoTableCompanion.insert({
@@ -299,6 +337,7 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
     this.moreActions = const Value.absent(),
     required DateTime createTime,
     required DateTime updateTime,
+    this.sortValue = const Value.absent(),
     this.rowid = const Value.absent(),
   })  : id = Value(id),
         icon = Value(icon),
@@ -314,6 +353,7 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
     Expression<String>? moreActions,
     Expression<DateTime>? createTime,
     Expression<DateTime>? updateTime,
+    Expression<int>? sortValue,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
@@ -324,6 +364,7 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
       if (moreActions != null) 'more_actions': moreActions,
       if (createTime != null) 'create_time': createTime,
       if (updateTime != null) 'update_time': updateTime,
+      if (sortValue != null) 'sort_value': sortValue,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -336,6 +377,7 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
       Value<String?>? moreActions,
       Value<DateTime>? createTime,
       Value<DateTime>? updateTime,
+      Value<int?>? sortValue,
       Value<int>? rowid}) {
     return GameInfoTableCompanion(
       id: id ?? this.id,
@@ -345,6 +387,7 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
       moreActions: moreActions ?? this.moreActions,
       createTime: createTime ?? this.createTime,
       updateTime: updateTime ?? this.updateTime,
+      sortValue: sortValue ?? this.sortValue,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -373,6 +416,9 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
     if (updateTime.present) {
       map['update_time'] = Variable<DateTime>(updateTime.value);
     }
+    if (sortValue.present) {
+      map['sort_value'] = Variable<int>(sortValue.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -389,6 +435,7 @@ class GameInfoTableCompanion extends UpdateCompanion<GameInfoDBModel> {
           ..write('moreActions: $moreActions, ')
           ..write('createTime: $createTime, ')
           ..write('updateTime: $updateTime, ')
+          ..write('sortValue: $sortValue, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();

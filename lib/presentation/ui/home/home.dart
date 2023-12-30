@@ -46,18 +46,22 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
       builder: (_, AsyncSnapshot<List<GameInfoEntity>> snapshot) {
         final List<GameInfoEntity> gameInfoList = snapshot.data ?? <GameInfoEntity>[];
 
-        if (navIndex >= gameInfoList.length) {
-          changeNavValue(gameInfoList.length - 1);
+        if (!gameInfoList.contains(selectedIem)) {
+          if (gameInfoList.isNotEmpty) {
+            changeNavValue(gameInfoList.first);
+          } else {
+            changeNavValue(null);
+          }
         }
 
         return Stack(
           children: <Widget>[
             Positioned.fill(child: ColoredBox(color: fluentTheme.scaffoldBackgroundColor)),
-            if (gameInfoList.isNotEmpty) GameBgBuilder(gameInfo: gameInfoList[navIndex]),
-            if (gameInfoList.isEmpty)
+            if (selectedIem != null) GameBgBuilder(gameInfo: selectedIem!),
+            if (selectedIem == null)
               Container(color: Colors.black.withOpacity(0.2))
             else
-              GameInfoPage(gameInfo: gameInfoList[navIndex]),
+              GameInfoPage(gameInfo: selectedIem!),
             Positioned.fill(child: BlurBox(navBarWithNotifier)),
             Padding(
               padding: const EdgeInsets.only(top: AppConstant.defAppBarHeight),
@@ -67,7 +71,7 @@ class _HomeState extends State<Home> with WindowListener, NavMixin {
                 onSettingItemTap: SettingsPage.open,
                 onAddItemTap: EditGameInfoPage.create,
                 onNavHover: onNavHover,
-                selectIndex: navIndex,
+                selectItem: selectedIem,
                 navItems: gameInfoList,
                 onItemTap: changeNav,
               ),

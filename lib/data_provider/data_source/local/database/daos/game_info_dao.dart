@@ -88,7 +88,7 @@ class GameInfoDao extends AppDatabaseAccessor with _$GameInfoDaoMixin {
 
     query.orderBy(
       <OrderingTerm Function(GameInfoTable)>[
-        (_) => OrderingTerm(expression: gameInfoTable.createTime),
+        (_) => OrderingTerm(expression: gameInfoTable.sortValue),
       ],
     );
 

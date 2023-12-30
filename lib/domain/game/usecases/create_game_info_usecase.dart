@@ -10,6 +10,7 @@ GameInfoEntity _genMapper(EditGameInfoEntity editGameInfo) {
     launchPath: editGameInfo.launchPath!,
     createTime: editGameInfo.createTime!,
     updateTime: editGameInfo.updateTime!,
+    sortValue: editGameInfo.sortValue!,
     moreActions: editGameInfo.moreActions,
     gameBgInfo: editGameInfo.gameBgInfo ?? GameInfoBg.create(editGameInfo.id),
   );
