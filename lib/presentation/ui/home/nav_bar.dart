@@ -65,15 +65,14 @@ class NavBar extends StatelessWidget {
                     return ReorderableListView.builder(
                       scrollController: controller,
                       onReorder: onReorder,
-                      onReorderStart: (_) => navHoverController.onEnter(),
-                      onReorderEnd: (_) => navHoverController.onExit(),
+                      shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      itemCount: navItems.length,
                       buildDefaultDragHandles: false,
-                      itemBuilder: (_, int index) => _buildItem(context, index, navItems[index], navMinWidth, showMore),
                       proxyDecorator: (Widget child, int index, __) =>
                           _buildItem(context, index, navItems[index], navMinWidth, false),
                       footer: _buildAddItem(context, navMinWidth, showMore),
+                      itemCount: navItems.length,
+                      itemBuilder: (_, int index) => _buildItem(context, index, navItems[index], navMinWidth, showMore),
                     );
                   },
                 ),
