@@ -3,6 +3,16 @@ import 'package:flutter/material.dart';
 const Duration _kHoverDuration = Duration(milliseconds: 300);
 const Curve _curve = Curves.ease;
 
+class NavHoverController {
+  NavHoverController({required this.value, required this.width, required this.onEnter, required this.onExit});
+
+  final double value;
+  final double width;
+
+  final Function() onEnter;
+  final Function() onExit;
+}
+
 /// 鼠标悬停时显示的盒子
 class NavHoverBox extends StatefulWidget {
   const NavHoverBox({
@@ -14,7 +24,7 @@ class NavHoverBox extends StatefulWidget {
 
   final double minWidth;
   final double maxWidth;
-  final Widget Function(double value, double width) childBuilder;
+  final Widget Function(NavHoverController controller) childBuilder;
 
   @override
   State<NavHoverBox> createState() => _NavHoverBoxState();
@@ -29,11 +39,11 @@ class _NavHoverBoxState extends State<NavHoverBox> with SingleTickerProviderStat
     super.dispose();
   }
 
-  Future<void> _onEnter(_) async {
+  Future<void> _onEnter() async {
     await _controller.animateTo(1, duration: _kHoverDuration, curve: _curve);
   }
 
-  Future<void> _onExit(_) async {
+  Future<void> _onExit() async {
     await _controller.animateTo(0, duration: _kHoverDuration, curve: _curve);
   }
 
@@ -47,9 +57,13 @@ class _NavHoverBoxState extends State<NavHoverBox> with SingleTickerProviderStat
         return SizedBox(
           width: width,
           child: MouseRegion(
-            onEnter: _onEnter,
-            onExit: _onExit,
-            child: ClipRect(child: widget.childBuilder(value, width)),
+            onEnter: (_) => _onEnter(),
+            onExit: (_) => _onExit(),
+            child: ClipRect(
+              child: widget.childBuilder(
+                NavHoverController(value: value, width: width, onEnter: _onEnter, onExit: _onExit),
+              ),
+            ),
           ),
         );
       },

@@ -30,6 +30,11 @@ mixin GameInfoDataMixin on State<Home> {
   }
 
   void onReorder(int fromIndex, int toIndex) {
+    if (fromIndex < toIndex) {
+      // 向下移动时修正索引
+      toIndex -= 1;
+    }
+
     GameInfoEntity fromItem = gameInfoList[fromIndex];
     final GameInfoEntity toItem = gameInfoList[toIndex];
 

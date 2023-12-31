@@ -6,7 +6,7 @@ import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/widgets/app_image.dart';
 import 'package:hoyo_launcher/presentation/widgets/hover_builder.dart';
-import 'package:reorderables/reorderables.dart';
+import 'package:hoyo_launcher/presentation/widgets/smooth_scroll_view.dart';
 
 import 'widgets/nav_hover_box.dart';
 import 'widgets/tap_box.dart';
@@ -40,35 +40,46 @@ class NavBar extends StatelessWidget {
   final Function(double animationValue)? onNavHover;
   final Function(int fromIndex, int toIndex) onReorder;
 
+  fu.FluentThemeData _fluentTheme(BuildContext context) => fu.FluentTheme.of(context);
+
   @override
   Widget build(BuildContext context) {
     return NavHoverBox(
       minWidth: navBarMinWidth,
       maxWidth: navBarMaxWidth,
-      childBuilder: (double value, double width) {
-        onNavHover?.call(width);
+      childBuilder: (NavHoverController navHoverController) {
+        onNavHover?.call(navHoverController.width);
 
-        final double navMinWidth = navBarMinWidth + (value * navBarMinWidth * 0.15);
+        final double navMinWidth = navBarMinWidth + (navHoverController.value * navBarMinWidth * 0.15);
+
+        final bool showMore = navHoverController.value > 0;
 
         return Material(
           color: Colors.transparent,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              ReorderableColumn(
-                onReorder: onReorder,
-                padding: EdgeInsets.zero,
-                buildDraggableFeedback: (_, __, Widget child) => child,
-                draggedItemBuilder: (_, int index) => _buildItem(context, index, navItems[index], navMinWidth),
-                children: List<Widget>.generate(
-                  navItems.length,
-                  (int i) => _buildItem(context, i, navItems[i], navMinWidth),
+              Expanded(
+                child: SmoothScrollView.provider(
+                  builder: (_, ScrollController controller) {
+                    return ReorderableListView.builder(
+                      scrollController: controller,
+                      onReorder: onReorder,
+                      onReorderStart: (_) => navHoverController.onEnter(),
+                      onReorderEnd: (_) => navHoverController.onExit(),
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: navItems.length,
+                      buildDefaultDragHandles: false,
+                      itemBuilder: (_, int index) => _buildItem(context, index, navItems[index], navMinWidth, showMore),
+                      proxyDecorator: (Widget child, int index, __) =>
+                          _buildItem(context, index, navItems[index], navMinWidth, false),
+                      footer: _buildAddItem(context, navMinWidth, showMore),
+                    );
+                  },
                 ),
               ),
-              _buildAddItem(context, navMinWidth),
-              const Spacer(),
-              _buildSettingItem(context, navMinWidth),
-              const SizedBox(height: _leadingMargin),
+              _buildSettingItem(context, navMinWidth, showMore),
+              const SizedBox(height: _leadingMargin / 2),
             ],
           ),
         );
@@ -76,7 +87,13 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(BuildContext context, int index, GameInfoEntity item, double navMinWidth) {
+  Widget _buildItem(
+    BuildContext context,
+    int index,
+    GameInfoEntity item,
+    double navMinWidth,
+    bool showMore,
+  ) {
     return KeyedSubtree(
       key: ValueKey<String>(item.id),
       child: _buildBasicItem(
@@ -84,6 +101,7 @@ class NavBar extends StatelessWidget {
         item.title,
         AppImg.cover(url: item.icon, width: 26, height: 26, radius: 4),
         navMinWidth,
+        showMore,
         isSelected: selectItem == item,
         index: index,
         trailings: <Widget>[
@@ -101,7 +119,7 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildAddItem(BuildContext context, double navMinWidth) {
+  Widget _buildAddItem(BuildContext context, double navMinWidth, bool showMore) {
     return HoverBuilder(
       builder: (bool isHover) {
         return _buildBasicItem(
@@ -109,6 +127,7 @@ class NavBar extends StatelessWidget {
           l10n.create_info,
           const Icon(fu.FluentIcons.add),
           navMinWidth,
+          showMore,
           isSelected: isHover,
           hasIndicator: false,
           onTap: onAddItemTap,
@@ -117,7 +136,7 @@ class NavBar extends StatelessWidget {
     );
   }
 
-  Widget _buildSettingItem(BuildContext context, double navMinWidth) {
+  Widget _buildSettingItem(BuildContext context, double navMinWidth, bool showMore) {
     return HoverBuilder(
       builder: (bool isHover) {
         return _buildBasicItem(
@@ -125,6 +144,7 @@ class NavBar extends StatelessWidget {
           l10n.settings,
           const Icon(fu.FluentIcons.settings),
           navMinWidth,
+          showMore,
           isSelected: isHover,
           hasIndicator: false,
           onTap: onSettingItemTap,
@@ -137,7 +157,8 @@ class NavBar extends StatelessWidget {
     BuildContext context,
     String title,
     Widget icon,
-    double navMinWidth, {
+    double navMinWidth,
+    bool showMore, {
     required bool isSelected,
     int index = -1,
     bool hasIndicator = true,
@@ -147,52 +168,62 @@ class NavBar extends StatelessWidget {
   }) {
     final double leadingSize = navMinWidth - _leadingMargin * 2;
 
-    final fu.FluentThemeData fluentTheme = fu.FluentTheme.of(context);
+    final fu.FluentThemeData fluentTheme = _fluentTheme(context);
 
     final Color navColor = fluentTheme.navigationPaneTheme.backgroundColor!.withOpacity(0.4);
     final Color indicatorColor = fluentTheme.accentColor;
 
-    return TapBox(
-      onTap: onTap ?? () => onItemTap(navItems[index]),
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: _leadingMargin).copyWith(top: 6),
-        height: leadingSize,
-        decoration: BoxDecoration(
-          color: isSelected ? navColor : navColor.withOpacity(0),
-          borderRadius: BorderRadius.circular(6),
-        ),
-        child: Stack(
-          alignment: Alignment.centerLeft,
-          children: <Widget>[
-            if (hasIndicator)
-              AnimatedContainer(
-                curve: Curves.ease,
-                duration: const Duration(milliseconds: 500),
-                width: 3,
-                height: isSelected ? (navBarMinWidth - _leadingMargin * 2) / 2.5 : 0,
-                decoration: BoxDecoration(
-                  color: indicatorColor,
-                  borderRadius: BorderRadius.circular(4),
-                ),
-              ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              physics: const NeverScrollableScrollPhysics(),
-              child: Row(
-                children: <Widget>[
-                  Container(width: leadingSize, height: leadingSize, padding: iconPadding, child: icon),
-                  const SizedBox(width: _leadingMargin),
-                  SizedBox(
-                    width: navBarMaxWidth - navMinWidth - kMinInteractiveDimension * trailings.length,
-                    child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis),
-                  ),
-                  if (trailings.isNotEmpty) const SizedBox(width: _leadingMargin),
-                  if (trailings.isNotEmpty) ...trailings,
-                  const SizedBox(width: _leadingMargin),
-                ],
-              ),
+    final double textWidth = navBarMaxWidth - navMinWidth - kMinInteractiveDimension * trailings.length;
+
+    const double minLeadingSize = navBarMinWidth - _leadingMargin * 2;
+
+    final Widget iconWidget = ReorderableDelayedDragStartListener(
+      index: index,
+      child: Stack(
+        alignment: Alignment.centerLeft,
+        children: <Widget>[
+          Container(width: leadingSize, height: leadingSize, padding: iconPadding, child: icon),
+          if (hasIndicator)
+            AnimatedContainer(
+              curve: Curves.ease,
+              duration: const Duration(milliseconds: 500),
+              width: 3,
+              height: isSelected ? (navBarMinWidth - _leadingMargin * 2) / 2.5 : 0,
+              decoration: BoxDecoration(color: indicatorColor, borderRadius: BorderRadius.circular(4)),
             ),
-          ],
+        ],
+      ),
+    );
+
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: TapBox(
+        onTap: onTap ?? () => onItemTap(navItems[index]),
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: _leadingMargin, vertical: _leadingMargin / 2),
+          width: showMore ? null : minLeadingSize,
+          height: showMore ? leadingSize : minLeadingSize,
+          decoration: BoxDecoration(
+            color: isSelected ? navColor : navColor.withOpacity(0),
+            borderRadius: BorderRadius.circular(6),
+          ),
+          child: showMore
+              ? SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      iconWidget,
+                      const SizedBox(width: _leadingMargin),
+                      SizedBox(width: textWidth, child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis)),
+                      if (trailings.isNotEmpty) const SizedBox(width: _leadingMargin),
+                      if (trailings.isNotEmpty) ...trailings,
+                      const SizedBox(width: _leadingMargin),
+                    ],
+                  ),
+                )
+              : iconWidget,
         ),
       ),
     );
