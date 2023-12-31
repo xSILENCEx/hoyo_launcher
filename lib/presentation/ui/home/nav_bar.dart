@@ -9,6 +9,7 @@ import 'package:hoyo_launcher/presentation/widgets/hover_builder.dart';
 import 'package:reorderables/reorderables.dart';
 
 import 'widgets/nav_hover_box.dart';
+import 'widgets/tap_box.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({
@@ -56,7 +57,6 @@ class NavBar extends StatelessWidget {
             children: <Widget>[
               ReorderableColumn(
                 onReorder: onReorder,
-                needsLongPressDraggable: false,
                 padding: EdgeInsets.zero,
                 buildDraggableFeedback: (_, __, Widget child) => child,
                 draggedItemBuilder: (_, int index) => _buildItem(context, index, navItems[index], navMinWidth),
@@ -152,7 +152,7 @@ class NavBar extends StatelessWidget {
     final Color navColor = fluentTheme.navigationPaneTheme.backgroundColor!.withOpacity(0.4);
     final Color indicatorColor = fluentTheme.accentColor;
 
-    return GestureDetector(
+    return TapBox(
       onTap: onTap ?? () => onItemTap(navItems[index]),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: _leadingMargin).copyWith(top: 6),
