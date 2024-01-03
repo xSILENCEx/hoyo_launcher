@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
@@ -31,9 +30,9 @@ class LoopImageBox extends StatefulWidget {
 }
 
 class _LoopImageBoxState extends State<LoopImageBox> with WindowListener {
-  late final Random _random = Random();
+  final List<int> _randomList = <int>[];
 
-  late int _index = _random.nextInt(widget.children.length);
+  late int _index;
 
   Timer? _timer;
 
@@ -52,6 +51,19 @@ class _LoopImageBoxState extends State<LoopImageBox> with WindowListener {
   }
 
   @override
+  void didUpdateWidget(covariant LoopImageBox oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    if (oldWidget.children.length != widget.children.length) {
+      _initRandomList();
+      if (_index >= widget.children.length) {
+        _index = 0;
+      }
+      setState(() {});
+    }
+  }
+
+  @override
   void onWindowEvent(String eventName) {
     super.onWindowEvent(eventName);
 
@@ -60,6 +72,11 @@ class _LoopImageBoxState extends State<LoopImageBox> with WindowListener {
     } else if (eventName == 'restore') {
       _start();
     }
+  }
+
+  void _initRandomList() {
+    _randomList.clear();
+    _randomList.addAll(List<int>.generate(widget.children.length, (int index) => index));
   }
 
   void _start() {
@@ -77,7 +94,11 @@ class _LoopImageBoxState extends State<LoopImageBox> with WindowListener {
 
   void _switch() {
     if (widget.randomSwitch) {
-      _index = _random.nextInt(widget.children.length);
+      if (_randomList.isEmpty) {
+        _initRandomList();
+      }
+      _randomList.shuffle();
+      _index = _randomList.removeAt(0);
     } else {
       _index = (_index + 1) % widget.children.length;
     }
