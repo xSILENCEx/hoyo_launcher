@@ -41,6 +41,7 @@ class _LoopImageBoxState extends State<LoopImageBox> with WindowListener {
     super.initState();
     windowManager.addListener(this);
     _start();
+    _initRandomList(initIndex: true);
   }
 
   @override
@@ -55,10 +56,7 @@ class _LoopImageBoxState extends State<LoopImageBox> with WindowListener {
     super.didUpdateWidget(oldWidget);
 
     if (oldWidget.children.length != widget.children.length) {
-      _initRandomList();
-      if (_index >= widget.children.length) {
-        _index = 0;
-      }
+      _initRandomList(initIndex: true);
       setState(() {});
     }
   }
@@ -74,9 +72,14 @@ class _LoopImageBoxState extends State<LoopImageBox> with WindowListener {
     }
   }
 
-  void _initRandomList() {
+  void _initRandomList({bool initIndex = false}) {
     _randomList.clear();
     _randomList.addAll(List<int>.generate(widget.children.length, (int index) => index));
+    _randomList.shuffle();
+
+    if (initIndex) {
+      _index = _randomList.removeAt(0);
+    }
   }
 
   void _start() {
@@ -97,7 +100,6 @@ class _LoopImageBoxState extends State<LoopImageBox> with WindowListener {
       if (_randomList.isEmpty) {
         _initRandomList();
       }
-      _randomList.shuffle();
       _index = _randomList.removeAt(0);
     } else {
       _index = (_index + 1) % widget.children.length;
