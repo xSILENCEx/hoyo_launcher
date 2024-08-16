@@ -15,5 +15,6 @@ SettingsEntity jsonStrToEntity(String jsonStr) {
     confirmBeforeClose: json['confirmBeforeClose'] as bool? ?? true,
     startWithFullScreen: json['startWithFullScreen'] as bool? ?? false,
     minimizeAfterLaunch: json['minimizeAfterLaunch'] as bool? ?? true,
+    officialLauncherPath: json['officialLauncherPath'] as String?,
   );
 }

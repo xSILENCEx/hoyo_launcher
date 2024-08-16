@@ -61,5 +61,6 @@
     "random_swich": "随机切换",
     "swich_interval": "切换间隔",
     "animate_duration": "动画时长",
-    "net_image": "网络图片"
+    "net_image": "网络图片",
+    "official_launcher_path": "官方启动器路径"
 }

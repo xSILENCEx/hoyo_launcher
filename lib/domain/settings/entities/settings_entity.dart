@@ -15,6 +15,7 @@ class SettingsEntity {
     required this.confirmBeforeClose,
     required this.startWithFullScreen,
     required this.minimizeAfterLaunch,
+    this.officialLauncherPath,
   });
 
   factory SettingsEntity.def() {
@@ -38,6 +39,7 @@ class SettingsEntity {
   final bool confirmBeforeClose;
   final bool startWithFullScreen;
   final bool minimizeAfterLaunch;
+  final String? officialLauncherPath;
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
@@ -49,6 +51,7 @@ class SettingsEntity {
       'confirmBeforeClose': confirmBeforeClose,
       'startWithFullScreen': startWithFullScreen,
       'minimizeAfterLaunch': minimizeAfterLaunch,
+      'officialLauncherPath': officialLauncherPath,
     };
   }
 

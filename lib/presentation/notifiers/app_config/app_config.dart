@@ -12,6 +12,7 @@ class AppConfig {
     required this.confirmBeforeClose,
     required this.startWithFullScreen,
     required this.minimizeAfterLaunch,
+    this.officialLauncherPath,
   });
 
   factory AppConfig.init() {
@@ -28,6 +29,7 @@ class AppConfig {
       confirmBeforeClose: entity.confirmBeforeClose,
       startWithFullScreen: entity.startWithFullScreen,
       minimizeAfterLaunch: entity.minimizeAfterLaunch,
+      officialLauncherPath: entity.officialLauncherPath,
     );
   }
 
@@ -39,6 +41,7 @@ class AppConfig {
   final bool confirmBeforeClose;
   final bool startWithFullScreen;
   final bool minimizeAfterLaunch;
+  final String? officialLauncherPath;
 
   SettingsEntity get settings {
     return SettingsEntity(
@@ -50,6 +53,7 @@ class AppConfig {
       confirmBeforeClose: confirmBeforeClose,
       startWithFullScreen: startWithFullScreen,
       minimizeAfterLaunch: minimizeAfterLaunch,
+      officialLauncherPath: officialLauncherPath,
     );
   }
 
@@ -62,6 +66,7 @@ class AppConfig {
     bool? confirmBeforeClose,
     bool? startWithFullScreen,
     bool? minimizeAfterLaunch,
+    String? officialLauncherPath,
   }) {
     return AppConfig(
       themeMode: themeMode ?? this.themeMode,
@@ -72,12 +77,13 @@ class AppConfig {
       confirmBeforeClose: confirmBeforeClose ?? this.confirmBeforeClose,
       startWithFullScreen: startWithFullScreen ?? this.startWithFullScreen,
       minimizeAfterLaunch: minimizeAfterLaunch ?? this.minimizeAfterLaunch,
+      officialLauncherPath: officialLauncherPath ?? this.officialLauncherPath,
     );
   }
 
   @override
   int get hashCode => Object.hash(themeMode, darkAccentColor, lightAccentColor, useSystemAccentColor, clockConfig,
-      confirmBeforeClose, startWithFullScreen);
+      confirmBeforeClose, startWithFullScreen, minimizeAfterLaunch, officialLauncherPath);
 
   @override
   bool operator ==(Object other) {
@@ -90,6 +96,8 @@ class AppConfig {
             useSystemAccentColor == other.useSystemAccentColor &&
             clockConfig == other.clockConfig &&
             confirmBeforeClose == other.confirmBeforeClose &&
-            startWithFullScreen == other.startWithFullScreen;
+            startWithFullScreen == other.startWithFullScreen &&
+            minimizeAfterLaunch == other.minimizeAfterLaunch &&
+            officialLauncherPath == other.officialLauncherPath;
   }
 }

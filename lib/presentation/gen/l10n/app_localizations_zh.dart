@@ -1,5 +1,7 @@
 import 'app_localizations.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for Chinese (`zh`).
 class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
@@ -189,4 +191,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get net_image => '网络图片';
+
+  @override
+  String get official_launcher_path => '官方启动器路径';
 }

@@ -8,6 +8,8 @@ import 'package:intl/intl.dart' as intl;
 import 'app_localizations_en.dart';
 import 'app_localizations_zh.dart';
 
+// ignore_for_file: type=lint
+
 /// Callers can lookup localized strings with an instance of AppLocalizations
 /// returned by `AppLocalizations.of(context)`.
 ///
@@ -464,6 +466,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Network image'**
   String get net_image;
+
+  /// No description provided for @official_launcher_path.
+  ///
+  /// In en, this message translates to:
+  /// **'Official Launcher Path'**
+  String get official_launcher_path;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -23,6 +23,7 @@ class AppConfigNotifier extends ExValue<AppConfig> {
     bool? confirmBeforeClose,
     bool? startWithFullScreen,
     bool? minimizeAfterLaunch,
+    String? officialLauncherPath,
   }) {
     final AppConfig newConfig = value.copyWith(
       themeMode: themeMode,
@@ -33,6 +34,7 @@ class AppConfigNotifier extends ExValue<AppConfig> {
       confirmBeforeClose: confirmBeforeClose,
       startWithFullScreen: startWithFullScreen,
       minimizeAfterLaunch: minimizeAfterLaunch,
+      officialLauncherPath: officialLauncherPath,
     );
 
     if (newConfig != value) {

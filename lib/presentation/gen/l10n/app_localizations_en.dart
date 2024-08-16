@@ -1,5 +1,7 @@
 import 'app_localizations.dart';
 
+// ignore_for_file: type=lint
+
 /// The translations for English (`en`).
 class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
@@ -189,4 +191,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get net_image => 'Network image';
+
+  @override
+  String get official_launcher_path => 'Official Launcher Path';
 }
