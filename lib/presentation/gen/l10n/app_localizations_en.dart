@@ -191,4 +191,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get net_image => 'Network image';
+
+  @override
+  String get official_launcher_path => 'Official Launcher Path';
 }

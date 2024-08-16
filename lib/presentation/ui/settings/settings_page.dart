@@ -8,6 +8,7 @@ import 'package:hoyo_launcher/presentation/utils/ex_types/ex_string.dart';
 import 'package:hoyo_launcher/presentation/utils/l10n_tool.dart';
 import 'package:hoyo_launcher/presentation/utils/router_tool.dart';
 import 'package:hoyo_launcher/presentation/widgets/app_switch.dart';
+import 'package:hoyo_launcher/presentation/widgets/path_picker.dart';
 import 'package:hoyo_launcher/presentation/widgets/smooth_scroll_view.dart';
 
 import 'clock_editer.dart';
@@ -106,6 +107,18 @@ class _SettingsPageState extends State<SettingsPage> {
             _buildRow(
               l10n.verison,
               Text(getIt.get<SettingsUsecase>().getVersion()),
+            ),
+            _buildDivider(),
+            _buildRow(
+              l10n.official_launcher_path,
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: PathPicker(
+                  initialPath: appConfigNotifier.value.officialLauncherPath,
+                  onPathChanged: (String path) => appConfigNotifier.update(officialLauncherPath: path),
+                  pickType: PickType.file,
+                ),
+              ),
             ),
           ],
         ),

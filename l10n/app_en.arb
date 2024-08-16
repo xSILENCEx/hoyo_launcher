@@ -61,5 +61,6 @@
     "random_swich": "Random switch",
     "swich_interval": "Switch interval",
     "animate_duration": "Animate duration",
-    "net_image": "Network image"
+    "net_image": "Network image",
+    "official_launcher_path": "Official Launcher Path"
 }

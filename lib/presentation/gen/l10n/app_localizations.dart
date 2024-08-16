@@ -466,6 +466,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Network image'**
   String get net_image;
+
+  /// No description provided for @official_launcher_path.
+  ///
+  /// In en, this message translates to:
+  /// **'Official Launcher Path'**
+  String get official_launcher_path;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

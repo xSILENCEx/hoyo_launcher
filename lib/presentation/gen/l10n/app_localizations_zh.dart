@@ -191,4 +191,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get net_image => '网络图片';
+
+  @override
+  String get official_launcher_path => '官方启动器路径';
 }

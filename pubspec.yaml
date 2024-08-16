@@ -3,7 +3,7 @@ description: Showcase App for Windows UI for Flutter
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.8+8
+version: 1.0.9+9
 
 environment:
   sdk: '>=2.17.0 <3.0.0'
@@ -13,18 +13,18 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  system_theme: ^2.3.1
-  window_manager: ^0.3.0
+  system_theme: ^3.0.0
+  window_manager: ^0.4.0
   flutter_acrylic: ^1.0.0+2
   url_launcher: ^6.1.7
-  intl: ^0.18.1
+  intl: ^0.19.0
   fluent_ui: ^4.8.2
-  file_picker: ^6.1.1
+  file_picker: ^8.1.2
   injectable: ^2.3.2
   hive: ^2.2.3
   get_it: ^7.6.4
   freezed_annotation: ^2.4.1
-  package_info_plus: ^5.0.1
+  package_info_plus: ^8.0.2
   json_annotation: ^4.8.1
   path: ^1.8.3
   path_provider: ^2.1.1
@@ -45,7 +45,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
+  flutter_lints: ^4.0.0
   injectable_generator: ^2.1.5    # 依赖注入代码生成
   json_serializable: ^6.7.1       # json 序列化代码生成
   freezed: ^2.3.2
