@@ -276,6 +276,23 @@ class GameInfoDBModel extends DataClass implements Insertable<GameInfoDBModel> {
         updateTime: updateTime ?? this.updateTime,
         sortValue: sortValue.present ? sortValue.value : this.sortValue,
       );
+  GameInfoDBModel copyWithCompanion(GameInfoTableCompanion data) {
+    return GameInfoDBModel(
+      id: data.id.present ? data.id.value : this.id,
+      icon: data.icon.present ? data.icon.value : this.icon,
+      title: data.title.present ? data.title.value : this.title,
+      launchPath:
+          data.launchPath.present ? data.launchPath.value : this.launchPath,
+      moreActions:
+          data.moreActions.present ? data.moreActions.value : this.moreActions,
+      createTime:
+          data.createTime.present ? data.createTime.value : this.createTime,
+      updateTime:
+          data.updateTime.present ? data.updateTime.value : this.updateTime,
+      sortValue: data.sortValue.present ? data.sortValue.value : this.sortValue,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('GameInfoDBModel(')
@@ -630,6 +647,18 @@ class GameInfoBgDBModel extends DataClass
         random: random.present ? random.value : this.random,
         bgData: bgData ?? this.bgData,
       );
+  GameInfoBgDBModel copyWithCompanion(GameInfoBgTableCompanion data) {
+    return GameInfoBgDBModel(
+      id: data.id.present ? data.id.value : this.id,
+      duration: data.duration.present ? data.duration.value : this.duration,
+      animatDuratuion: data.animatDuratuion.present
+          ? data.animatDuratuion.value
+          : this.animatDuratuion,
+      random: data.random.present ? data.random.value : this.random,
+      bgData: data.bgData.present ? data.bgData.value : this.bgData,
+    );
+  }
+
   @override
   String toString() {
     return (StringBuffer('GameInfoBgDBModel(')
@@ -757,6 +786,7 @@ class GameInfoBgTableCompanion extends UpdateCompanion<GameInfoBgDBModel> {
 
 abstract class _$MyDatabase extends GeneratedDatabase {
   _$MyDatabase(QueryExecutor e) : super(e);
+  $MyDatabaseManager get managers => $MyDatabaseManager(this);
   late final $GameInfoTableTable gameInfoTable = $GameInfoTableTable(this);
   late final $GameInfoBgTableTable gameInfoBgTable =
       $GameInfoBgTableTable(this);
@@ -767,4 +797,408 @@ abstract class _$MyDatabase extends GeneratedDatabase {
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
       [gameInfoTable, gameInfoBgTable];
+}
+
+typedef $$GameInfoTableTableCreateCompanionBuilder = GameInfoTableCompanion
+    Function({
+  required String id,
+  required String icon,
+  required String title,
+  required String launchPath,
+  Value<String?> moreActions,
+  required DateTime createTime,
+  required DateTime updateTime,
+  Value<int?> sortValue,
+  Value<int> rowid,
+});
+typedef $$GameInfoTableTableUpdateCompanionBuilder = GameInfoTableCompanion
+    Function({
+  Value<String> id,
+  Value<String> icon,
+  Value<String> title,
+  Value<String> launchPath,
+  Value<String?> moreActions,
+  Value<DateTime> createTime,
+  Value<DateTime> updateTime,
+  Value<int?> sortValue,
+  Value<int> rowid,
+});
+
+class $$GameInfoTableTableFilterComposer
+    extends Composer<_$MyDatabase, $GameInfoTableTable> {
+  $$GameInfoTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get icon => $composableBuilder(
+      column: $table.icon, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get launchPath => $composableBuilder(
+      column: $table.launchPath, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get moreActions => $composableBuilder(
+      column: $table.moreActions, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get createTime => $composableBuilder(
+      column: $table.createTime, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<DateTime> get updateTime => $composableBuilder(
+      column: $table.updateTime, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get sortValue => $composableBuilder(
+      column: $table.sortValue, builder: (column) => ColumnFilters(column));
+}
+
+class $$GameInfoTableTableOrderingComposer
+    extends Composer<_$MyDatabase, $GameInfoTableTable> {
+  $$GameInfoTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get icon => $composableBuilder(
+      column: $table.icon, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get title => $composableBuilder(
+      column: $table.title, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get launchPath => $composableBuilder(
+      column: $table.launchPath, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get moreActions => $composableBuilder(
+      column: $table.moreActions, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get createTime => $composableBuilder(
+      column: $table.createTime, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<DateTime> get updateTime => $composableBuilder(
+      column: $table.updateTime, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get sortValue => $composableBuilder(
+      column: $table.sortValue, builder: (column) => ColumnOrderings(column));
+}
+
+class $$GameInfoTableTableAnnotationComposer
+    extends Composer<_$MyDatabase, $GameInfoTableTable> {
+  $$GameInfoTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get icon =>
+      $composableBuilder(column: $table.icon, builder: (column) => column);
+
+  GeneratedColumn<String> get title =>
+      $composableBuilder(column: $table.title, builder: (column) => column);
+
+  GeneratedColumn<String> get launchPath => $composableBuilder(
+      column: $table.launchPath, builder: (column) => column);
+
+  GeneratedColumn<String> get moreActions => $composableBuilder(
+      column: $table.moreActions, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get createTime => $composableBuilder(
+      column: $table.createTime, builder: (column) => column);
+
+  GeneratedColumn<DateTime> get updateTime => $composableBuilder(
+      column: $table.updateTime, builder: (column) => column);
+
+  GeneratedColumn<int> get sortValue =>
+      $composableBuilder(column: $table.sortValue, builder: (column) => column);
+}
+
+class $$GameInfoTableTableTableManager extends RootTableManager<
+    _$MyDatabase,
+    $GameInfoTableTable,
+    GameInfoDBModel,
+    $$GameInfoTableTableFilterComposer,
+    $$GameInfoTableTableOrderingComposer,
+    $$GameInfoTableTableAnnotationComposer,
+    $$GameInfoTableTableCreateCompanionBuilder,
+    $$GameInfoTableTableUpdateCompanionBuilder,
+    (
+      GameInfoDBModel,
+      BaseReferences<_$MyDatabase, $GameInfoTableTable, GameInfoDBModel>
+    ),
+    GameInfoDBModel,
+    PrefetchHooks Function()> {
+  $$GameInfoTableTableTableManager(_$MyDatabase db, $GameInfoTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$GameInfoTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$GameInfoTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$GameInfoTableTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<String> icon = const Value.absent(),
+            Value<String> title = const Value.absent(),
+            Value<String> launchPath = const Value.absent(),
+            Value<String?> moreActions = const Value.absent(),
+            Value<DateTime> createTime = const Value.absent(),
+            Value<DateTime> updateTime = const Value.absent(),
+            Value<int?> sortValue = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GameInfoTableCompanion(
+            id: id,
+            icon: icon,
+            title: title,
+            launchPath: launchPath,
+            moreActions: moreActions,
+            createTime: createTime,
+            updateTime: updateTime,
+            sortValue: sortValue,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required String icon,
+            required String title,
+            required String launchPath,
+            Value<String?> moreActions = const Value.absent(),
+            required DateTime createTime,
+            required DateTime updateTime,
+            Value<int?> sortValue = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GameInfoTableCompanion.insert(
+            id: id,
+            icon: icon,
+            title: title,
+            launchPath: launchPath,
+            moreActions: moreActions,
+            createTime: createTime,
+            updateTime: updateTime,
+            sortValue: sortValue,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$GameInfoTableTableProcessedTableManager = ProcessedTableManager<
+    _$MyDatabase,
+    $GameInfoTableTable,
+    GameInfoDBModel,
+    $$GameInfoTableTableFilterComposer,
+    $$GameInfoTableTableOrderingComposer,
+    $$GameInfoTableTableAnnotationComposer,
+    $$GameInfoTableTableCreateCompanionBuilder,
+    $$GameInfoTableTableUpdateCompanionBuilder,
+    (
+      GameInfoDBModel,
+      BaseReferences<_$MyDatabase, $GameInfoTableTable, GameInfoDBModel>
+    ),
+    GameInfoDBModel,
+    PrefetchHooks Function()>;
+typedef $$GameInfoBgTableTableCreateCompanionBuilder = GameInfoBgTableCompanion
+    Function({
+  required String id,
+  required int duration,
+  required int animatDuratuion,
+  Value<bool?> random,
+  required String bgData,
+  Value<int> rowid,
+});
+typedef $$GameInfoBgTableTableUpdateCompanionBuilder = GameInfoBgTableCompanion
+    Function({
+  Value<String> id,
+  Value<int> duration,
+  Value<int> animatDuratuion,
+  Value<bool?> random,
+  Value<String> bgData,
+  Value<int> rowid,
+});
+
+class $$GameInfoBgTableTableFilterComposer
+    extends Composer<_$MyDatabase, $GameInfoBgTableTable> {
+  $$GameInfoBgTableTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get duration => $composableBuilder(
+      column: $table.duration, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<int> get animatDuratuion => $composableBuilder(
+      column: $table.animatDuratuion,
+      builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<bool> get random => $composableBuilder(
+      column: $table.random, builder: (column) => ColumnFilters(column));
+
+  ColumnFilters<String> get bgData => $composableBuilder(
+      column: $table.bgData, builder: (column) => ColumnFilters(column));
+}
+
+class $$GameInfoBgTableTableOrderingComposer
+    extends Composer<_$MyDatabase, $GameInfoBgTableTable> {
+  $$GameInfoBgTableTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<String> get id => $composableBuilder(
+      column: $table.id, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get duration => $composableBuilder(
+      column: $table.duration, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<int> get animatDuratuion => $composableBuilder(
+      column: $table.animatDuratuion,
+      builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<bool> get random => $composableBuilder(
+      column: $table.random, builder: (column) => ColumnOrderings(column));
+
+  ColumnOrderings<String> get bgData => $composableBuilder(
+      column: $table.bgData, builder: (column) => ColumnOrderings(column));
+}
+
+class $$GameInfoBgTableTableAnnotationComposer
+    extends Composer<_$MyDatabase, $GameInfoBgTableTable> {
+  $$GameInfoBgTableTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<String> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<int> get duration =>
+      $composableBuilder(column: $table.duration, builder: (column) => column);
+
+  GeneratedColumn<int> get animatDuratuion => $composableBuilder(
+      column: $table.animatDuratuion, builder: (column) => column);
+
+  GeneratedColumn<bool> get random =>
+      $composableBuilder(column: $table.random, builder: (column) => column);
+
+  GeneratedColumn<String> get bgData =>
+      $composableBuilder(column: $table.bgData, builder: (column) => column);
+}
+
+class $$GameInfoBgTableTableTableManager extends RootTableManager<
+    _$MyDatabase,
+    $GameInfoBgTableTable,
+    GameInfoBgDBModel,
+    $$GameInfoBgTableTableFilterComposer,
+    $$GameInfoBgTableTableOrderingComposer,
+    $$GameInfoBgTableTableAnnotationComposer,
+    $$GameInfoBgTableTableCreateCompanionBuilder,
+    $$GameInfoBgTableTableUpdateCompanionBuilder,
+    (
+      GameInfoBgDBModel,
+      BaseReferences<_$MyDatabase, $GameInfoBgTableTable, GameInfoBgDBModel>
+    ),
+    GameInfoBgDBModel,
+    PrefetchHooks Function()> {
+  $$GameInfoBgTableTableTableManager(
+      _$MyDatabase db, $GameInfoBgTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$GameInfoBgTableTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$GameInfoBgTableTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$GameInfoBgTableTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback: ({
+            Value<String> id = const Value.absent(),
+            Value<int> duration = const Value.absent(),
+            Value<int> animatDuratuion = const Value.absent(),
+            Value<bool?> random = const Value.absent(),
+            Value<String> bgData = const Value.absent(),
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GameInfoBgTableCompanion(
+            id: id,
+            duration: duration,
+            animatDuratuion: animatDuratuion,
+            random: random,
+            bgData: bgData,
+            rowid: rowid,
+          ),
+          createCompanionCallback: ({
+            required String id,
+            required int duration,
+            required int animatDuratuion,
+            Value<bool?> random = const Value.absent(),
+            required String bgData,
+            Value<int> rowid = const Value.absent(),
+          }) =>
+              GameInfoBgTableCompanion.insert(
+            id: id,
+            duration: duration,
+            animatDuratuion: animatDuratuion,
+            random: random,
+            bgData: bgData,
+            rowid: rowid,
+          ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ));
+}
+
+typedef $$GameInfoBgTableTableProcessedTableManager = ProcessedTableManager<
+    _$MyDatabase,
+    $GameInfoBgTableTable,
+    GameInfoBgDBModel,
+    $$GameInfoBgTableTableFilterComposer,
+    $$GameInfoBgTableTableOrderingComposer,
+    $$GameInfoBgTableTableAnnotationComposer,
+    $$GameInfoBgTableTableCreateCompanionBuilder,
+    $$GameInfoBgTableTableUpdateCompanionBuilder,
+    (
+      GameInfoBgDBModel,
+      BaseReferences<_$MyDatabase, $GameInfoBgTableTable, GameInfoBgDBModel>
+    ),
+    GameInfoBgDBModel,
+    PrefetchHooks Function()>;
+
+class $MyDatabaseManager {
+  final _$MyDatabase _db;
+  $MyDatabaseManager(this._db);
+  $$GameInfoTableTableTableManager get gameInfoTable =>
+      $$GameInfoTableTableTableManager(_db, _db.gameInfoTable);
+  $$GameInfoBgTableTableTableManager get gameInfoBgTable =>
+      $$GameInfoBgTableTableTableManager(_db, _db.gameInfoBgTable);
 }

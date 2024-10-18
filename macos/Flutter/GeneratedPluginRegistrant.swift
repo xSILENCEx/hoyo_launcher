@@ -9,7 +9,7 @@ import macos_window_utils
 import package_info_plus
 import path_provider_foundation
 import screen_retriever
-import sqflite
+import sqflite_darwin
 import sqlite3_flutter_libs
 import system_theme
 import url_launcher_macos
