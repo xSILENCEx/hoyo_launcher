@@ -20,7 +20,7 @@ class IconSelector extends StatefulWidget {
 
   final String? initIconPath;
 
-  final Function(String iconPath) onSelected;
+  final void Function(String iconPath) onSelected;
 
   @override
   State<IconSelector> createState() => _IconSelectorState();

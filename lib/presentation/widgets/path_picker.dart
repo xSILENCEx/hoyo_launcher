@@ -18,7 +18,7 @@ class PathPicker extends StatefulWidget {
 
   final String? headerValue;
   final PickType pickType;
-  final Function(String path) onPathChanged;
+  final void Function(String path) onPathChanged;
 
   @override
   State<PathPicker> createState() => _PathPickerState();
@@ -57,11 +57,7 @@ class _PathPickerState extends State<PathPicker> {
         path = result?.files.single.path;
       }
     } catch (e) {
-      AppInfoBar.show(
-        context,
-        e.toString(),
-        severity: InfoBarSeverity.error,
-      );
+      if (mounted) AppInfoBar.show(context, e.toString(), severity: InfoBarSeverity.error);
     } finally {
       _isSelecting = false;
     }

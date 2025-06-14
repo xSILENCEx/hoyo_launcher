@@ -18,7 +18,8 @@ class ThemeColorSelector extends StatefulWidget {
   final Color? initDarkAccentColor;
   final Color? initLightAccentColor;
 
-  final Function(bool useSystemAccentColor, Color darkAccentColor, Color lightAccentColor) onThemeColorChanged;
+  final void Function(bool useSystemAccentColor, Color darkAccentColor, Color lightAccentColor)
+      onThemeColorChanged;
 
   @override
   State<ThemeColorSelector> createState() => _ThemeColorSelectorState();
@@ -139,7 +140,9 @@ class _ThemeColorSelectorState extends State<ThemeColorSelector> {
           child: Text(
             text,
             style: TextStyle(
-              color: _useSystemAccentColor == value ? themeData.scaffoldBackgroundColor : themeData.accentColor,
+              color: _useSystemAccentColor == value
+                  ? themeData.scaffoldBackgroundColor
+                  : themeData.accentColor,
             ),
           ),
         ),
@@ -147,7 +150,7 @@ class _ThemeColorSelectorState extends State<ThemeColorSelector> {
     );
   }
 
-  Widget _buildColorBtn(String text, Color color, Function()? onTap) {
+  Widget _buildColorBtn(String text, Color color, void Function()? onTap) {
     return Row(
       children: <Widget>[
         Text(text.withColon),

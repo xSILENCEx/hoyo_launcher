@@ -33,14 +33,14 @@ class MoreActionBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     if (actions.isEmpty) return const SizedBox.shrink();
 
-    final LayerLink _layerLink = LayerLink();
+    final LayerLink layerLink = LayerLink();
 
     return Container(
       margin: const EdgeInsets.only(left: 10),
       child: CompositedTransformTarget(
-        link: _layerLink,
+        link: layerLink,
         child: AppBtn(
-          onTap: () => _onTap(context, _layerLink),
+          onTap: () => _onTap(context, layerLink),
           width: btnSize,
           height: btnSize,
           alignment: Alignment.center,
@@ -53,7 +53,8 @@ class MoreActionBtn extends StatelessWidget {
   Widget _buildMenu(BuildContext context, LayerLink layerLink) {
     final FluentThemeData fluentTheme = FluentTheme.of(context);
 
-    final ContentDialogThemeData style = ContentDialogThemeData.standard(fluentTheme).merge(fluentTheme.dialogTheme);
+    final ContentDialogThemeData style =
+        ContentDialogThemeData.standard(fluentTheme).merge(fluentTheme.dialogTheme);
 
     final BoxDecoration? styleDecoration = style.decoration as BoxDecoration?;
 

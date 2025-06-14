@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:fluent_ui/fluent_ui.dart' as fu;
 import 'package:flutter/material.dart';
 import 'package:hoyo_launcher/domain/game/entities/game_info_entity.dart';
@@ -31,14 +29,14 @@ class NavBar extends StatelessWidget {
 
   final GameInfoEntity? selectItem;
   final List<GameInfoEntity> navItems;
-  final Function(GameInfoEntity info) onItemTap;
-  final Function(GameInfoEntity info) onEditItemTap;
-  final Function(GameInfoEntity info) onDelItemTap;
-  final Function() onSettingItemTap;
-  final Function() onAddItemTap;
+  final void Function(GameInfoEntity info) onItemTap;
+  final void Function(GameInfoEntity info) onEditItemTap;
+  final void Function(GameInfoEntity info) onDelItemTap;
+  final void Function() onSettingItemTap;
+  final void Function() onAddItemTap;
 
-  final Function(double animationValue)? onNavHover;
-  final Function(int fromIndex, int toIndex) onReorder;
+  final void Function(double animationValue)? onNavHover;
+  final void Function(int fromIndex, int toIndex) onReorder;
 
   fu.FluentThemeData _fluentTheme(BuildContext context) => fu.FluentTheme.of(context);
 
@@ -50,7 +48,8 @@ class NavBar extends StatelessWidget {
       childBuilder: (NavHoverController navHoverController) {
         onNavHover?.call(navHoverController.width);
 
-        final double navMinWidth = navBarMinWidth + (navHoverController.value * navBarMinWidth * 0.15);
+        final double navMinWidth =
+            navBarMinWidth + (navHoverController.value * navBarMinWidth * 0.15);
 
         final bool showMore = navHoverController.value > 0;
 
@@ -72,7 +71,8 @@ class NavBar extends StatelessWidget {
                           _buildItem(context, index, navItems[index], navMinWidth, false),
                       footer: _buildAddItem(context, navMinWidth, showMore),
                       itemCount: navItems.length,
-                      itemBuilder: (_, int index) => _buildItem(context, index, navItems[index], navMinWidth, showMore),
+                      itemBuilder: (_, int index) =>
+                          _buildItem(context, index, navItems[index], navMinWidth, showMore),
                     );
                   },
                 ),
@@ -163,7 +163,7 @@ class NavBar extends StatelessWidget {
     bool hasIndicator = true,
     List<Widget> trailings = const <Widget>[],
     EdgeInsetsGeometry? iconPadding,
-    Function()? onTap,
+    void Function()? onTap,
   }) {
     final double leadingSize = navMinWidth - _leadingMargin * 2;
 
@@ -172,7 +172,8 @@ class NavBar extends StatelessWidget {
     final Color navColor = fluentTheme.navigationPaneTheme.backgroundColor!.withOpacity(0.4);
     final Color indicatorColor = fluentTheme.accentColor;
 
-    final double textWidth = navBarMaxWidth - navMinWidth - kMinInteractiveDimension * trailings.length;
+    final double textWidth =
+        navBarMaxWidth - navMinWidth - kMinInteractiveDimension * trailings.length;
 
     const double minLeadingSize = navBarMinWidth - _leadingMargin * 2;
 
@@ -188,7 +189,8 @@ class NavBar extends StatelessWidget {
               duration: const Duration(milliseconds: 500),
               width: 3,
               height: isSelected ? (navBarMinWidth - _leadingMargin * 2) / 2.5 : 0,
-              decoration: BoxDecoration(color: indicatorColor, borderRadius: BorderRadius.circular(4)),
+              decoration:
+                  BoxDecoration(color: indicatorColor, borderRadius: BorderRadius.circular(4)),
             ),
         ],
       ),
@@ -199,7 +201,8 @@ class NavBar extends StatelessWidget {
       child: TapBox(
         onTap: onTap ?? () => onItemTap(navItems[index]),
         child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: _leadingMargin, vertical: _leadingMargin / 2),
+          margin:
+              const EdgeInsets.symmetric(horizontal: _leadingMargin, vertical: _leadingMargin / 2),
           width: showMore ? null : minLeadingSize,
           height: showMore ? leadingSize : minLeadingSize,
           decoration: BoxDecoration(
@@ -215,7 +218,9 @@ class NavBar extends StatelessWidget {
                     children: <Widget>[
                       iconWidget,
                       const SizedBox(width: _leadingMargin),
-                      SizedBox(width: textWidth, child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis)),
+                      SizedBox(
+                          width: textWidth,
+                          child: Text(title, maxLines: 1, overflow: TextOverflow.ellipsis)),
                       if (trailings.isNotEmpty) const SizedBox(width: _leadingMargin),
                       if (trailings.isNotEmpty) ...trailings,
                       const SizedBox(width: _leadingMargin),

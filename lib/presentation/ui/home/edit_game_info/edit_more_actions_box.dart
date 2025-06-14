@@ -17,7 +17,7 @@ class EditMoreActionsBox extends StatefulWidget {
   });
 
   final List<GameInfoAction> initActions;
-  final Function(List<GameInfoAction> actions) onActionsChanged;
+  final void Function(List<GameInfoAction> actions) onActionsChanged;
 
   @override
   State<EditMoreActionsBox> createState() => _EditMoreActionsBoxState();
@@ -37,7 +37,7 @@ class _EditMoreActionsBoxState extends State<EditMoreActionsBox> {
     if (action == null) return;
 
     if (_actions.contains(action)) {
-      AppInfoBar.show(context, l10n.path_already_exists);
+      if (mounted) AppInfoBar.show(context, l10n.path_already_exists);
       return;
     }
 

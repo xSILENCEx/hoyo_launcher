@@ -13,8 +13,6 @@ import 'data_provider/data_source/local/storage/local_storage.dart';
 import 'presentation/notifiers/app_config/app_config_notifier.dart';
 import 'presentation/ui/root.dart';
 
-const String appTitle = 'Hoyo Launcher';
-
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   await WindowsSingleInstance.ensureSingleInstance(args, 'com.hoyo_launcher');

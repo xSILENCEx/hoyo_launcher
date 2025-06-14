@@ -4,7 +4,7 @@ class TapBox extends StatefulWidget {
   const TapBox({super.key, required this.child, required this.onTap});
 
   final Widget child;
-  final Function() onTap;
+  final void Function() onTap;
 
   @override
   State<TapBox> createState() => _TapBoxState();

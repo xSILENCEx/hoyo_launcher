@@ -23,7 +23,7 @@ class ThemeModeSelector extends StatefulWidget {
   });
 
   final ThemeMode? initThemeMode;
-  final Function(ThemeMode themeMode) onThemeModeChanged;
+  final void Function(ThemeMode themeMode) onThemeModeChanged;
 
   @override
   State<ThemeModeSelector> createState() => _ThemeModeSelectorState();
@@ -79,7 +79,9 @@ class _ThemeModeSelectorState extends State<ThemeModeSelector> {
                   child: Text(
                     themeMode.name,
                     style: TextStyle(
-                      color: _themeMode == themeMode ? fluentTheme.scaffoldBackgroundColor : fluentTheme.accentColor,
+                      color: _themeMode == themeMode
+                          ? fluentTheme.scaffoldBackgroundColor
+                          : fluentTheme.accentColor,
                     ),
                   ),
                 ),

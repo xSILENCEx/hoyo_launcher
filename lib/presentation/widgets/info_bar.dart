@@ -25,7 +25,7 @@ class AppInfoBar extends StatelessWidget {
   }) async {
     await displayInfoBar(
       context,
-      builder: (_, Function() close) {
+      builder: (_, void Function() close) {
         return AppInfoBar._(
           severity: severity,
           close: close,

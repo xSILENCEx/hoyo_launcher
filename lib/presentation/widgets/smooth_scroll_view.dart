@@ -66,9 +66,9 @@ class _SmoothScrollViewState extends State<SmoothScrollView> {
     );
   }
 
-  static Widget _scrollView(ScrollController _controller, Widget child) {
+  static Widget _scrollView(ScrollController controller, Widget child) {
     return SingleChildScrollView(
-      controller: _controller,
+      controller: controller,
       physics: const NeverScrollableScrollPhysics(),
       child: child,
     );

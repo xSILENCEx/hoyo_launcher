@@ -1,4 +1,4 @@
-import 'package:fluent_ui/fluent_ui.dart' hide Page, Colors;
+import 'package:fluent_ui/fluent_ui.dart' hide Colors, Page;
 import 'package:flutter/material.dart';
 import 'package:hoyo_launcher/presentation/gen/l10n/app_localizations.dart';
 import 'package:hoyo_launcher/presentation/notifiers/app_config/app_config_notifier.dart';
@@ -25,8 +25,10 @@ class RootApp extends StatelessWidget {
               p.themeMode != n.themeMode ||
               p.useSystemAccentColor != n.useSystemAccentColor,
           childBuilder: (AppConfig appConfig, Widget child) {
-            final Color lightAccentColor = appConfig.useSystemAccentColor ? accentColor : appConfig.lightAccentColor;
-            final Color darkAccentColor = appConfig.useSystemAccentColor ? accentColor : appConfig.darkAccentColor;
+            final Color lightAccentColor =
+                appConfig.useSystemAccentColor ? accentColor : appConfig.lightAccentColor;
+            final Color darkAccentColor =
+                appConfig.useSystemAccentColor ? accentColor : appConfig.darkAccentColor;
 
             return FluentApp(
               navigatorKey: navigatorKey,

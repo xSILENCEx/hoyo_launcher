@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:hoyo_launcher/commons/constant.dart';
 import 'package:hoyo_launcher/presentation/notifiers/app_config/app_config_notifier.dart';
@@ -45,7 +47,10 @@ class _HomeState extends State<Home> with WindowListener, GameInfoDataMixin, Nav
         if (!close) return;
       }
 
-      windowManager.destroy();
+      await windowManager.setPreventClose(false);
+      await windowManager.close();
+      await windowManager.destroy();
+      exit(0);
     }
   }
 

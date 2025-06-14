@@ -23,7 +23,7 @@ class AppBtn extends StatelessWidget {
 
   final Widget child;
 
-  final Function()? onTap;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {

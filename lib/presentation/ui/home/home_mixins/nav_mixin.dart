@@ -16,6 +16,11 @@ mixin NavMixin on State<Home> {
   }
 
   void changeNavValue(GameInfoEntity? info) {
+    if (info == null) {
+      selectedIem = null;
+      return;
+    }
+
     selectedIem = info;
   }
 
@@ -26,6 +31,7 @@ mixin NavMixin on State<Home> {
   }
 
   void onNavHover(double value) {
+    if (selectedIem == null) return;
     navBarWithNotifier.value = value;
   }
 

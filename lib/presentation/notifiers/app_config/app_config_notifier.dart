@@ -12,7 +12,10 @@ final AppConfigNotifier appConfigNotifier = AppConfigNotifier();
 class AppConfigNotifier extends ExValue<AppConfig> {
   AppConfigNotifier() : super(AppConfig.init());
 
-  void loadConfig(AppConfig config) => value = config;
+  void loadConfig(AppConfig config) {
+    if (config == value) return;
+    value = config;
+  }
 
   void update({
     ThemeMode? themeMode,

@@ -9,12 +9,12 @@ typedef ValueWidgetBuilder<T> = Widget Function(BuildContext context, T value, W
 
 class ExValueBuilder<T> extends StatefulWidget {
   const ExValueBuilder({
-    Key? key,
+    super.key,
     required this.valueListenable,
     required this.builder,
     this.child,
     this.shouldRebuild,
-  }) : super(key: key);
+  });
 
   final ValueListenable<T> valueListenable;
 
@@ -57,7 +57,8 @@ class _ExValueBuilderState<T> extends State<ExValueBuilder<T>> with SafeState<Ex
 
   void _valueChanged() {
     ///条件判断
-    if (widget.shouldRebuild == null || widget.shouldRebuild!(value, widget.valueListenable.value)) {
+    if (widget.shouldRebuild == null ||
+        widget.shouldRebuild!(value, widget.valueListenable.value)) {
       safeSetState(() {
         value = widget.valueListenable.value;
       });
@@ -73,22 +74,20 @@ class _ExValueBuilderState<T> extends State<ExValueBuilder<T>> with SafeState<Ex
 /// 简化的 `ExValueBuilder`
 class ExBuilder<T> extends StatefulWidget {
   const ExBuilder({
-    Key? key,
+    super.key,
     required this.valueListenable,
     required this.builder,
     this.shouldRebuild,
   })  : child = null,
-        childBuilder = null,
-        super(key: key);
+        childBuilder = null;
 
   const ExBuilder.child({
-    Key? key,
+    super.key,
     required this.valueListenable,
     required this.childBuilder,
     required this.child,
     this.shouldRebuild,
-  })  : builder = null,
-        super(key: key);
+  }) : builder = null;
 
   final ValueListenable<T> valueListenable;
 
@@ -133,7 +132,8 @@ class _ExBuilderState<T> extends State<ExBuilder<T>> with SafeState<ExBuilder<T>
 
   void _valueChanged() {
     // 条件判断
-    final bool shouldRebuild = widget.shouldRebuild?.call(_value, widget.valueListenable.value) ?? true;
+    final bool shouldRebuild =
+        widget.shouldRebuild?.call(_value, widget.valueListenable.value) ?? true;
     if (shouldRebuild) {
       _value = widget.valueListenable.value;
       safeSetState(() {});
@@ -153,20 +153,18 @@ class _ExBuilderState<T> extends State<ExBuilder<T>> with SafeState<ExBuilder<T>
 /// 监听器
 class ListenBuilder extends StatefulWidget {
   const ListenBuilder({
-    Key? key,
+    super.key,
     required this.listenable,
     required this.builder,
   })  : childen = null,
-        childBuilder = null,
-        super(key: key);
+        childBuilder = null;
 
   const ListenBuilder.child({
-    Key? key,
+    super.key,
     required this.listenable,
     required this.childBuilder,
     required this.childen,
-  })  : builder = null,
-        super(key: key);
+  }) : builder = null;
 
   final Listenable listenable;
 

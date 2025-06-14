@@ -100,7 +100,7 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
       _editInfo = _editInfo.copyWith(updateTime: now);
 
       await getIt.get<CreateGameInfoUseCase>()(_editInfo);
-      Navigator.pop(context);
+      if (context.mounted) Navigator.pop(context);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -208,13 +208,15 @@ class _EditGameInfoPageState extends State<EditGameInfoPage> {
             _spacer(),
             EditMoreActionsBox(
               initActions: _editInfo.moreActions,
-              onActionsChanged: (List<GameInfoAction> actions) => _editInfo = _editInfo.copyWith(moreActions: actions),
+              onActionsChanged: (List<GameInfoAction> actions) =>
+                  _editInfo = _editInfo.copyWith(moreActions: actions),
             ),
             _spacer(),
             EditGameBgBox(
               id: _editInfo.id,
               initGameInfoBg: _editInfo.gameBgInfo,
-              onGameInfoBgChanged: (GameInfoBg gameInfoBg) => _editInfo = _editInfo.copyWith(gameBgInfo: gameInfoBg),
+              onGameInfoBgChanged: (GameInfoBg gameInfoBg) =>
+                  _editInfo = _editInfo.copyWith(gameBgInfo: gameInfoBg),
             ),
           ],
         ),

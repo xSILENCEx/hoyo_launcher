@@ -13,7 +13,7 @@ mixin SafeState<T extends StatefulWidget> on State<T> {
   }
 
   @override
-  void setState(Function() fn) {
+  void setState(void Function() fn) {
     if (mounted) {
       super.setState(fn);
     }

@@ -10,7 +10,7 @@ class ClockEditer extends StatefulWidget {
   const ClockEditer({super.key, required this.initClockConfig, required this.onShowClockChanged});
 
   final ClockConfig initClockConfig;
-  final Function(ClockConfig config) onShowClockChanged;
+  final void Function(ClockConfig config) onShowClockChanged;
 
   @override
   State<ClockEditer> createState() => _ClockEditerState();
@@ -19,7 +19,8 @@ class ClockEditer extends StatefulWidget {
 class _ClockEditerState extends State<ClockEditer> {
   late ClockConfig _clockConfig = widget.initClockConfig;
 
-  late final TextEditingController _textEditingController = TextEditingController(text: _clockConfig.dateIcon);
+  late final TextEditingController _textEditingController =
+      TextEditingController(text: _clockConfig.dateIcon);
 
   void _onShowClockChanged(bool showClock) {
     if (showClock == _clockConfig.showClock) {
@@ -220,7 +221,7 @@ class _BlurSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FluentThemeData _fluentTheme = FluentTheme.of(context);
+    final FluentThemeData fluentTheme = FluentTheme.of(context);
 
     double realValue = value;
     if (realValue < min) {
@@ -235,7 +236,7 @@ class _BlurSlider extends StatelessWidget {
       label: label,
       min: min,
       max: max,
-      style: SliderThemeData(labelBackgroundColor: _fluentTheme.accentColor),
+      style: SliderThemeData(labelBackgroundColor: fluentTheme.accentColor),
     );
   }
 }

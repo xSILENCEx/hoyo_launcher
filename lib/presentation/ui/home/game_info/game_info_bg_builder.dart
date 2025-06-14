@@ -53,7 +53,9 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
 
     for (final String path in bgData) {
       // 有后缀的文件为图片，直接加入 _images ,使用正则匹配
-      if (RegExp(r'\.(png|jpe?g|gif|webp|bmp|wbmp|heic|heif|tiff|raw|svg|ico)$', caseSensitive: false).hasMatch(path)) {
+      if (RegExp(r'\.(png|jpe?g|gif|webp|bmp|wbmp|heic|heif|tiff|raw|svg|ico)$',
+              caseSensitive: false)
+          .hasMatch(path)) {
         _images.add(path);
       } else {
         // 没有后缀的文件为文件夹，遍历文件夹下的图片
@@ -67,25 +69,26 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
   }
 
   List<String> _scanImage(String folder) {
-    final List<String> _imageList = <String>[];
+    final List<String> imageList = <String>[];
     try {
       final Directory directory = Directory(folder);
       final List<FileSystemEntity> files = directory.listSync();
       for (final FileSystemEntity file in files) {
         if (file is File) {
-          _imageList.add(file.path);
+          imageList.add(file.path);
         }
       }
     } catch (e) {
       AppInfoBar.show(context, 'content');
     }
 
-    return _imageList;
+    return imageList;
   }
 
   Future<void> _deleteImage(String path) async {
     if (path.startsWith('http')) {
-      final bool confirmDel = await ConfirmDialog.show(l10n.confirm_del, contentWidget: _buildConfirmImg(path));
+      final bool confirmDel =
+          await ConfirmDialog.show(l10n.confirm_del, contentWidget: _buildConfirmImg(path));
       if (!confirmDel) return;
 
       final GameInfoBg gameInfoBg = _gameInfo.gameBgInfo;
@@ -95,7 +98,8 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
       );
       getIt.get<UpdateGameInfoUseCase>().call(newInfo);
     } else {
-      final bool confirmDel = await ConfirmDialog.show(l10n.confirm_del_file, contentWidget: _buildConfirmImg(path));
+      final bool confirmDel =
+          await ConfirmDialog.show(l10n.confirm_del_file, contentWidget: _buildConfirmImg(path));
       if (!confirmDel) return;
       await File(path).delete();
 
@@ -139,7 +143,8 @@ class _GameBgBuilderState extends State<GameBgBuilder> with SafeState<GameBgBuil
           imageFilter: ImageFilter.blur(sigmaX: 40, sigmaY: 40),
           child: SizedBox.expand(child: AppImg.cover(url: icon)),
         ),
-        Positioned.fill(child: ColoredBox(color: fluentTheme.scaffoldBackgroundColor.withOpacity(0.2))),
+        Positioned.fill(
+            child: ColoredBox(color: fluentTheme.scaffoldBackgroundColor.withOpacity(0.2))),
       ],
     );
   }

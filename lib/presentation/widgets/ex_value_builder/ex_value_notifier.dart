@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hoyo_launcher/commons/logger.dart';
 
-typedef ExOnData<T> = Function(T p, T n);
+typedef ExOnData<T> = void Function(T p, T n);
 
 ///ValueNotifier安全扩展
 class ExValue<T> extends ValueNotifier<T> {
-  ExValue(T value) : super(value);
+  ExValue(super.value);
 
   bool _mounted = true;
 

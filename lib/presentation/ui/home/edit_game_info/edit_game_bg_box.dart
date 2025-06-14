@@ -23,7 +23,7 @@ class EditGameBgBox extends StatefulWidget {
   final String id;
   final GameInfoBg? initGameInfoBg;
 
-  final Function(GameInfoBg gameInfoBg) onGameInfoBgChanged;
+  final void Function(GameInfoBg gameInfoBg) onGameInfoBgChanged;
 
   @override
   State<EditGameBgBox> createState() => _EditGameBgBoxState();
@@ -59,9 +59,11 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
     }
 
     if (_gameInfoBg.animateDuration.inMilliseconds < _minAnimateDuration) {
-      _gameInfoBg = _gameInfoBg.copyWith(animateDuration: Duration(milliseconds: _minAnimateDuration.toInt()));
+      _gameInfoBg = _gameInfoBg.copyWith(
+          animateDuration: Duration(milliseconds: _minAnimateDuration.toInt()));
     } else if (_gameInfoBg.animateDuration.inMilliseconds > _maxAnimateDuration) {
-      _gameInfoBg = _gameInfoBg.copyWith(animateDuration: Duration(milliseconds: _maxAnimateDuration.toInt()));
+      _gameInfoBg = _gameInfoBg.copyWith(
+          animateDuration: Duration(milliseconds: _maxAnimateDuration.toInt()));
     }
   }
 
@@ -78,11 +80,7 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
         path = result?.files.single.path;
       }
     } catch (e) {
-      AppInfoBar.show(
-        context,
-        e.toString(),
-        severity: InfoBarSeverity.error,
-      );
+      if (mounted) AppInfoBar.show(context, e.toString(), severity: InfoBarSeverity.error);
     } finally {
       _isSelecting = false;
     }
@@ -94,7 +92,7 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
     paths.removeWhere((String element) => element.trim().isEmpty);
 
     if (paths.contains(path)) {
-      AppInfoBar.show(context, l10n.path_already_exists);
+      if (mounted) AppInfoBar.show(context, l10n.path_already_exists);
       return;
     }
 
@@ -160,13 +158,18 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
             children: <Widget>[
               Text(l10n.bg_images.withColon),
               const Spacer(),
-              Text(l10n.image_source.withColon, style: TextStyle(fontSize: 12, color: _fluentTheme.accentColor)),
+              Text(l10n.image_source.withColon,
+                  style: TextStyle(fontSize: 12, color: _fluentTheme.accentColor)),
               const SizedBox(width: 20),
               IconButton(onPressed: _addPath, icon: const Icon(FluentIcons.photo2_add)),
-              IconButton(onPressed: () => _addPath(isFolder: true), icon: const Icon(FluentIcons.folder_open)),
+              IconButton(
+                  onPressed: () => _addPath(isFolder: true),
+                  icon: const Icon(FluentIcons.folder_open)),
             ],
           ),
-          const Divider(style: DividerThemeData(horizontalMargin: EdgeInsets.symmetric(vertical: 10), thickness: 1)),
+          const Divider(
+              style: DividerThemeData(
+                  horizontalMargin: EdgeInsets.symmetric(vertical: 10), thickness: 1)),
           TextBox(
             onChanged: _onPathChanged,
             placeholder: placeholder.join('\n'),
@@ -174,9 +177,11 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
             controller: _editingController,
             maxLines: null,
             minLines: 3,
-            decoration: BoxDecoration(
-              color: _fluentTheme.menuColor,
-              borderRadius: BorderRadius.circular(6),
+            decoration: WidgetStateProperty.all(
+              BoxDecoration(
+                color: _fluentTheme.menuColor,
+                borderRadius: BorderRadius.circular(6),
+              ),
             ),
           ),
           const SizedBox(height: 10),
@@ -218,7 +223,8 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
     );
   }
 
-  Widget _buildSlider(int value, double min, double max, {required void Function(double)? onChanged}) {
+  Widget _buildSlider(int value, double min, double max,
+      {required void Function(double)? onChanged}) {
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.only(left: 50),
@@ -228,7 +234,8 @@ class _EditGameBgBoxState extends State<EditGameBgBox> {
           max: max,
           value: value.toDouble(),
           label: value.toString(),
-          style: SliderThemeData(labelBackgroundColor: _fluentTheme.accentColor, useThumbBall: true),
+          style:
+              SliderThemeData(labelBackgroundColor: _fluentTheme.accentColor, useThumbBall: true),
         ),
       ),
     );

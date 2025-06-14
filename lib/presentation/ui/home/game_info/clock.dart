@@ -37,7 +37,8 @@ class _ClockState extends State<Clock> {
     _timer = Timer.periodic(const Duration(milliseconds: 500), (_) {
       if (mounted) {
         final DateTime now = DateTime.now();
-        final DateTime nowSecond = DateTime(now.year, now.month, now.day, now.hour, now.minute, now.second);
+        final DateTime nowSecond =
+            DateTime(now.year, now.month, now.day, now.hour, now.minute, now.second);
         if (_dateTime != nowSecond) {
           _dateTime = nowSecond;
           setState(() {});
@@ -58,7 +59,7 @@ class _ClockState extends State<Clock> {
       builder: (AppConfig config) {
         final ClockConfig clock = config.clockConfig;
 
-        TextStyle _textStyle(double fontSize) {
+        TextStyle textStyle(double fontSize) {
           return TextStyle(
             fontSize: fontSize * clock.scale,
             color: _fluentTheme.activeColor,
@@ -79,13 +80,13 @@ class _ClockState extends State<Clock> {
           children: <Widget>[
             Text(
               (clock.showSecond ? DateFormat('HH:mm:ss') : DateFormat('HH:mm')).format(_dateTime),
-              style: _textStyle(74),
+              style: textStyle(74),
             ),
             Positioned(
               bottom: -20 * clock.scale,
               right: 0,
               child: DefaultTextStyle(
-                style: _textStyle(20),
+                style: textStyle(20),
                 child: Row(
                   children: <Widget>[
                     Text(DateFormat('EEEE').format(_dateTime)),

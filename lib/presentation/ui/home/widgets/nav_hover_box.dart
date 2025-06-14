@@ -4,13 +4,14 @@ const Duration _kHoverDuration = Duration(milliseconds: 300);
 const Curve _curve = Curves.ease;
 
 class NavHoverController {
-  NavHoverController({required this.value, required this.width, required this.onEnter, required this.onExit});
+  NavHoverController(
+      {required this.value, required this.width, required this.onEnter, required this.onExit});
 
   final double value;
   final double width;
 
-  final Function() onEnter;
-  final Function() onExit;
+  final void Function() onEnter;
+  final void Function() onExit;
 }
 
 /// 鼠标悬停时显示的盒子

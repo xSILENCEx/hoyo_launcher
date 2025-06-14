@@ -13,7 +13,7 @@ export 'package:extended_image/src/utils.dart';
 /// 传入`url`进行自动识别
 class AppImg extends StatelessWidget {
   const AppImg({
-    Key? key,
+    super.key,
     this.url,
     this.bytes,
     this.scale = 1,
@@ -40,7 +40,7 @@ class AppImg extends StatelessWidget {
     this.enableSlideOutPage = false,
     this.heroBuilderForSlidingPage,
     this.initGestureConfigHandler,
-  }) : super(key: key);
+  });
 
   factory AppImg.cover({
     Key? key,
@@ -229,13 +229,12 @@ class AppImg extends StatelessWidget {
 /// 渐入
 class _FadeInBox extends StatefulWidget {
   const _FadeInBox({
-    Key? key,
     required this.imageState,
     this.duration,
     this.width,
     this.height,
     required this.radius,
-  }) : super(key: key);
+  });
 
   final ExtendedImageState imageState;
   final Duration? duration;
@@ -249,7 +248,8 @@ class _FadeInBox extends StatefulWidget {
   State<_FadeInBox> createState() => _FadeInBoxState();
 }
 
-class _FadeInBoxState extends State<_FadeInBox> with SafeState<_FadeInBox>, SingleTickerProviderStateMixin {
+class _FadeInBoxState extends State<_FadeInBox>
+    with SafeState<_FadeInBox>, SingleTickerProviderStateMixin {
   AnimationController? _animationController;
 
   Animation<double>? _opacity;
@@ -295,13 +295,10 @@ class _FadeInBoxState extends State<_FadeInBox> with SafeState<_FadeInBox>, Sing
     switch (_loadState) {
       case LoadState.loading:
         _animationController?.reset();
-        break;
       case LoadState.completed:
         await _animationController?.forward();
-        break;
       case LoadState.failed:
         _animationController?.reset();
-        break;
     }
 
     if (_oldImageState != _loadState) {

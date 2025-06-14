@@ -17,7 +17,7 @@ GameInfoDao get gameInfoDao => GameInfoDao(database);
 
 @DriftAccessor(tables: <Type>[GameInfoTable, GameInfoBgTable])
 class GameInfoDao extends AppDatabaseAccessor with _$GameInfoDaoMixin {
-  GameInfoDao(MyDatabase db) : super(db);
+  GameInfoDao(super.db);
 
   Future<void> upsert(FullGameInfoDBModel model) async {
     await into(gameInfoBgTable).insertOnConflictUpdate(model.gameInfoBgDBModel);
@@ -27,7 +27,8 @@ class GameInfoDao extends AppDatabaseAccessor with _$GameInfoDaoMixin {
   Future<void> upsertAll(List<FullGameInfoDBModel> list) async {
     // 使用批量操作
     await batch((Batch batch) {
-      batch.insertAllOnConflictUpdate(gameInfoTable, list.map((FullGameInfoDBModel e) => e.gameInfoDBModel).toList());
+      batch.insertAllOnConflictUpdate(
+          gameInfoTable, list.map((FullGameInfoDBModel e) => e.gameInfoDBModel).toList());
     });
 
     final List<GameInfoBgDBModel> bgList = <GameInfoBgDBModel>[];

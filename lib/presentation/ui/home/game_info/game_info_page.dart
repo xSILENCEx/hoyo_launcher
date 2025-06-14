@@ -27,7 +27,7 @@ class GameInfoPage extends StatelessWidget {
       }
     } catch (e) {
       errorLog(e.toString());
-      AppInfoBar.show(context, e.toString(), severity: InfoBarSeverity.error);
+      if (context.mounted) AppInfoBar.show(context, e.toString(), severity: InfoBarSeverity.error);
     }
   }
 
